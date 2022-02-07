@@ -1,0 +1,10 @@
+1- Poner la ruta en:
+    public/htaccess = /ruta/public/
+    app/config/config.php = cambiar URLROOT a http://localhost/ruta
+2- Las peticiones de rutas siguen : ruta/controlador/metodo/parámetros
+    Los parámetros pasados sólo se utilizarán los necesarios, y se obviará el
+    resto
+3- En config hay que configurar el resto de parámetros.
+3- Al crear los controladores se tiene que extender de controllers y 
+    en el constructor tenemos que cargar el modelo: $this->getModel('modelo');
+4- El modelo por convención le añadiremos : nombreModelo_model.
