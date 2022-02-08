@@ -1,7 +1,7 @@
 <?php
 
 // Raíz de la aplicación 
-define('APPROOT', dirname(dirname (__FILE__)));
+define('APPROOT', dirname(dirname(__FILE__)));
 // Url raíz
 define('URLROOT', 'http://localhost/mvc/comunidad');
 // Nombre del sitio

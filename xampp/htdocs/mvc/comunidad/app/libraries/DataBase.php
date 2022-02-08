@@ -38,7 +38,7 @@ class DataBase {
             echo 'error: ' . $exc->getTraceAsString();
         }
     }
-    
+
     // Aquí preparamos parámetros (:nombreParametro)
     // Agregamos seguidamente los parámetros con bind
     // para seguidamente ejecutar la sentencia con resultPrepared
@@ -47,7 +47,7 @@ class DataBase {
             $this->stmt = $this->dbh->prepare($sql);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
-        }        
+        }
     }
 
     // Type solo puede ser: null, int, bool, string
@@ -76,7 +76,7 @@ class DataBase {
         }
         $this->stmt->bindValue($param, $value, $type);
     }
-    
+
     function resultPrepared() {
         try {
             $this->stmt->execute();
@@ -85,7 +85,7 @@ class DataBase {
             echo $exc->getTraceAsString();
         }
     }
-    
+
     function rowCount() {
         return $this->stmt->rowCount();
     }

@@ -15,17 +15,17 @@ class Comunidad_model {
 
     function getComunidades() {
 
-        /****************************************************
+        /*         * **************************************************
          * Con datos escapados sería:
          * 
          * $this->db->prepared("select * from codigos where Poblacion=:ciudad");
          * $this->db->bind('ciudad', 'Madrid', 'string');
          * return $this->db->resultPrepared();        
          *
-         * **************************************************/
+         * ************************************************* */
 
         $sql = "SELECT comunidad.* from comunidad";
-        
+
         return $this->db->result($sql);
     }
 
@@ -37,10 +37,10 @@ class Comunidad_model {
                 LEFT JOIN recibo_comunidad ON propiedad.numero = recibo_comunidad.numero
                 WHERE recibo_comunidad.estado='IMPAGADO'
                 GROUP BY comunidad.cod, comunidad.nombre";
-        
+
         return $this->db->result($sql);
     }
-    
+
     function getTotal() {
         return $this->db->rowCount();
     }
