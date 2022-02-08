@@ -13,9 +13,9 @@ class Login extends Controller {
 
     public function index() {
         $salida = '';
-        $nombre = filter_input(INPUT_POST, 'nombre');
-        if (isset($nombre)) {
-            $salida = 'hola';
+        $usuario = filter_input(INPUT_POST, 'usuario');
+        if (isset($usuario)) {
+            $salida = $usuario;
         }
         $data = array('nombre' => $salida);
         $this->render('login_view', $data);
