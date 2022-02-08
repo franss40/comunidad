@@ -13,6 +13,7 @@ function urlAmigable($url) {
 }
 
 function auth(string $control, string $usuario) {
+    return true;
     /* ---------------------------------------------
      * Funciones
      * ---------

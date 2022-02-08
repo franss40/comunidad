@@ -21,6 +21,7 @@ class Core {
             $this->acceso = $url[0];
             unset($url[0]);
         }
+
         require_once '../app/controllers/' . $this->controladorActual . '.php';
         $this->controladorActual = new $this->controladorActual();
 

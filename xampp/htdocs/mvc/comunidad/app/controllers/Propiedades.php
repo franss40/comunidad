@@ -8,8 +8,8 @@
 class Propiedades extends Controller {
 
     public function __construct() {
-        $this->getModel('Propiedad_model');
-        $this->getModel('Comunidad_model');
+        $this->addModel('Propiedad_model');
+        $this->addModel('Comunidad_model');
     }
 
     public function index() {

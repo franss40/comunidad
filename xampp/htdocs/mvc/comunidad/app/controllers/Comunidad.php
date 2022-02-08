@@ -8,7 +8,7 @@
 class Comunidad extends Controller {
 
     public function __construct() {
-        $this->getModel('Comunidad_model');
+        $this->addModel('Comunidad_model');
     }
 
     public function index() {

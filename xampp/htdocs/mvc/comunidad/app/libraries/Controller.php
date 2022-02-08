@@ -10,7 +10,7 @@ class Controller {
 
     protected $model;
 
-    public function getModel($model) {
+    public function addModel($model) {
         require_once APPROOT . '/models/' . $model . '.php';
         $this->model[$model] = new $model();
     }

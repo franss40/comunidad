@@ -5,7 +5,7 @@ class DefaultClass extends Controller
     function __construct()
     {
         //Activo el modelo correspondiente
-        $this->getModel('Comunidad');
+        $this->addModel('Comunidad');
     }
     
     public function index()
