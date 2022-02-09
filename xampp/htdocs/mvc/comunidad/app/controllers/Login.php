@@ -12,12 +12,12 @@ class Login extends Controller {
     }
 
     public function index() {
-        $salida = '';
+        $info = '';
         $usuario = filter_input(INPUT_POST, 'usuario');
         if (isset($usuario)) {
-            $salida = $usuario;
+            $info = $usuario;
         }
-        $data = array('nombre' => $salida);
+        $data = array('info' => $info);
         $this->render('login_view', $data);
     }
 
