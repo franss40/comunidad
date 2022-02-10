@@ -14,8 +14,8 @@ class Login extends Controller {
     }
 
     /**
-     * Se comprueba si está autorizado el usuario o no antes de entrar 
-     * en la aplicación.
+     * Se comprueba si está autorizado el usuario o no antes de acceder 
+     * 
      */
     public function index() {
 

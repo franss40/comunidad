@@ -9,21 +9,26 @@ class Logins {
 
     private $db;
 
+    /**
+     * Cargamos la base de datos para poder acceder a ella
+     */
     public function __construct() {
         $this->db = new DataBase();
     }
 
+    /**
+     * Comprobación si el usuario y la contraseña introducida es correcta
+     * 
+     * Se usa la función nativa de PHP password_hash para crear el hash
+     * y password_verify para verificarlo:
+     * $hash= password_hash("admin", PASSWORD_DEFAULT);
+     * password_verify('contraseña', $hash)
+     * 
+     * @param string $user
+     * @param string $pass
+     * @return boolean
+     */
     public function verifyPass($user, $pass) {
-        /*         * *************
-          $hash= password_hash("admin", PASSWORD_DEFAULT);
-
-          if (password_verify('contraseña', $hash)) {
-          echo '¡La contraseña es válida!';
-          } else {
-          echo 'La contraseña no es válida.';
-          }
-         * ********** */
-
 
         $sql = "SELECT * FROM Login WHERE usuario = '$user'";
         $usuario = $this->db->result($sql);
