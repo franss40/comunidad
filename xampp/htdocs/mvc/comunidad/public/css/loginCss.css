@@ -5,6 +5,7 @@
 html, body {margin: 0; padding: 0;}
 body {font-family: sans-serif, Arial, Helvetica;}
 
+/*Ajusto los iconos*/
 .container img { position: relative; top: 13px;}
 
 h1 { text-align: center;}
@@ -59,14 +60,15 @@ input[type=submit]:hover {
     margin: 0 auto;
 }
 
+/*Centrado para pantallas mayores de 600px; el resto al 100%*/
 @media screen and (min-width: 600px) {
     #container {
-        width: 70%;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    #container {
         width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -250px;
+        margin-left: -250px;
     }
 }
