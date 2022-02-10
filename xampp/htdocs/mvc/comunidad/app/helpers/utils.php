@@ -13,29 +13,28 @@ function urlAmigable($url) {
 }
 
 function auth(string $control, string $usuario) {
-    return true;
     /* ---------------------------------------------
      * Funciones
      * ---------
-     * comunidad-index = 1
-     * comunidad-ver = 2
+     * login-index = 1
+     * comunidad-index = 2
+     * comunidad-ver = 3
      * 
-     * propiedades-comunidad = 3
-     * propiedades-cuota = 4
+     * propiedades-comunidad = 4
+     * propiedades-cuota = 5
      * 
-     * ...
+     * 
      * **************************** */
     $funciones = array(
-        'comunidad' => 1, // 0001
-        'comunidad-ver' => 2, // 0010
-        'propiedades-comunidad' => 4, // 0100
-        'propiedades-cuota' => 15      // 1000        
+        'Login-index' => 1, // 0001
+        'Comunidad-index' => 2, // 0010
+        'Comunidad-ver' => 4, // 00100  
     );
 
     $permisos = array(
-        'invitado' => 15, // 15 = 1111 significa que permite la función 1,2,3,4
-        'usuario' => 15, // 1101 significa que permite la función 1,2,4
-        'admin' => 15   // 1111
+        'ADMIN' => 15, // 15 = 1111 significa que permite la función 1,2,3,4
+        'OPERARIO' => 15, // 1101 significa que permite la función 1,2,4
+        'USUARIO' => 15   // 1111
     );
 
     if (!array_key_exists($control, $funciones) || !array_key_exists($usuario, $permisos)) {
