@@ -12,10 +12,10 @@ class Comunidad extends Controller {
     }
 
     public function index() {
-        $comunidades = $this->model['Comunidad_model']->getComunidades();
-        $total = $this->model['Comunidad_model']->getTotal();
+        $comunidades = $this->models['Comunidad_model']->getComunidades();
+        $total = $this->models['Comunidad_model']->getTotal();
 
-        $cuotasPendientes = $this->model['Comunidad_model']->getComuConCuotasPtes();
+        $cuotasPendientes = $this->models['Comunidad_model']->getComuConCuotasPtes();
 
         foreach ($comunidades as $comunidad) {
             $comunidad->cuantos = 0;
@@ -34,7 +34,7 @@ class Comunidad extends Controller {
     }
 
     public function ver(int $cod) {
-        $comunidad = $this->model->getComunidad($cod);
+        $comunidad = $this->models->getComunidad($cod);
 
         $data = ['comunidad' => $comunidad];
 

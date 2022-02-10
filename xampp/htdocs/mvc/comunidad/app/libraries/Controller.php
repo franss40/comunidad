@@ -8,11 +8,17 @@
  */
 class Controller {
 
+    protected $models;
     protected $model;
 
     public function addModel($model) {
         require_once APPROOT . '/models/' . $model . '.php';
-        $this->model[$model] = new $model();
+        $this->models[$model] = new $model();
+    }
+    
+    public function setModel($model) {
+        require_once APPROOT . '/models/' . $model . '.php';
+        $this->model = new $model();
     }
 
     public function render($view, $data = []) {

@@ -7,4 +7,4 @@
 3- En config hay que configurar el resto de parámetros.
 3- Al crear los controladores se tiene que extender de controllers y 
     en el constructor tenemos que cargar el modelo: $this->getModel('modelo');
-4- El modelo por convención le añadiremos : nombreModelo_model.
+4- Los modelo por convención le pondremos en plural.
