@@ -40,7 +40,7 @@ class Core {
          * Antes de llamar al método del controlador con sus parámetros, 
          * vamos a ver si el usuario está autorizado         
          * ************************************************************** */
-        auth($this->acceso, 'ADMIN');
+        isset($_SESSION['valid_user']) ? auth($this->acceso, $_SESSION['valid_user']) : auth($this->acceso);
 
         call_user_func_array([$this->controladorActual, $this->metodoActual],
                 $this->parametros);

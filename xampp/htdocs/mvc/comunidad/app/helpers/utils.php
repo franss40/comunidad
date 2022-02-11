@@ -12,7 +12,7 @@ function urlAmigable($url) {
     return str_replace(' ', '-', $url);
 }
 
-function auth(string $control, string $usuario) {
+function auth(string $control, string $usuario = '') {
     /* ---------------------------------------------
      * Funciones
      * ---------
@@ -32,6 +32,7 @@ function auth(string $control, string $usuario) {
     );
 
     $permisos = array(
+        '' => 1,
         'ADMIN' => 15, // 15 = 1111 significa que permite la función 1,2,3,4
         'OPERARIO' => 15, // 1101 significa que permite la función 1,2,4
         'USUARIO' => 15   // 1111

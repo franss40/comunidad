@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Clase que da acceso a los usuarios
+ * Clase que comprueba el acceso de los usuarios
  *
  * @author Fco Sanz
  */
@@ -26,6 +26,7 @@ class Login extends Controller {
 
         if (!empty($usuario) && !empty($pass)) {
             if ($this->model->verifyPass($usuario, $pass)) {
+                
                 redirect(comunidad);
             } else {
                 $data = array('info' => 'Usuario o contraseña incorrectos');
