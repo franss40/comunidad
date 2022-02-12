@@ -28,7 +28,7 @@ function auth(string $control, string $usuario = '') {
     $funciones = array(
         'Login-index' => 1, // 0001
         'Comunidad-index' => 2, // 0010
-        'Comunidad-ver' => 4, // 00100  
+        'Comunidad-ver' => 4, // 00100
     );
 
     $permisos = array(

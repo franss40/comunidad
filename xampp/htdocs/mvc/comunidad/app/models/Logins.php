@@ -35,10 +35,9 @@ class Logins {
 
         if ($usuario) {
             if (password_verify($pass, $usuario[0]->password)) {
-                return true;
+                return $usuario;
             }
         }
-
         return false;
     }
 

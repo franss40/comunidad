@@ -6,6 +6,7 @@
  * @author Fco Sanz
  */
 class Login extends Controller {
+
     /**
      * Cargamos el modelo del Logins
      */
@@ -22,11 +23,13 @@ class Login extends Controller {
         $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRIPPED);
         $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRIPPED);
 
-        $data = array('info' => 'Por favor ingrese sus credenciales para poder acceder');
+        $data = array('info' => 'Por favor ingrese sus credenciales para acceder');
 
         if (!empty($usuario) && !empty($pass)) {
-            if ($this->model->verifyPass($usuario, $pass)) {
-                
+            $usuario_verify = $this->model->verifyPass($usuario, $pass);
+            if ($usuario_verify && $usuario_verify[0]->activo) {
+                $_SESSION['user'] = $usuario_verify[0]->usuario;
+                $_SESSION['tipo'] = $usuario_verify[0]->tipo;
                 redirect(comunidad);
             } else {
                 $data = array('info' => 'Usuario o contraseña incorrectos');
