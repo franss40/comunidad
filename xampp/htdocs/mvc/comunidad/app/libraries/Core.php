@@ -50,25 +50,25 @@ class Core {
     }
 
     # Optener contenedor
-
     private function getControlador(&$url) {
         //ucwords convierte a mayúsculas el primer carácter
         if ($url && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
             $this->controladorActual = ucwords($url[0]);
             unset($url[0]);
+        } elseif ($url && !file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+            die('Controlador no existe - 404 not found!');
         }
         $this->acceso = $this->controladorActual;
     }
 
     # Optener el método 
-
     private function getMetodo(&$url) {
         if (isset($url[1])) {
             if (method_exists($this->controladorActual, $url[1])) {
                 $this->metodoActual = $url[1];
                 unset($url[1]);
             } else {
-                die('El controlador no existe - 404 not found');
+                die('No existe ese método en el controlador - 404 not found');
             }
         }
         $this->acceso .= '-' . $this->metodoActual;
