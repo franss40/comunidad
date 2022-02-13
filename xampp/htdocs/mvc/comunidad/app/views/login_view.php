@@ -4,15 +4,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Formulario de Acceso</title>
         <link rel="stylesheet" href="<?= URLROOT . '/public/css/loginCss.css' ?>" />       
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Redressed&family=Staatliches&display=swap');
+        </style>
     </head>
     <body>
         <div id="container">
+
             <form action="<?= URLROOT . '/login' ?>" method="post">
                 <div class="img_container">
                     <img src="<?= URLROOT . '/public/img/avatar2.png' ?>" alt="imagen Usuario" height="100" width="100" class="usuario">
                 </div>
 
-                <h1>Acceso</h1>
+                <h1>COMUNI</h1>
                 <hr>
                 <div class="container">
                     <img src="<?= URLROOT . '/public/img/person.svg' ?>" width="36" height="36" alt="User"/>
@@ -27,7 +31,7 @@
                         <?= $info ?>
                     </div>
                 </div>
-            </form>            
+            </form> 
         </div>
 
     </body>

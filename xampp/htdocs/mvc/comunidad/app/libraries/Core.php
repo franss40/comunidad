@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 session_start();
@@ -19,7 +20,7 @@ class Core {
     public function __construct() {
 
         $url = $this->getUrl();
-        
+
         # Revisamos el primer parámetro
         $this->getControlador($url);
 
@@ -30,7 +31,7 @@ class Core {
         $this->getMetodo($url);
 
         $this->parametros = $url ? array_values($url) : [];
-        
+
         /* ----------------------
          * Llama a la función 'método actúal' de la clase controlador con los 
          * parámetros. Esos parámetros no lo pasa como un array como pudiera 
@@ -47,8 +48,9 @@ class Core {
         call_user_func_array([$this->controladorActual, $this->metodoActual],
                 $this->parametros);
     }
-    
+
     # Optener contenedor
+
     private function getControlador(&$url) {
         //ucwords convierte a mayúsculas el primer carácter
         if ($url && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
@@ -57,8 +59,9 @@ class Core {
         }
         $this->acceso = $this->controladorActual;
     }
-    
+
     # Optener el método 
+
     private function getMetodo(&$url) {
         if (isset($url[1])) {
             if (method_exists($this->controladorActual, $url[1])) {
@@ -68,13 +71,13 @@ class Core {
                 die('El controlador no existe - 404 not found');
             }
         }
-        $this->acceso .= '-'.$this->metodoActual;
+        $this->acceso .= '-' . $this->metodoActual;
     }
-    
+
     # Captar los parámetros de la url actúal y los devolvemos.
+
     private function getUrl() {
         $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
-
         if (isset($url)) {
             // Elimino las barras del final, limpio los datos y creo el array
             return explode('/', strip_tags(rtrim($url, '/')));
