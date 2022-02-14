@@ -9,7 +9,7 @@ class Propiedades extends Controller {
 
     public function __construct() {
         $this->addModel('Propiedad_model');
-        $this->addModel('Comunidad_model');
+        $this->setModel('Comunidades');
     }
 
     public function index() {
@@ -17,14 +17,14 @@ class Propiedades extends Controller {
     }
     
     public function comunidad(int $cod) {
-        $comunidad = $this->model['Comunidad_model']->getComunidad($cod);
-
+        $comunidad = $this->model->getComunidad($cod);
+        
         if (!$comunidad) {
             die('Código de comunidad no existe - 404 not found');
         }
 
-        $propiedades = $this->model['Propiedad_model']->getPropiedades($cod);
-        $total = $this->model['Propiedad_model']->getTotal();
+        $propiedades = $this->models['Propiedad_model']->getPropiedades($cod);
+        $total = $this->models['Propiedad_model']->getTotal();
 
         $data = ['comunidad' => $comunidad[0],
             'propiedades' => $propiedades,
@@ -41,11 +41,11 @@ class Propiedades extends Controller {
         // Ahora vuelvo a cambiar los guiones por espacios
         $numberPropiedad = str_replace('-', ' ', $numberPropiedad);        
         
-        $cuotasPtes = $this->model['Propiedad_model']->getCuotasPendientes($codComunidad, $numberPropiedad);
-        $total = $this->model['Propiedad_model']->getTotal();
+        $cuotasPtes = $this->model['Propiedades']->getCuotasPendientes($codComunidad, $numberPropiedad);
+        $total = $this->model['Propiedades']->getTotal();
         
-        $cuotas = $this->model['Propiedad_model']->getcuotas($codComunidad, $numberPropiedad);
-        $comuPropiedad = $this->model['Propiedad_model']->getComuPropiedad($codComunidad, $numberPropiedad);
+        $cuotas = $this->model['Propiedades']->getcuotas($codComunidad, $numberPropiedad);
+        $comuPropiedad = $this->model['Propiedades']->getComuPropiedad($codComunidad, $numberPropiedad);
         
         if ($comuPropiedad) {
             $comuPropi = $comuPropiedad[0];

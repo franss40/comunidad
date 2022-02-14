@@ -86,7 +86,7 @@ class DataBase {
         $this->stmt->bindValue($param, $value, $type);
     }
     /**
-     * Devolvemos el resultado de la consulta después de prepares y bind
+     * Devuelve el resultado de la consulta después de prepares y bind
      * 
      * @return array
      */
@@ -100,7 +100,7 @@ class DataBase {
     }
     
     /**
-     * Devolvemos el número de filas afectadas
+     * Devuelve el número de filas
      * 
      * @return int
      */
@@ -109,7 +109,7 @@ class DataBase {
     }
 
     /**
-     * Devolvemos la última Id insertada
+     * Devuelve la última Id insertada
      * 
      * @return int
      */

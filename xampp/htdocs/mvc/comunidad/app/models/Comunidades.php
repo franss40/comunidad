@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabla Codigo
+ * Modelo de Comunidades
  *
  * @author Fran
  */
@@ -12,7 +12,12 @@ class Comunidades {
     public function __construct() {
         $this->db = new DataBase();
     }
-
+    
+    /**
+     * Retorna las comunidades existentes
+     * 
+     * @return array
+     */
     function getComunidades() {
 
         /***************************************************
@@ -24,11 +29,16 @@ class Comunidades {
          *
          * ************************************************* */
 
-        $sql = "SELECT comunidad.* from comunidad";
+        $sql = "SELECT * from comunidad";
 
         return $this->db->result($sql);
     }
 
+    /**
+     * Retorna el importe de las cuotas ptes de cada comunidad
+     * 
+     * @return array
+     */
     function getComuConCuotasPtes() {
         $sql = "SELECT comunidad.nombre, COUNT(recibo_comunidad.importe) AS cuantos, 
                 SUM(recibo_comunidad.importe) AS suma
@@ -41,12 +51,23 @@ class Comunidades {
         return $this->db->result($sql);
     }
 
+    /**
+     * Rerotrn ael número total de registros
+     * 
+     * @return int
+     */
     function getTotal() {
         return $this->db->rowCount();
     }
 
+    /**
+     * Retorna una comunidad según su cod
+     * 
+     * @param int $cod
+     * @return array
+     */
     function getComunidad(int $cod) {
-        return $this->db->result("SELECT * FROM Comunidad WHERE cod = $cod");
+        return $this->db->result("SELECT * FROM comunidad WHERE cod = $cod");
     }
 
 }
