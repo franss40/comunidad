@@ -32,7 +32,7 @@ class Core {
 
         $this->parametros = $url ? array_values($url) : [];
 
-        /*         * ********************************
+        /*********************************
          * Vemos en cada petición si el usuario está autorizado         
          * ************************************************************** */
         isset($_SESSION['user']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);
@@ -48,8 +48,11 @@ class Core {
                 $this->parametros);
     }
 
-    # Optener contenedor
-
+    /**
+     * Obtener el controlador de la url
+     * 
+     * @param array $url
+     */
     private function getControlador(&$url) {
         if ($url && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
             $this->controladorActual = ucwords($url[0]);
@@ -60,8 +63,11 @@ class Core {
         $this->acceso = $this->controladorActual;
     }
 
-    # Optener el método 
-
+    /**
+     * obtener el método de la url
+     * 
+     * @param array $url
+     */
     private function getMetodo(&$url) {
         if (isset($url[1])) {
             if (method_exists($this->controladorActual, $url[1])) {
@@ -74,8 +80,11 @@ class Core {
         $this->acceso .= '-' . $this->metodoActual;
     }
 
-    # Captar los parámetros de la url actúal y los devolvemos.
-
+    /**
+     * Obtener la url y dividirla en controlador, método y parámetros en su caso
+     * 
+     * @return array
+     */
     private function getUrl() {
         $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
         if (isset($url)) {

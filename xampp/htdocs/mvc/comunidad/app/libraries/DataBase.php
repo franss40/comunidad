@@ -28,6 +28,12 @@ class DataBase {
         }
     }
 
+    /**
+     * Obtiene el resultado
+     * 
+     * @param string $sql
+     * @return array
+     */
     function result($sql) {
         try {
             // protege contra inyecciones sql
@@ -39,9 +45,14 @@ class DataBase {
         }
     }
 
-    // Aquí preparamos parámetros (:nombreParametro)
-    // Agregamos seguidamente los parámetros con bind
-    // para seguidamente ejecutar la sentencia con resultPrepared
+    /**
+     * Preparamos el sql para escapar los datos
+     * Aquí preparamos parámetros (:nombreParametro)
+     * Agregamos seguidamente los parámetros con bind
+     * para seguidamente ejecutar la sentencia con resultPrepared
+     * 
+     * @param string $sql
+     */
     function prepared($sql) {
         try {
             $this->stmt = $this->dbh->prepare($sql);
@@ -50,8 +61,13 @@ class DataBase {
         }
     }
 
-    // Type solo puede ser: null, int, bool, string
-    // Si no lo pongo cogemos el tipo de datos que pasamos por parámetro
+    /**
+     * Escapa valores introducidos en el sql con prepared
+     * 
+     * @param type $param
+     * @param type $value
+     * @param type $type
+     */
     function bind($param, $value, $type = null) {
         switch ($type) {
             case 'int':
@@ -69,7 +85,11 @@ class DataBase {
         }
         $this->stmt->bindValue($param, $value, $type);
     }
-
+    /**
+     * Devolvemos el resultado de la consulta después de prepares y bind
+     * 
+     * @return array
+     */
     function resultPrepared() {
         try {
             $this->stmt->execute();
@@ -78,11 +98,21 @@ class DataBase {
             echo $exc->getTraceAsString();
         }
     }
-
+    
+    /**
+     * Devolvemos el número de filas afectadas
+     * 
+     * @return int
+     */
     function rowCount() {
         return $this->stmt->rowCount();
     }
 
+    /**
+     * Devolvemos la última Id insertada
+     * 
+     * @return int
+     */
     function lastID() {
         return $this->dbh->lastInsertId();
     }
