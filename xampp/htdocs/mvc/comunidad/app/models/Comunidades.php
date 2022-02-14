@@ -5,7 +5,7 @@
  *
  * @author Fran
  */
-class Comunidad_model {
+class Comunidades {
 
     private $db;
 
@@ -15,7 +15,7 @@ class Comunidad_model {
 
     function getComunidades() {
 
-        /*         * **************************************************
+        /***************************************************
          * Con datos escapados sería:
          * 
          * $this->db->prepared("select * from codigos where Poblacion=:ciudad");

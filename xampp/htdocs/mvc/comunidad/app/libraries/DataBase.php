@@ -53,13 +53,6 @@ class DataBase {
     // Type solo puede ser: null, int, bool, string
     // Si no lo pongo cogemos el tipo de datos que pasamos por parámetro
     function bind($param, $value, $type = null) {
-        $permitido = array('int', 'bool', 'string', null);
-        if (!in_array($type, $permitido)) {
-            die('Datos no permitidos');
-        }
-        if ($type == null) {
-            $type = gettype($value);
-        }
         switch ($type) {
             case 'int':
                 $type = PDO::PARAM_INT;

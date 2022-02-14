@@ -32,26 +32,25 @@ class Core {
 
         $this->parametros = $url ? array_values($url) : [];
 
+        /*         * ********************************
+         * Vemos en cada petición si el usuario está autorizado         
+         * ************************************************************** */
+        isset($_SESSION['user']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);
+
         /* ----------------------
          * Llama a la función 'método actúal' de la clase controlador con los 
          * parámetros. Esos parámetros no lo pasa como un array como pudiera 
          * suponerse, sino como parámetros normales. 
          * Así si la función destino tiene un sólo parámetro de recepción y 
          * la url tiene 2, sólo capta el primer parámetro sin dar error.
-         *
-         * ----------------------------------------
-         * Antes de llamar al método del controlador con sus parámetros, 
-         * vamos a ver si el usuario está autorizado         
-         * ************************************************************** */
-        isset($_SESSION['user']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);
-
+         * **************************************************************** */
         call_user_func_array([$this->controladorActual, $this->metodoActual],
                 $this->parametros);
     }
 
     # Optener contenedor
+
     private function getControlador(&$url) {
-        //ucwords convierte a mayúsculas el primer carácter
         if ($url && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
             $this->controladorActual = ucwords($url[0]);
             unset($url[0]);
@@ -62,6 +61,7 @@ class Core {
     }
 
     # Optener el método 
+
     private function getMetodo(&$url) {
         if (isset($url[1])) {
             if (method_exists($this->controladorActual, $url[1])) {
