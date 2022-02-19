@@ -2,52 +2,68 @@
 <html lang="es">
     <head>    
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">        
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
-
-        <link rel="stylesheet" type="text/css" href="<?= URLROOT . '/public/css/style.css' ?>" />
         <title>Comunidades</title>
+        
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Redressed&family=Staatliches&display=swap');
+            h1 { 
+                font-family: 'Redressed', cursive;
+                font-family: 'Staatliches', cursive;
+                color: green;
+            }
+            
+        </style>
+        <!-- Bootstrap css-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <!--
+        <link rel="stylesheet" type="text/css" href="<?= URLROOT . '/public/css/style.css' ?>" />
+        -->
 
     </head>
 
     <body>        
+        
+        <div class="container-fluid pt-3">
+            <div class="row">
+                <div class="col-2"><h1>COMUNI</h1></div>
+                <div class="col-10 text-end">Cerrar Sesión</div>
+            </div>
+        </div>
+       
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item list-group-item-action list-group-item-info text-center active">Comunidad</li>
+            <li class="list-group-item list-group-item-action text-center">Proveedor</li>
+            <li class="list-group-item list-group-item-action text-center">Incidencia</li>
+        </ul>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">COD <br> COMUNIDAD</th>
+                    <th scope="col">DIRECCION <br> POBLACION</th>
+                    <th scope="col"><br>IMPORTES PTES/CUOTAS</th>
+                    <th scope="col"><br>OPERACION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($comunidades as $comunidad): ?>
+                <tr>
+                    <th scope="row"><?= $comunidad->cod ?><br><?= $comunidad->nombre ?></th>
+                    <td><?= $comunidad->calle ?> <br> <?= $comunidad->poblacion ?></td>
+                    <td><?= $comunidad->suma ?></td>
+                    <td><a href="<?= URLROOT . '/propiedades/comunidad/' . $comunidad->cod ?>" class="pure-button button-small button-success">
+                                        Propiedades
+                                    </a></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+        
         <div class="pure-g"> 
-
-            <!-- Lateral que se muestra cuando se hace click en el Menú openNav -->
-            <aside class="pure-u-1" id="sideNav">  
-                <!-- Cierre Menú -->
-                <a href="javascript:void()" id="closeNav">&times;</a>
-                <h1 class="brand">MICOMU</h1>
-                
-                <div class="content">
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
-                </div>
-            </aside>
-
-            <!-- Menú de contenido -->    
-            <section class="pure-u-1" id="main">
-
-                <section class="pure-g">
-                    <div class="pure-u-1-2 pure-left">
-                        <!-- Apertura Menú-->
-                        <a href="javascript:void()" id="openNav">&#9776;</a>
-                    </div>
-                    <div class="pure-u-1-2 pure-right">
-                        <br>
-                        <a href="">
-                            <b>Cerrar Sesión</b><br>  
-                            <b>USUARIO</b>
-                        </a>
-                    </div>
-                </section>
-
-                <br><br>
-
                 <div class="pure-g">
                     <div class="pure-u-1 pure-u-md-8-24 pure-u-lg-6-24 pure-box is-secondary">
                         <h1>COMUNIDADES</h1>
@@ -88,12 +104,7 @@
                     </tbody>
                 </table>
                 <br><br>  
-                
-                
-                
-                
 
-                
                 <section class="pure-g is-grey">
                     <article class="pure-u-1-4">
                         <h4>COD <br> COMUNIDAD</h4>
@@ -155,6 +166,10 @@
 
             </section>
         </div>
+        <!--
         <script type="text/javascript" src="<?= URLROOT . '/public/js/miJS.js' ?>"></script>
+        -->
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>
