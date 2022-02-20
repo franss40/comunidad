@@ -33,7 +33,7 @@ class Comunidad extends Controller {
 
         $data = ['comunidades' => $comunidades, 'total' => $total];
 
-        $this->render('comunidad/index', $data);
+        $this->render('comunidad/comunidad_view', $data);
     }
 
     /**

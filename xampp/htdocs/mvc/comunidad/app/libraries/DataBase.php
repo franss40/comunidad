@@ -14,6 +14,9 @@ class DataBase {
     private $dbh;
     private $stmt;
 
+    /**
+     * Conectamos a la BBDD
+     */
     public function __construct() {
         $dsn = "mysql:host={$this->host};dbname={$this->dbname}";
 
