@@ -8,7 +8,7 @@
 class Propiedad extends Controller {
 
     public function __construct() {
-        $this->addModel('Propiedad_model');
+        $this->addModel('Propiedades');
         $this->setModel('Comunidades');
     }
 
@@ -23,14 +23,14 @@ class Propiedad extends Controller {
             die('Código de comunidad no existe - 404 not found');
         }
 
-        $propiedades = $this->models['Propiedad_model']->getPropiedades($cod);
-        $total = $this->models['Propiedad_model']->getTotal();
+        $propiedades = $this->models['Propiedades']->getPropiedades($cod);
+        $total = $this->models['Propiedades']->getTotal();
 
         $data = ['comunidad' => $comunidad[0],
             'propiedades' => $propiedades,
             'total' => $total];
 
-        $this->render('propiedad/index', $data);
+        $this->render('propiedad/propiedad_view', $data);
     }
     
     public function cuota(int $codComunidad, string $numberPropiedad) {

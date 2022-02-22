@@ -55,8 +55,8 @@
 
         <section class="mt-5" role="datos">
             <div class="ps-3 btn-group">          
-                <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="36" height="36" alt="Adicionar Comunidad" title="Nueva Comunidad"/>
-                <a href="<?= URLROOT . '/comunidad/nueva' ?>" type="button" class="btn btn-success">                    
+                
+                <a href="<?= URLROOT . '/comunidad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Comunidad" title="Nueva Comunidad"/>
                     Crear Comunidad
                 </a>
             </div> 
@@ -67,7 +67,7 @@
                         <tr>
                             <th scope="col">COD <br> COMUNIDAD</th>
                             <th scope="col">DIRECCIÓN <br> POBLACIÓN</th>
-                            <th scope="col"><br>IMPORTE PTE/CUOTA</th>
+                            <th scope="col"><br>IMPORTE PTE <br> CUOTA</th>
                             <th scope="col"><br>OPERACIÓN</th>
                         </tr>
                     </thead>
@@ -76,10 +76,10 @@
                             <?php
                             $rojo = '';
                             if ($comunidad->cuantos > 0) {
-                                $rojo = 'cuotasPendientes';
+                                $cuotaPendiente = 'cuotasPendientes';
                             }
                             ?>
-                        <tr class="<?= $rojo ?>">
+                        <tr class="<?= $cuotaPendiente ?>">
                                 <th scope="row">
                                     <?= $comunidad->cod ?>
                                     <!-- Sólo saldrá el icono si hay alguna incidencia abierta-->

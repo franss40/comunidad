@@ -2,48 +2,61 @@
 <html lang="es">
     <head>    
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Comunidades</title>
 
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">        
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
-        <link rel="stylesheet" type="text/css" href="<?= URLROOT . '/public/css/style.css' ?>" />
-        
-        <title>Propiedades</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Redressed&family=Staatliches&display=swap');
+            h1 { 
+                font-family: 'Redressed', cursive;
+                font-family: 'Staatliches', cursive;
+                color: green;
+            }
+            .cuotasPendientes{ color: blue;}
+        </style>
+        <!-- Bootstrap css-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
         
-    <body>        
-        <div class="pure-g">
-            <!-- Lateral que se muestra cuando se hace click en el Menú openNav -->
-            <aside class="pure-u-1" id="sideNav">  
-                <!-- Cierre Menú -->
-                <a href="javascript:void()" id="closeNav">&times;</a>
-                <h1 class="brand">MICOMU</h1>
-                
-                <div class="content">
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
+    <body>
+        <header class="mt-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2">
+                        <h1>
+                            <img src="<?= URLROOT . '/public/img/building.svg' ?>" width="36" height="36" alt="comunidad"/>       
+                            COMUNI
+                        </h1>
+                    </div>
+                    <div class="col-10 text-end pt-2 pe-4">
+                        <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
+                            <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
+                        </a>
+                        
+                        <a href="<?= URLROOT . '/cerrar_sesion' ?>">
+                            <img src="<?= URLROOT . '/public/img/box-arrow-right.svg' ?>" width="36" height="36" alt="Cerrar Sesión" title="Cerrar sesión"/>
+                        </a>
+                    </div>
                 </div>
-            </aside>
+            </div>
+        </header>
+        
+        <section class="mt-3" role="info">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item list-group-item-action list-group-item-info text-center active">                     Propiedades
+                </li>
+                <li class="list-group-item list-group-item-action list-group-item-info text-center">
+                    <?= $total ?>
+                </li>
+            </ul>
+        </section>
+        
+        
+        <div class="pure-g">
             
             <!-- Menú de contenido -->    
             <section class="pure-u-1" id="main">
-                <section class="pure-g">
-                    <div class="pure-u-1-2 pure-left">
-                        <!-- Apertura Menú-->
-                        <a href="javascript:void()" id="openNav">&#9776;</a>
-                    </div>
-                    <div class="pure-u-1-2 pure-right">
-                        <br>
-                        <a href="">
-                            <b>Cerrar Sesión</b><br>  
-                            <b>USUARIO</b>
-                        </a>
-                    </div>
-                </section>
-                
-                <br><br>
                 
                 <div class="pure-g">
                     <div class="pure-u-1 pure-u-md-8-24 pure-u-lg-6-24 pure-box is-secondary">
@@ -101,6 +114,8 @@
             </section>
               
         </div>
-        <script type="text/javascript" src="<?= URLROOT . '/public/js/miJS.js' ?>"></script>
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
     </body>
 </html>

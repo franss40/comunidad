@@ -5,7 +5,7 @@
  *
  * @author Fran
  */
-class Propiedad_model {
+class Propiedades {
 
     private $db;
 
