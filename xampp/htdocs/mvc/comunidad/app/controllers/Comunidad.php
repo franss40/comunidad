@@ -32,17 +32,25 @@ class Comunidad extends Controller {
                     $comunidad->suma = $cuotaPendiente->suma;
                 }
             }
+            
             $comunidad->incidencia = false;
-            foreach ($incidencias as $incidencia) {                
-                if ($comunidad->cod == $incidencia->cod) {
-                    $comunidad->incidencia = true;
-                }
+            if ($this->comunidadTieneIncidencia($comunidad, $incidencias)) {
+                $comunidad->incidencia = true;
             }
         }
 
         $data = ['comunidades' => $comunidades, 'total' => $total];
 
         $this->render('comunidad/comunidad_view', $data);
+    }
+    
+    private function comunidadTieneIncidencia($comunidad, $incidencias) {
+        foreach ($incidencias as $incidencia) {                
+            if ($comunidad->cod == $incidencia->cod) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
