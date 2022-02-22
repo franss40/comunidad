@@ -9,6 +9,7 @@ class Comunidad extends Controller {
 
     public function __construct() {
         $this->setModel('Comunidades');
+        $this->addModel('Incidencias');
     }
     
     /**
@@ -16,6 +17,8 @@ class Comunidad extends Controller {
      *  
      */
     public function index() {
+        $incidencias = $this->models['Incidencias']->getIncidencias();
+        
         $comunidades = $this->model->getComunidades();
         $total = $this->model->getTotal();
 
@@ -27,6 +30,12 @@ class Comunidad extends Controller {
                 if ($comunidad->nombre == $cuotaPendiente->nombre) {
                     $comunidad->cuantos = $cuotaPendiente->cuantos;
                     $comunidad->suma = $cuotaPendiente->suma;
+                }
+            }
+            $comunidad->incidencia = false;
+            foreach ($incidencias as $incidencia) {                
+                if ($comunidad->cod == $incidencia->cod) {
+                    $comunidad->incidencia = true;
                 }
             }
         }

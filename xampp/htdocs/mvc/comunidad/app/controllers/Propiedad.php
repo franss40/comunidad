@@ -5,7 +5,7 @@
  *
  * @author Fran
  */
-class Propiedades extends Controller {
+class Propiedad extends Controller {
 
     public function __construct() {
         $this->addModel('Propiedad_model');
