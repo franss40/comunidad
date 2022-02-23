@@ -42,11 +42,11 @@
             </div>
         </header>
         
-        <section class="container-fluid mt-3" role="info">
+        <section class="container-fluid mt-2" role="info">
             <div class="row">
                 <div class="col-md-6 bg-info text-black text-center p-2"><?=$comunidad->nombre;?></div>
-                <div class="col-md-4 col-6 bg-success text-white text-center p-2">Propiedades:</div>
-                <div class="col-md-2 col-6 bg-success text-white text-center p-2"><?= $total ?></div>
+                <div class="col-md-4 col-6 bg-success text-white text-end p-2">Propiedades:</div>
+                <div class="col-md-2 col-6 bg-success text-white text-begin p-2"><?= $total ?></div>
             </div>
         </section>
         
@@ -93,7 +93,7 @@
                             </td>
                             <td>
                                 <a href="<?= URLROOT . '/propiedad/comunidad/' . $propiedad->cod ?>" type="button" class="btn btn-info mb-1">  
-                                    <img src="<?= URLROOT . '/public/img/people.svg' ?>" width="20" height="20" alt="Ver propietarios" title="Propietarios"/>                                        
+                                    <img src="<?= URLROOT . '/public/img/euro.svg' ?>" width="20" height="20" alt="Cuotas propietarios" title="Cuotas Propietarios"/>                                        
                                 </a>
                                 <a href="<?= URLROOT . '/comunidad/ver/' . $propiedad->cod ?>" type="button" class="btn btn-success mb-1">              
                                     <img src="<?= URLROOT . '/public/img/info.svg' ?>" width="20" height="20" alt="Ver o editar comunidad" title="Ver datos o editar comunidad"/>

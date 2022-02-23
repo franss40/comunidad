@@ -43,10 +43,10 @@
             </div>
         </header>
         
-        <section class="container-fluid" role="info">
+        <section class="container-fluid mt-2" role="info">
             <div class="row">
-                <div class="col-md-6 bg-info text-black text-center p-2">Comunidades:</div>
-                <div class="col-md-6 bg-success text-white text-center p-2"><?= $total ?></div>
+                <div class="col-md-6 bg-info text-black text-end p-2">Comunidades:</div>
+                <div class="col-md-6 bg-success text-white text-begin p-2"><?= $total ?></div>
             </div>
         </section>
         
