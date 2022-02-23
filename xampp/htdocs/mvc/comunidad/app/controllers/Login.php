@@ -30,6 +30,7 @@ class Login extends Controller {
             if ($usuario_verify && $usuario_verify[0]->activo) {
                 $_SESSION['user'] = $usuario_verify[0]->usuario;
                 $_SESSION['tipo'] = $usuario_verify[0]->tipo;
+                session_write_close();
                 redirect(comunidad);
             } else {
                 $data = array('info' => 'Usuario o contraseña incorrectos');

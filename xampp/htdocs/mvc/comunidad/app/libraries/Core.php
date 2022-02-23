@@ -35,8 +35,8 @@ class Core {
         /*********************************
          * Vemos en cada petición si el usuario está autorizado         
          * ************************************************************** */
-        isset($_SESSION['user']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);
-
+        isset($_SESSION['user']) && isset($_SESSION['tipo']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);
+        
         /* ----------------------
          * Llama a la función 'método actúal' de la clase controlador con los 
          * parámetros. Esos parámetros no lo pasa como un array como pudiera 

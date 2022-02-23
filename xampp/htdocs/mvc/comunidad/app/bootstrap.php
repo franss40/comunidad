@@ -36,6 +36,7 @@ spl_autoload_register(function ($className) {
 
 // Cargo los helpers
 require_once 'helpers/utils.php';
+require_once 'helpers/auth.php';
 
 // cargo el Core para reiniciar todo
 new Core();

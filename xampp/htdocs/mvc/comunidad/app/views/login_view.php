@@ -21,7 +21,7 @@
                 <div class="container">
                     <img src="<?= URLROOT . '/public/img/person.svg' ?>" width="36" height="36" alt="User"/>
                     <input type="text" placeholder="Usuario" name="usuario" id="usuario" required>        
-                    <img src="<?= URLROOT . '/public/img/lock.svg' ?>" width="36" height="36" alt="lock"/>
+                    <img src="<?= URLROOT . '/public/img/unlock.svg' ?>" width="36" height="36" alt="lock"/>
                     <input type="password" placeholder="Contraseña" name="password" id="password" required>
 
                     <input type="submit" value="Acceso">
