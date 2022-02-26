@@ -29,10 +29,17 @@ class Logins {
      * @return boolean
      */
     public function verifyPass($user, $pass) {
-
+        /*-----------------------------
+        Esta es otra forma de hacer la consulta, sin necesidad de preparar
+        los datos
         $sql = "SELECT * FROM Login WHERE usuario = '$user'";
         $usuario = $this->db->result($sql);
-
+        -----------------------------------------*/
+        
+        $this->db->prepared("SELECT * FROM login WHERE usuario = :user");   
+        $this->db->bind(':user', $user); 
+        $usuario = $this->db->resultPrepared();
+        
         if ($usuario) {
             if (password_verify($pass, $usuario[0]->password)) {
                 return $usuario;

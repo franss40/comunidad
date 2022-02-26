@@ -1,9 +1,7 @@
 <?php
 
-//declare(strict_types=1);
-
 session_start();
-
+session_regenerate_id();
 /**
  * Clase principal donde se controlan todas las peticiones
  * Formateo URL:  /controlador/método/parámetros
@@ -32,7 +30,7 @@ class Core {
 
         $this->parametros = $url ? array_values($url) : [];
 
-        /*********************************
+        /****************************************************************
          * Vemos en cada petición si el usuario está autorizado         
          * ************************************************************** */
         isset($_SESSION['user']) && isset($_SESSION['tipo']) ? auth($this->acceso, $_SESSION['tipo']) : auth($this->acceso);

@@ -1,7 +1,14 @@
 <?php
 
 /**
- * Uso de PDO para facilitar las cosas para recuperar datos
+ * Uso de PDO para más facilidad para recuperar datos
+ * 
+ * La consulta normal sería (también escapa datos, pero de otra forma)
+ * $this->db->result($sql);
+ * Consulta con datos escapados sería:    
+ * $this->db->prepared("select * from codigos where Poblacion=:ciudad");   
+ * $this->db->bind(':ciudad', 'Madrid'); 
+ * return $this->db->resultPrepared();        
  *
  * @author Fran
  */
