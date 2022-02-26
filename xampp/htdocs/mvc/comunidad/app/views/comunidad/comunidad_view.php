@@ -2,7 +2,6 @@
 <html lang="es">
     <head>    
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Comunidades</title>
 
@@ -21,44 +20,44 @@
     </head>
 
     <body>
-        <header class="mt-3">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-6">
-                        <h1>
-                            <img src="<?= URLROOT . '/public/img/building.svg' ?>" width="36" height="36" alt="comunidad"/>       
-                            COMUNI
-                        </h1>
-                    </div>
-                    <div class="col-6 text-end pt-2 pe-4">
-                        <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
-                            <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
-                        </a>
-                        
-                        <a href="<?= URLROOT . '/cerrar_sesion' ?>">
-                            <img src="<?= URLROOT . '/public/img/box-arrow-right.svg' ?>" width="36" height="36" alt="Cerrar Sesión" title="Cerrar sesión"/>
-                        </a>
-                    </div>
+        <header class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <h1>
+                        <img src="<?= URLROOT . '/public/img/building.svg' ?>" width="36" height="36" alt="comunidad"/>       
+                        COMUNI
+                    </h1>
+                </div>
+                <div class="col-6 text-end pt-2 pe-4">
+                    <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
+                        <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
+                    </a>
+
+                    <a href="<?= URLROOT . '/cerrar_sesion' ?>">
+                        <img src="<?= URLROOT . '/public/img/box-arrow-right.svg' ?>" width="36" height="36" alt="Cerrar Sesión" title="Cerrar sesión"/>
+                    </a>
                 </div>
             </div>
         </header>
         
-        <section class="container-fluid mt-2" role="info">
+        <section class="container-fluid mt-2">
             <div class="row">
-                <div class="col-md-12 bg-info text-black text-center p-2">Comunidades: <?= $total ?></div>   
-            </div>
+                <div class="col-md-12 bg-info text-black text-center p-2">Comunidades: <?= $total ?></div>             </div>
         </section>
         
         <br>
-        <nav aria-label="breadcrumb" class="mt-2 ps-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                    Usted está en: <strong>Origen</strong>
-                </li>
-            </ol>
-        </nav>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Usted está en: <strong>Origen</strong>
+                    </li>
+                </ol>
+            </nav>
+        </div>
         
-        <section class="mt-4" role="datos">
+        <div class="container">
+        <section class="mt-4" role="main">
             <div class="ps-3 btn-group">                
                 <a href="<?= URLROOT . '/comunidad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Comunidad" title="Nueva Comunidad"/>
                     Crear Comunidad
@@ -125,6 +124,7 @@
                     </p>
                 <?php endif;?>
         </section>
+        </div>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>

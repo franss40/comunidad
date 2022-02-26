@@ -23,7 +23,8 @@ function auth(string $control, string $tipoUsuario = '') {
     $funciones = array(
         'Login-index' => 1, // 0001
         'Comunidad-index' => 2, // 0010
-        'Propiedad-comunidad' => 4
+        'Comunidad-nueva' =>3,  // 0100
+        'Propiedad-comunidad' => 4  // 1000
     );
 
     $permisos = array(

@@ -20,24 +20,22 @@
     </head>
         
     <body>
-        <header class="mt-3">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-6">
-                        <h1>
-                            <img src="<?= URLROOT . '/public/img/building.svg' ?>" width="36" height="36" alt="comunidad"/>       
-                            COMUNI
-                        </h1>
-                    </div>
-                    <div class="col-6 text-end pt-2 pe-4">
-                        <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
-                            <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
-                        </a>
-                        
-                        <a href="<?= URLROOT . '/cerrar_sesion' ?>">
-                            <img src="<?= URLROOT . '/public/img/box-arrow-right.svg' ?>" width="36" height="36" alt="Cerrar Sesión" title="Cerrar sesión"/>
-                        </a>
-                    </div>
+        <header class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <h1>
+                        <img src="<?= URLROOT . '/public/img/building.svg' ?>" width="36" height="36" alt="comunidad"/>       
+                        COMUNI
+                    </h1>
+                </div>
+                <div class="col-6 text-end pt-2 pe-4">
+                    <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
+                        <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
+                    </a>
+
+                    <a href="<?= URLROOT . '/cerrar_sesion' ?>">
+                        <img src="<?= URLROOT . '/public/img/box-arrow-right.svg' ?>" width="36" height="36" alt="Cerrar Sesión" title="Cerrar sesión"/>
+                    </a>
                 </div>
             </div>
         </header>
@@ -51,17 +49,20 @@
         </section>
         
         <br>
-        <nav aria-label="breadcrumb" class="mt-2 ps-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                    Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
-                </li>                
-                <li class="breadcrumb-item active" aria-current="page">
-                    <strong>Propiedades</strong>
-                </li>
-            </ol>
-        </nav>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
+                    </li>                
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <strong>Propiedades</strong>
+                    </li>
+                </ol>
+            </nav>
+        </div>
         
+        <div class="container">
         <section class="mt-4" role="datos">
             <div class="ps-3 btn-group">                
                 <a href="<?= URLROOT . '/propiedad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Propiedad" title="Nueva Propiedad"/>
@@ -114,7 +115,7 @@
                     </p>
                 <?php endif;?>
         </section>
-       
+        </div>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>

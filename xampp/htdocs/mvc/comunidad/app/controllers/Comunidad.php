@@ -52,6 +52,14 @@ class Comunidad extends Controller {
         }
         return false;
     }
+    
+    public function nueva() {
+        if (!$_SESSION['token']) {
+            $_SESSION['token'] = md5(mt_rand(1, 10000000));
+        }
+        
+        $this->render('comunidad/nuevaComunidad_view');
+    }
 
     /**
      * Obtiene la información de una determinada comunidad por su cod.

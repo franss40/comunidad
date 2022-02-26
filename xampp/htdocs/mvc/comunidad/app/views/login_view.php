@@ -19,6 +19,7 @@
                 <h1>COMUNI</h1>
                 <hr>
                 <div class="container">
+                    <input type="hidden" name="token" value="<?=$token ?>">
                     <img src="<?= URLROOT . '/public/img/person.svg' ?>" width="36" height="36" alt="User"/>
                     <input type="text" placeholder="Usuario" name="usuario" id="usuario" required>        
                     <img src="<?= URLROOT . '/public/img/unlock.svg' ?>" width="36" height="36" alt="lock"/>

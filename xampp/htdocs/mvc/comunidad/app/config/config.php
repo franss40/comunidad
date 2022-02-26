@@ -6,7 +6,7 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/mvc/comunidad');
 // Nombre del sitio
 define('SITENAME', 'Comunidad');
-define('DEFAULT_CONTROLLER', 'Comunidad');
+define('DEFAULT_CONTROLLER', 'Login');
 // Base de datos
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

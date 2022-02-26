@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-session_regenerate_id();
+session_regenerate_id(true);    // regenero el id de sesión: evita hijacking
+
 /**
  * Clase principal donde se controlan todas las peticiones
  * Formateo URL:  /controlador/método/parámetros
