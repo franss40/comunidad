@@ -70,7 +70,8 @@
                         <tr>
                             <th scope="col">COD <br> COMUNIDAD</th>
                             <th scope="col">DIRECCIÓN <br> POBLACIÓN</th>
-                            <th scope="col"><br>IMPORTE PTE <br> CUOTA</th>
+                            <th scope="col"><br>TIPO CUOTA <br> PRESUPUESTO</th>
+                            <th scope="col"><br>IMPORTE PTE <br> CUOTA</th>                            
                             <th scope="col"><br>OPERACIÓN</th>
                         </tr>
                     </thead>
@@ -97,6 +98,10 @@
                                 <br> <?= $comunidad->poblacion ?>
                             </td>
                             <td>
+                                <?= $comunidad->tipo_cuota ?> 
+                                <br> <?= $comunidad->presupuesto ?>
+                            </td>
+                            <td>
                                 <?= $comunidad->suma ?> €
                                 <br>
                                 <?= $comunidad->cuantos ?>
@@ -106,7 +111,7 @@
                                     <img src="<?= URLROOT . '/public/img/people.svg' ?>" width="20" height="20" alt="Ver propietarios" title="Propietarios"/>                                        
                                 </a>
                                 <a href="<?= URLROOT . '/comunidad/ver/' . $comunidad->cod ?>" type="button" class="btn btn-success mb-1">              
-                                    <img src="<?= URLROOT . '/public/img/info.svg' ?>" width="20" height="20" alt="Ver o editar comunidad" title="Ver datos o editar comunidad"/>
+                                    <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar comunidad" title="Editar comunidad"/>
                                 </a>
                                 <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod ?>" type="button" class="btn btn-warning mb-1">
                                     <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar comunidad" title="Borrar comunidad"/>

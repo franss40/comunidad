@@ -22,17 +22,16 @@ class Login extends Controller {
         // Nota: Stripped es un alias de STRING
         // Creamos un token para mayor seguridad
 
-        if (!$_SESSION['token']) {
+        if (!isset($_SESSION['token'])) {
             $_SESSION['token'] = md5(mt_rand(1, 10000000));
         }
 
+        $data = array('info' => 'Por favor ingrese sus credenciales para acceder',
+            'token' => $_SESSION['token']);
+        
         $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRIPPED);
         $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRIPPED);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-
-        $data = array('info' => 'Por favor ingrese sus credenciales para acceder',
-            'token' => $_SESSION['token']);
-
         if (!empty($usuario) && !empty($pass) && $token == $_SESSION['token']) {
             $usuario_verify = $this->model->verifyPass($usuario, $pass);
             if ($usuario_verify && $usuario_verify[0]->activo) {
@@ -44,6 +43,7 @@ class Login extends Controller {
                     'token' => $_SESSION['token']);
             }
         }
+
         $this->render('login_view', $data);
     }
 
