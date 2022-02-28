@@ -110,7 +110,7 @@
                                 <a href="<?= URLROOT . '/propiedad/comunidad/' . $comunidad->cod ?>" type="button" class="btn btn-info mb-1">  
                                     <img src="<?= URLROOT . '/public/img/people.svg' ?>" width="20" height="20" alt="Ver propietarios" title="Propietarios"/>                                        
                                 </a>
-                                <a href="<?= URLROOT . '/comunidad/ver/' . $comunidad->cod ?>" type="button" class="btn btn-success mb-1">              
+                                <a href="<?= URLROOT . '/comunidad/editar/' . $comunidad->cod ?>" type="button" class="btn btn-success mb-1">              
                                     <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar comunidad" title="Editar comunidad"/>
                                 </a>
                                 <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod ?>" type="button" class="btn btn-warning mb-1">

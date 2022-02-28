@@ -43,7 +43,13 @@ class Comunidad extends Controller {
 
         $this->render('comunidad/comunidad_view', $data);
     }
-
+    
+    /**
+     * Nos indica si la comunidad tiene incidencia o no
+     * @param array $comunidad
+     * @param array $incidencias
+     * @return boolean
+     */
     private function comunidadTieneIncidencia($comunidad, $incidencias) {
         foreach ($incidencias as $incidencia) {
             if ($comunidad->cod == $incidencia->cod) {
@@ -93,5 +99,8 @@ class Comunidad extends Controller {
 
         $this->render('comunidad/nuevaComunidad_view', $data);
     }
-
+    
+    public function editar(int $cod) {
+        
+    }
 }
