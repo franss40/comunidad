@@ -11,14 +11,14 @@ class Comunidad extends Controller {
         $this->setModel('Comunidades');
         $this->addModel('Incidencias');
     }
-    
+
     /**
      * Muestra las comunidades que existen con sus cuotas pendientes
      *  
      */
     public function index() {
         $incidencias = $this->models['Incidencias']->getIncidencias();
-        
+
         $comunidades = $this->model->getComunidades();
         $total = $this->model->getTotal();
 
@@ -32,7 +32,7 @@ class Comunidad extends Controller {
                     $comunidad->suma = $cuotaPendiente->suma;
                 }
             }
-            
+
             $comunidad->incidencia = false;
             if ($this->comunidadTieneIncidencia($comunidad, $incidencias)) {
                 $comunidad->incidencia = true;
@@ -43,52 +43,55 @@ class Comunidad extends Controller {
 
         $this->render('comunidad/comunidad_view', $data);
     }
-    
+
     private function comunidadTieneIncidencia($comunidad, $incidencias) {
-        foreach ($incidencias as $incidencia) {                
+        foreach ($incidencias as $incidencia) {
             if ($comunidad->cod == $incidencia->cod) {
                 return true;
             }
         }
         return false;
     }
-    
-    public function nueva() {
-        if (!isset($_SESSION['token'])) {
-            $_SESSION['token'] = md5(mt_rand(1, 10000000));
-        }
-        
-        $cod = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_STRIPPED);
-        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
-        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRIPPED);
-        $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRIPPED);
-        $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);
-        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_STRIPPED);
-        $presupuesto = filter_input(INPUT_POST, 'presupuesto', FILTER_SANITIZE_STRIPPED);
-        
-        if (!empty($cod) && !empty($nombre) && !empty($direccion) && !empty($codigo)&& !empty($poblacion) && !empty($cuota) && $token == $_SESSION['token']) {
-            
-        }
-        
-        $data = ['action' => 'add', 
-                'infoAction' => "Alta Comunidad", 
-                'soloLectura' => 'disabled',
-                'token' => $_SESSION['token']
-                ];
-        $this->render('comunidad/nuevaComunidad_view', $data);
-    }
 
     /**
-     * Obtiene la información de una determinada comunidad por su cod.
+     * Alta de la comunidad. Al dar el alta no se añade ni presupuesto ni
+     * presidente ni vicepresidente, ya que no hay aún propiedades
      * 
-     * @param int $cod
      */
-    public function ver(int $cod) {
-        $comunidad = $this->model->getComunidad($cod);
+    public function nueva() {
+        
+        $data = ['info' => 'Alta Comunidad',
+            'token' => $_SESSION['token']
+        ];
 
-        $data = ['comunidad' => $comunidad];
+        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
+        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRIPPED);
+        $codigo = filter_input(INPUT_POST, 'codigo', FILTER_VALIDATE_INT);
+        $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);
+        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_STRIPPED);
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
+        
+        if (!empty($nombre) && !empty($direccion) && !empty($poblacion) && $token == $_SESSION['token']) {
 
-        $this->render('comunidad/ver', $data);
+            if ($cuota!=='FIJA' && $cuota!=='VARIABLE' || !is_int($codigo)) {  
+                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+                $this->render('comunidad/nuevaComunidad_view', $data);
+                return;
+            }
+
+            $comunidad = ['nombre' => $nombre,
+                    'direccion' => $direccion,
+                    'codigo' => $codigo,
+                    'poblacion' => $poblacion,
+                    'cuota' => $cuota
+                    ];
+
+            if ($this->model->addComunidad($comunidad)) {
+                $data['info'] = 'Registro añadido correctamente';
+            }            
+        }
+
+        $this->render('comunidad/nuevaComunidad_view', $data);
     }
 
 }

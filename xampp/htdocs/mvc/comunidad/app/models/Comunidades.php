@@ -18,7 +18,7 @@ class Comunidades {
      * 
      * @return array
      */
-    function getComunidades() {
+    public function getComunidades() {
 
         /***************************************************
          * Con datos escapados sería:
@@ -39,7 +39,7 @@ class Comunidades {
      * 
      * @return array
      */
-    function getComuConCuotasPtes() {
+    public function getComuConCuotasPtes() {
         $sql = "SELECT comunidad.nombre, COUNT(recibo_comunidad.importe) AS cuantos, 
                 SUM(recibo_comunidad.importe) AS suma
                 FROM comunidad
@@ -50,13 +50,25 @@ class Comunidades {
 
         return $this->db->result($sql);
     }
+    
+    public function addComunidad($comunidad) {
+        $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota) 
+                    VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota)";
+        $this->db->prepared($sql);
+        $this->db->bind('nombre', $comunidad['nombre'], 'string');
+        $this->db->bind('direccion', $comunidad['direccion'], 'string');
+        $this->db->bind('codigo', $comunidad['codigo'], 'int');
+        $this->db->bind('poblacion', $comunidad['poblacion'], 'string');
+        $this->db->bind('cuota', $comunidad['cuota'], 'string');
+        return $this->db->noResultPrepared();
+    }
 
     /**
      * Rerotrn ael número total de registros
      * 
      * @return int
      */
-    function getTotal() {
+    public function getTotal() {
         return $this->db->rowCount();
     }
 
@@ -66,7 +78,7 @@ class Comunidades {
      * @param int $cod
      * @return array
      */
-    function getComunidad(int $cod) {
+    public function getComunidad(int $cod) {
         return $this->db->result("SELECT * FROM comunidad WHERE cod = $cod");
     }
 

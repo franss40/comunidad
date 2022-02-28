@@ -96,7 +96,7 @@ class DataBase {
         $this->stmt->bindValue($param, $value, $type);
     }
     /**
-     * Devuelve el resultado de la consulta después de prepares y bind
+     * Devuelve el resultado de la consulta después de prepared y bind
      * 
      * @return array
      */
@@ -108,7 +108,21 @@ class DataBase {
             echo $exc->getTraceAsString();
         }
     }
-    
+    /**
+     * Después de prepared y bind cuando se insertan o actualizan datos
+     * 
+     * @return boolean
+     */
+    function noResultPrepared() {
+        try {
+            return $this->stmt->execute();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+            return false;
+        }
+    }
+
+
     /**
      * Devuelve el número de filas
      * 
@@ -126,5 +140,11 @@ class DataBase {
     function lastID() {
         return $this->dbh->lastInsertId();
     }
-
+    
+    /**
+     * Cerrar conexión
+     */
+    public function cerrar() {
+        $this->dbh = '';
+    }
 }

@@ -42,7 +42,7 @@
         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-md-12 bg-info text-black text-center p-2">
-                    <?=$infoAction?>
+                    <?=$info?>
                 </div>              
             </div>
         </div>
@@ -55,22 +55,21 @@
                         Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
                     </li>              
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong><?=$infoAction?></strong>
+                        <strong>Alta Comunidad</strong>
                     </li>
                 </ol>
             </nav>
         </div>
         
         
-        <section class="mt-4" role="main">
+        <section class="mt-4" role="main">            
             <div class="container bg-light p-3">
             <form action="" method="POST">
-                <input type="hidden" name="action" class="form-control">
-                <input type="hidden" name="token" class="form-control">
+                <input type="hidden" name="token" class="form-control" value="<?=$token ?>">
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="cod" class="form-label">Código Comunidad</label>
-                        <input type="text" name="cod" class="form-control" id="cod" value="<?=$infoAction ?>" <?=$soloLectura ?>>
+                        <input type="text" name="cod" class="form-control" id="cod" value="Alta Comunidad" disabled>
                     </div>
                 </div>
                 
@@ -100,18 +99,14 @@
                     <div class="col">
                         <label for="cuota" class="form-label">Tipo de Cuota</label>
                         <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="cuota">
-                            <option selected value="fija">Fija</option>
-                            <option value="variable">Variable</option>
+                            <option selected value="FIJA">FIJA</option>
+                            <option value="VARIABLE">VARIABLE</option>
                         </select>
-                    </div>
-                    <div class="col">
-                        <label for="presupuesto" class="form-label">Presupuesto Anual</label>
-                        <input type="text" name="presupuesto" class="form-control" id="presupuesto">
-                    </div>
+                    </div>                    
                 </div>
                 
                 <div>
-                    <button type="submit" class="btn btn-primary"><?=$infoAction ?></button>
+                    <button type="submit" class="btn btn-primary">Alta Comunidad</button>
                 </div>
             </form>
             </div>
