@@ -30,7 +30,6 @@ class Comunidades {
          * ************************************************* */
 
         $sql = "SELECT * from comunidad";
-
         return $this->db->result($sql);
     }
 

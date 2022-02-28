@@ -39,15 +39,14 @@ class DataBase {
     }
 
     /**
-     * Obtiene el resultado
+     * Obtiene el resultado sin preparar los datos antes
      * 
      * @param string $sql
      * @return array
      */
     function result($sql) {
         try {
-            // protege contra inyecciones sql
-            $this->stmt = $this->dbh->quote($sql);
+            // Se puede utilizar también $this->dbh->quote($sql) para proteger contra inyecciones sql
             $this->stmt = $this->dbh->query($sql);
             return $this->stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $exc) {
@@ -115,6 +114,7 @@ class DataBase {
      */
     function noResultPrepared() {
         try {
+            $this->cerrar();
             return $this->stmt->execute();
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -139,12 +139,5 @@ class DataBase {
      */
     function lastID() {
         return $this->dbh->lastInsertId();
-    }
-    
-    /**
-     * Cerrar conexión
-     */
-    public function cerrar() {
-        $this->dbh = '';
     }
 }
