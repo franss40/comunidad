@@ -55,7 +55,7 @@
                         Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
                     </li>              
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong>Alta Comunidad</strong>
+                        <strong>Editar Comunidad</strong>
                     </li>
                 </ol>
             </nav>
@@ -69,7 +69,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="cod" class="form-label">Código Comunidad</label>
-                        <input type="text" name="cod" class="form-control" id="cod" value="Alta Comunidad" disabled>
+                        <input type="text" name="cod" class="form-control" id="cod" value="" disabled>
                     </div>
                 </div>
                 
@@ -106,7 +106,7 @@
                 </div>
                 
                 <div>
-                    <button type="submit" class="btn btn-primary">Alta Comunidad</button>
+                    <button type="submit" class="btn btn-primary">Editar Comunidad</button>
                 </div>
             </form>
             </div>

@@ -140,4 +140,9 @@ class DataBase {
     function lastID() {
         return $this->dbh->lastInsertId();
     }
+    
+    public function __destruct() {
+        $this->dbh = '';
+        $this->stmt = '';
+    }
 }

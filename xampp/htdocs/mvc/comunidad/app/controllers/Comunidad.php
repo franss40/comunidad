@@ -101,6 +101,9 @@ class Comunidad extends Controller {
     }
     
     public function editar(int $cod) {
-        
+        $data = ['info' => 'Editar Comunidad',
+            'token' => $_SESSION['token']
+        ];
+        $this->render('comunidad/editarComunidad_view', $data);
     }
 }

@@ -24,7 +24,9 @@ function auth(string $control, string $tipoUsuario = '') {
         'Login-index' => 1, // 0001
         'Comunidad-index' => 2, // 0010
         'Comunidad-nueva' =>3,  // 0100
-        'Propiedad-comunidad' => 4  // 1000
+        'Comunidad-editar' =>4, // 1000
+        'Propiedad-comunidad' => 5  // 10000
+        
     );
 
     $permisos = array(
