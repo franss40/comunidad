@@ -69,29 +69,29 @@
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="cod" class="form-label">Código Comunidad</label>
-                        <input type="text" name="cod" class="form-control" id="cod" value="" disabled>
+                        <input type="text" name="cod" class="form-control" id="cod" value="<?=$comunidad->cod ?>" disabled>
                     </div>
                 </div>
                 
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="nombre" class="form-label">Nombre Comunidad</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" required>
+                        <input type="text" name="nombre" class="form-control" id="nombre" value="<?=$comunidad->nombre ?>" required>
                     </div>
                 </div>
                 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" name="direccion" class="form-control" id="direccion" required>
+                        <input type="text" name="direccion" class="form-control" id="direccion" value="<?=$comunidad->calle ?>" required>
                     </div>
                     <div class="col">
                         <label for="codigo" class="form-label">Código Postal</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" required>
+                        <input type="text" name="codigo" class="form-control" id="codigo" value="<?=$comunidad->codigo_postal ?>" required>
                     </div>
                     <div class="col">
                         <label for="poblacion" class="form-label">Población</label>
-                        <input type="text" name="poblacion" class="form-control" id="poblacion" required>
+                        <input type="text" name="poblacion" class="form-control" id="poblacion" value="<?=$comunidad->poblacion ?>" required>
                     </div>
                 </div>   
                 
@@ -102,9 +102,29 @@
                             <option selected value="FIJA">FIJA</option>
                             <option value="VARIABLE">VARIABLE</option>
                         </select>
-                    </div>                    
+                    </div>
+                    <div class="col">
+                        <label for="presupuesto" class="form-label">Presupuesto</label>
+                        <input type="text" name="presupuesto" class="form-control" id="presupuesto">
+                    </div>
                 </div>
                 
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="presidente" class="form-label">Presidente</label>
+                        <select class="form-select" aria-label="presidente" id="presidente" name="presidente">
+                            <option selected value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="vicepresidente" class="form-label">Vicepresidente</label>
+                        <select class="form-select" aria-label="vicepresidente" id="vicepresidente" name="vicepresidente">
+                            <option selected value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Editar Comunidad</button>
                 </div>
