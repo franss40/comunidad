@@ -140,7 +140,9 @@ class DataBase {
     function lastID() {
         return $this->dbh->lastInsertId();
     }
-    
+    /**
+     * Destruye la conexión
+     */
     public function __destruct() {
         $this->dbh = '';
         $this->stmt = '';

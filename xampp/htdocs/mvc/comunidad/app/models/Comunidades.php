@@ -54,11 +54,12 @@ class Comunidades {
         $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota) 
                     VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota)";
         $this->db->prepared($sql);
-        $this->db->bind('nombre', $comunidad['nombre'], 'string');
-        $this->db->bind('direccion', $comunidad['direccion'], 'string');
-        $this->db->bind('codigo', $comunidad['codigo'], 'int');
-        $this->db->bind('poblacion', $comunidad['poblacion'], 'string');
-        $this->db->bind('cuota', $comunidad['cuota'], 'string');
+        $this->db->bind('nombre', $comunidad->nombre, 'string');
+        $this->db->bind('direccion', $comunidad->direccion, 'string');
+        $this->db->bind('codigo', $comunidad->codigo, 'int');
+        $this->db->bind('poblacion', $comunidad->poblacion, 'string');
+        $this->db->bind('cuota', $comunidad->cuota, 'string');
+
         return $this->db->noResultPrepared();
     }
 

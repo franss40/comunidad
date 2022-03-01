@@ -10,6 +10,7 @@ class Comunidad extends Controller {
     public function __construct() {
         $this->setModel('Comunidades');
         $this->addModel('Incidencias');
+        $this->addModel('Propiedades');
     }
 
     /**
@@ -84,13 +85,13 @@ class Comunidad extends Controller {
                 $this->render('comunidad/nuevaComunidad_view', $data);
                 return;
             }
-
-            $comunidad = ['nombre' => $nombre,
-                    'direccion' => $direccion,
-                    'codigo' => $codigo,
-                    'poblacion' => $poblacion,
-                    'cuota' => $cuota
-                    ];
+            // En vez de arrays, utilizamos objetos stdclass
+            $comunidad = new stdClass();
+            $comunidad->nombre = $nombre; 
+            $comunidad->direccion = $direccion;
+            $comunidad->codigo = $codigo;
+            $comunidad->poblacion = $poblacion;
+            $comunidad->cuota = $cuota;
 
             if ($this->model->addComunidad($comunidad)) {
                 $data['info'] = 'Registro añadido correctamente';
@@ -105,7 +106,9 @@ class Comunidad extends Controller {
             'token' => $_SESSION['token']
         ];
         
-        $data['comunidad'] = $this->model->getComunidad($cod)[0];
+        $propiedades = $this->models['Propiedades']->getPropiedades($cod);
+        $data['propiedad'] = $propiedades;
+        $data['comunidad'] = $this->model->getComunidad($cod)[0];        
         $this->render('comunidad/editarComunidad_view', $data);
     }
 }

@@ -87,7 +87,7 @@
                     </div>
                     <div class="col">
                         <label for="codigo" class="form-label">Código Postal</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" value="<?=$comunidad->codigo_postal ?>" required>
+                        <input type="text" name="codigo" class="form-control" id="codigo" value="<?=$comunidad->cp ?>" required>
                     </div>
                     <div class="col">
                         <label for="poblacion" class="form-label">Población</label>
@@ -99,29 +99,33 @@
                     <div class="col">
                         <label for="cuota" class="form-label">Tipo de Cuota</label>
                         <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="cuota">
-                            <option selected value="FIJA">FIJA</option>
-                            <option value="VARIABLE">VARIABLE</option>
+                            <option value="FIJA" <?php if ($comunidad->tipo_cuota=='FIJA') {echo 'selected';} ?>>FIJA</option>
+                            <option value="VARIABLE" <?php if ($comunidad->tipo_cuota=='VARIABLE') {echo 'selected';}?>>VARIABLE</option>
                         </select>
                     </div>
                     <div class="col">
                         <label for="presupuesto" class="form-label">Presupuesto</label>
-                        <input type="text" name="presupuesto" class="form-control" id="presupuesto">
+                        <input type="text" name="presupuesto" class="form-control" id="presupuesto" value="<?=$comunidad->presupuesto ?>">
                     </div>
                 </div>
                 
                 <div class="row mb-3">
                     <div class="col">
                         <label for="presidente" class="form-label">Presidente</label>
-                        <select class="form-select" aria-label="presidente" id="presidente" name="presidente">
-                            <option selected value=""></option>
+                        <select class="form-select" aria-label="presidente" id="presidente" name="presidente">                
                             <option value=""></option>
+                            <?php foreach ($propiedad as $propietario):?>
+                                <option value="<?= $propietario->numero ?>" <?php if ($comunidad->presidente==$propietario->numero) {echo 'selected';}?>><?= $propietario->numero ?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                     <div class="col">
                         <label for="vicepresidente" class="form-label">Vicepresidente</label>
                         <select class="form-select" aria-label="vicepresidente" id="vicepresidente" name="vicepresidente">
-                            <option selected value=""></option>
                             <option value=""></option>
+                            <?php foreach ($propiedad as $propietario):?>
+                                <option value="<?= $propietario->numero ?>" <?php if ($comunidad->vicepresidente==$propietario->numero) {echo 'selected';}?>><?= $propietario->numero ?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                 </div>
