@@ -6,6 +6,8 @@
     resto
 3- En config hay que configurar el resto de parámetros.
 3- Al crear los controladores se tiene que extender de controllers y 
-    en el constructor tenemos que cargar el modelo: $this->getModel('modelo');
+    en el constructor tenemos que cargar el modelo: $this->setModel('modelo') o addModel('modelo')
+    en el caso de uso de más de un modelo. Para acceder al modelo usar $this->model->...
+    o $this->models['modelo'] si hay más de un modelo cargado.
 4- Los modelo por convención le pondremos en plural y la vista le añadiremos
     view.

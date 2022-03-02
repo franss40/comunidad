@@ -49,20 +49,47 @@ class Comunidades {
 
         return $this->db->result($sql);
     }
-    
+    /**
+     * Adiciono una comunidad
+     * 
+     * @param integer $comunidad
+     * @return boolean
+     */
     public function addComunidad($comunidad) {
         $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota) 
                     VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota)";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->direccion, 'string');
-        $this->db->bind('codigo', $comunidad->codigo, 'int');
+        $this->db->bind('codigo', $comunidad->codigoPostal, 'int');
         $this->db->bind('poblacion', $comunidad->poblacion, 'string');
-        $this->db->bind('cuota', $comunidad->cuota, 'string');
+        $this->db->bind('cuota', $comunidad->tipoCuota, 'string');
 
         return $this->db->noResultPrepared();
     }
 
+    /**
+     * Edito una comunidad
+     * 
+     * @param int $comunidad
+     * @return boolean
+     */
+    public function editComunidad($comunidad) {
+        $sql = "UPDATE comunidad SET(nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente) WHERE cod=:cod"; 
+        
+        $this->db->prepared($sql);
+        $this->db->bind('nombre', $comunidad->nombre, 'string');
+        $this->db->bind('direccion', $comunidad->direccion, 'string');
+        $this->db->bind('codigoPostal', $comunidad->codigoPostal, 'int');
+        $this->db->bind('poblacion', $comunidad->poblacion, 'string');
+        $this->db->bind('tipoCuota', $comunidad->tipoCuota, 'string');
+        $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
+        $this->db->bind('presidente', $comunidad->presidente, 'string');
+        $this->db->bind('vicepresidente', $comunidad->vicepresidente, 'string');
+        $this->db->bind('cod', $comunidad->cod, 'int');
+        
+        return $this->db->noResultPrepared();
+    }
     /**
      * Rerotrn ael número total de registros
      * 

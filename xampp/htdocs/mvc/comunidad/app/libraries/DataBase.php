@@ -108,13 +108,26 @@ class DataBase {
         }
     }
     /**
+     * Devuelve un resultado de la consulta después de prepared y bind
+     * 
+     * @return array
+     */
+    function resultPreparedOne() {
+        try {
+            $this->stmt->execute();
+            return $this->stmt->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    /**
      * Después de prepared y bind cuando se insertan o actualizan datos
      * 
      * @return boolean
      */
     function noResultPrepared() {
         try {
-            $this->cerrar();
             return $this->stmt->execute();
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

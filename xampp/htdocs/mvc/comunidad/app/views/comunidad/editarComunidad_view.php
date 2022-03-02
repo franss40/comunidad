@@ -87,7 +87,7 @@
                     </div>
                     <div class="col">
                         <label for="codigo" class="form-label">Código Postal</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" value="<?=$comunidad->cp ?>" required>
+                        <input type="text" name="codigoPostal" class="form-control" id="codigo" value="<?=$comunidad->cp ?>" required>
                     </div>
                     <div class="col">
                         <label for="poblacion" class="form-label">Población</label>
@@ -98,9 +98,9 @@
                 <div class="row mb-4">
                     <div class="col">
                         <label for="cuota" class="form-label">Tipo de Cuota</label>
-                        <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="cuota">
-                            <option value="FIJA" <?php if ($comunidad->tipo_cuota=='FIJA') {echo 'selected';} ?>>FIJA</option>
-                            <option value="VARIABLE" <?php if ($comunidad->tipo_cuota=='VARIABLE') {echo 'selected';}?>>VARIABLE</option>
+                        <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="tipoCuota">
+                            <option value="FIJA" <?php setSelected($comunidad->tipo_cuota, 'FIJA') ?>>FIJA</option>
+                            <option value="VARIABLE" <?php setSelected($comunidad->tipo_cuota, 'VARIABLE')?>>VARIABLE</option>
                         </select>
                     </div>
                     <div class="col">

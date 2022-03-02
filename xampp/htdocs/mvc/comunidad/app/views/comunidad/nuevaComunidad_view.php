@@ -87,7 +87,7 @@
                     </div>
                     <div class="col">
                         <label for="codigo" class="form-label">Código Postal</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" required>
+                        <input type="text" name="codigoPostal" class="form-control" id="codigo" required>
                     </div>
                     <div class="col">
                         <label for="poblacion" class="form-label">Población</label>
@@ -98,7 +98,7 @@
                 <div class="row mb-4">
                     <div class="col">
                         <label for="cuota" class="form-label">Tipo de Cuota</label>
-                        <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="cuota">
+                        <select class="form-select" aria-label="Tipo de Cuota" id="cuota" name="tipoCuota">
                             <option selected value="FIJA">FIJA</option>
                             <option value="VARIABLE">VARIABLE</option>
                         </select>
