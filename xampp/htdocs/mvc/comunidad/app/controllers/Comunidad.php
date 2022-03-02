@@ -103,6 +103,11 @@ class Comunidad extends Controller {
         $this->render('comunidad/nuevaComunidad_view', $data);
     }
     
+    /**
+     * Editar comunidad
+     * 
+     * @param int $cod
+     */
     public function editar(int $cod) {
         
         require_once APPROOT . '/views/helpers_view.php';
@@ -141,6 +146,12 @@ class Comunidad extends Controller {
                 $data['info'] = 'No pueden ser presidente y vicepresidente la misma persona';
                 $this->render('comunidad/editarComunidad_view', $data);
                 return;
+            }
+            if ($presidente == '') {
+                $presidente = null;
+            }
+            if ($vicepresidente == '') {
+                $vicepresidente = null;
             }
             // En vez de arrays, utilizamos objetos stdclass
             $comunidad = new stdClass();

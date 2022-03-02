@@ -75,8 +75,7 @@ class Comunidades {
      * @return boolean
      */
     public function editComunidad($comunidad) {
-        $sql = "UPDATE comunidad SET(nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente) WHERE cod=:cod"; 
-        
+        $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente WHERE cod=:cod"; 
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->direccion, 'string');
