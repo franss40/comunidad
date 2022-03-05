@@ -12,11 +12,10 @@
                 font-family: 'Staatliches', cursive;
                 color: green;
             }
-            .cuotasPendientes{ color: blue;}
         </style>
         <!-- Bootstrap css-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+        
     </head>
 
     <body>
@@ -54,9 +53,10 @@
                     </li>
                 </ol>
             </nav>
+            <hr>
         </div>
         
-        <div class="container">
+        <div class="container container-info">
         <section class="mt-4" role="main">
             <div class="ps-3 btn-group">                
                 <a href="<?= URLROOT . '/comunidad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Comunidad" title="Nueva Comunidad"/>
@@ -113,12 +113,12 @@
                                 <a href="<?= URLROOT . '/comunidad/editar/' . $comunidad->cod ?>" type="button" class="btn btn-success mb-1">              
                                     <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar comunidad" title="Editar comunidad"/>
                                 </a>
-                                <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod ?>" type="button" class="btn btn-warning mb-1">
+                                <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$comunidad->nombre?>">
                                     <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar comunidad" title="Borrar comunidad"/>
                                 </a>
                             </td>
                         </tr>
-                        <?php endforeach; ?>                        
+                        <?php endforeach; ?>                
                     </tbody>
                 </table>
             <div>
@@ -132,6 +132,21 @@
         </div>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">  
+            window.onload = function() {
+                var borrar = document.querySelectorAll('a.borrar');  
+                
+                for (var i = 0; i < borrar.length; i++) {  
+                    borrar[i].addEventListener('click', function(event) {
+                        var info = "¿Estas seguro que deseas borrar la comunidad " + this.getAttribute('rel') + "? Los cambios no podrán deshacerse";
+                        if (!window.confirm(info)) {  
+                            event.preventDefault();
+                            return false;
+                        }
+                    }, false);
+                }
+            };
         </script>
     </body>
 </html>
