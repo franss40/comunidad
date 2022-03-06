@@ -29,7 +29,7 @@ class Comunidades {
          *
          * ************************************************* */
 
-        $sql = "SELECT * from comunidad";
+        $sql = "SELECT * FROM comunidad ORDER BY nombre";
         return $this->db->result($sql);
     }
 
@@ -69,7 +69,6 @@ class Comunidades {
     }
 
      public function borrarComunidad(int $cod) {
-         return false;
         $sql = "DELETE FROM comunidad WHERE cod = :cod";
         $this->db->prepared($sql);
         $this->db->bind('cod', $cod, 'int');

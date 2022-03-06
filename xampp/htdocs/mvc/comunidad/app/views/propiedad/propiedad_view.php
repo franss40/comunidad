@@ -110,7 +110,7 @@
             <div>
                 <?php else:?>
                     <br> <br> 
-                    <p class="h4 alert alert-danger ps-2" role="alert">
+                    <p class="h4 alert alert-danger ps-2 text-center" role="alert">
                         No tiene actualmente ninguna propiedad dada de alta
                     </p>
                 <?php endif;?>
