@@ -11,3 +11,6 @@
     o $this->models['modelo'] si hay más de un modelo cargado.
 4- Los modelo por convención le pondremos en plural y la vista le añadiremos
     view.
+5- Podemos usar esto para comprobar resultados y funcionamientos en general de la aplicación
+    o para grabar errores:
+    error_log($info."\n\r", 3, APPROOT.'app/log.log');

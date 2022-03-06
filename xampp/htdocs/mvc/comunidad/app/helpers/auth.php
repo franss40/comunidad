@@ -20,20 +20,21 @@ function auth(string $control, string $tipoUsuario = '') {
      * 
      * 
      * **************************** */
+
     $funciones = array(
         'Login-index' => 1, // 0001
         'Comunidad-index' => 2, // 0010
         'Comunidad-nueva' =>3,  // 0100
         'Comunidad-editar' =>4, // 1000
-        'Propiedad-comunidad' => 5  // 10000
-        
+        'Comunidad-borrar' => 5, //10000
+        'Propiedad-comunidad' => 6  // 100000
     );
 
     $permisos = array(
         '' => 1,
-        'ADMIN' => 15, // 15 = 1111 significa que permite la función 1,2,3,4
-        'OPERARIO' => 15, // 1101 significa que permite la función 1,2,4
-        'USUARIO' => 15   // 1111
+        'ADMIN' => 0b111111, // 15 = 1111 significa que permite la función 1,2,3,4
+        'OPERARIO' => 0b111111, // 1101 significa que permite la función 1,2,4
+        'USUARIO' => 0b111111   // 1111
     );
 
     if (!array_key_exists($control, $funciones) || !array_key_exists($tipoUsuario, $permisos)) {
@@ -45,4 +46,3 @@ function auth(string $control, string $tipoUsuario = '') {
     }
     return true;
 }
-

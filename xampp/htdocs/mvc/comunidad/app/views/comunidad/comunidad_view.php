@@ -56,7 +56,7 @@
             <hr>
         </div>
         
-        <div class="container container-info">
+        <div class="container">
         <section class="mt-4" role="main">
             <div class="ps-3 btn-group">                
                 <a href="<?= URLROOT . '/comunidad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Comunidad" title="Nueva Comunidad"/>

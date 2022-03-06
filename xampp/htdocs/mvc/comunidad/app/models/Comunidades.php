@@ -68,6 +68,14 @@ class Comunidades {
         return $this->db->noResultPrepared();
     }
 
+     public function borrarComunidad(int $cod) {
+         return false;
+        $sql = "DELETE FROM comunidad WHERE cod = :cod";
+        $this->db->prepared($sql);
+        $this->db->bind('cod', $cod, 'int');
+        return $this->db->noResultPrepared();
+     }
+     
     /**
      * Edito una comunidad
      * 

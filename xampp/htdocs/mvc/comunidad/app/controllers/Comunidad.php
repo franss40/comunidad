@@ -59,7 +59,20 @@ class Comunidad extends Controller {
         }
         return false;
     }
-
+    
+    /**
+     * Borrado de una comunidad
+     * 
+     * @param int $cod
+     */
+    public function borrar(int $cod) {
+        $data = ['info' => 'Se ha producido un error al intentar borrar la comunidad'];
+        if ($this->model->borrarComunidad($cod)) {
+            $data = ['info' => 'Comunidad borrada'];
+        }
+        $this->render('informacion_view', $data);
+    }
+    
     /**
      * Alta de la comunidad. Al dar el alta no se añade ni presupuesto ni
      * presidente ni vicepresidente, ya que no hay aún propiedades
