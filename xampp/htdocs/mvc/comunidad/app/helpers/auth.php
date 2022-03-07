@@ -22,19 +22,20 @@ function auth(string $control, string $tipoUsuario = '') {
      * **************************** */
 
     $funciones = array(
-        'Login-index' => 1, // 0001
-        'Comunidad-index' => 2, // 0010
-        'Comunidad-nueva' =>3,  // 0100
-        'Comunidad-editar' =>4, // 1000
-        'Comunidad-borrar' => 5, //10000
-        'Propiedad-comunidad' => 6  // 100000
+        'Login-index' => 0b1, // 0001 = 1
+        'Comunidad-index' => 0b10, // 0010 = 2
+        'Comunidad-nueva' => 0b100,  // 0100 = 4
+        'Comunidad-editar' => 0b1000, // 1000 = 8
+        'Comunidad-borrar' => 0b10000, //10000 = 16
+        'Propiedad-comunidad' => 0b100000,  // 100000 = 32
+        'Cerrar_sesion-index' => 0b1000000 // 1000000 = 64
     );
 
     $permisos = array(
-        '' => 1,
-        'ADMIN' => 0b111111, // 15 = 1111 significa que permite la función 1,2,3,4
-        'OPERARIO' => 0b111111, // 1101 significa que permite la función 1,2,4
-        'USUARIO' => 0b111111   // 1111
+        '' => 0b1,
+        'ADMIN' => 0b1111111, // 15 = 1111 significa que permite la función 1,2,3,4
+        'OPERARIO' => 0b1111111, // 1101 significa que permite la función 1,2,4
+        'USUARIO' => 0b1111111   // 1111
     );
 
     if (!array_key_exists($control, $funciones) || !array_key_exists($tipoUsuario, $permisos)) {
