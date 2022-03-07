@@ -3,7 +3,7 @@
 /**
  * Propiedad
  *
- * @author Fran
+ * @author Fco Sanz
  */
 class Propiedad extends Controller {
 

@@ -28,7 +28,7 @@
                     </h1>
                 </div>
                 <div class="col-6 text-end pt-2 pe-4">
-                    <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
+                    <a href="<?= URLROOT . '/usuario' ?>" class="pe-2">
                         <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
                     </a>
 

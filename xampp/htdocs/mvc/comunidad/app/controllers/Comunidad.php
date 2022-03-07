@@ -3,7 +3,7 @@
 /**
  * Gestión de datos de las comunidades
  *
- * @author Fran
+ * @author Fco Sanz
  */
 class Comunidad extends Controller {
 

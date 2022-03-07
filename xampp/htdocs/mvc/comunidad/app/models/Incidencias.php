@@ -3,7 +3,7 @@
 /**
  * Modelo de Incidencias
  *
- * @author Fran
+ * @author Fco Sanz
  */
 class Incidencias {
 

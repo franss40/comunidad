@@ -3,7 +3,7 @@
 /**
  * Modelo de Comunidades
  *
- * @author Fran
+ * @author Fco Sanz
  */
 class Comunidades {
 
@@ -97,7 +97,7 @@ class Comunidades {
         return $this->db->noResultPrepared();
     }
     /**
-     * Rerotrn ael número total de registros
+     * Retorna ael número total de registros
      * 
      * @return int
      */

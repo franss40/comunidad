@@ -3,7 +3,7 @@
 /**
  * Propiedad_model
  *
- * @author Fran
+ * @author Fco Sanz
  */
 class Propiedades {
 
