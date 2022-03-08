@@ -110,7 +110,9 @@ class Comunidad extends Controller {
             
             if ($this->model->addComunidad($comunidad)) {
                 $data['info'] = 'Registro añadido correctamente';
-            }            
+            } else {
+                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+            }      
         }
 
         $this->render('comunidad/nuevaComunidad_view', $data);
