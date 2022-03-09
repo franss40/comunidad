@@ -104,7 +104,7 @@ class DataBase {
             $this->stmt->execute();
             return $this->stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $exc) {
-            $exc->getMessage().'<br>'.$exc->getTraceAsString();
+            echo $exc->getMessage().'<br>'.$exc->getTraceAsString();
         }
     }
     /**
@@ -117,7 +117,7 @@ class DataBase {
             $this->stmt->execute();
             return $this->stmt->fetch(PDO::FETCH_OBJ);
         } catch (Exception $exc) {
-            $exc->getMessage().'<br>'.$exc->getTraceAsString();
+            echo $exc->getMessage().'<br>'.$exc->getTraceAsString();
         }
     }
     
@@ -131,7 +131,6 @@ class DataBase {
             return $this->stmt->execute();
         } catch (Exception $exc) {
             echo $exc->getMessage().'<br>'.$exc->getTraceAsString();
-            return false;
         }
     }
 
