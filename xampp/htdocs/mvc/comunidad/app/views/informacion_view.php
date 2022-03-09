@@ -41,7 +41,7 @@
         
         <section class="container-fluid mt-2">
             <div class="row">
-                <div class="col-md-12 bg-info text-black text-center p-2">Borrado Comunidad</div>                       </div>
+                <div class="col-md-12 bg-info text-black text-center p-2"><?=$info ?></div>                       </div>
         </section>
         
         <br>
@@ -52,7 +52,7 @@
                         Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
                     </li>              
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong>Borrado Comunidad</strong>
+                        <strong><?=$info ?></strong>
                     </li>
                 </ol>
             </nav>
@@ -62,7 +62,7 @@
         <div class="container">
             <section class="mt-4" role="main">
                 <div class="alert alert-primary text-center" role="alert">
-                    <?=$info ?>
+                    <?=$result ?>
                 </div>
             </section>
         </div>

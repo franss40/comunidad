@@ -68,7 +68,8 @@ class Comunidad extends Controller {
     public function borrar(int $cod) {
         $data = ['info' => 'Se ha producido un error al intentar borrar la comunidad'];
         if ($this->model->borrarComunidad($cod)) {
-            $data = ['info' => 'Comunidad borrada'];
+            $data = ['result' => 'Comunidad borrada',
+                     'info' => 'Borrado Comunidad'];
         }
         $this->render('informacion_view', $data);
     }
@@ -182,6 +183,8 @@ class Comunidad extends Controller {
 
             if ($this->model->editComunidad($comunidad)) {
                 $data['info'] = 'Registro actualizado correctamente';
+            } else {
+                $data['info'] = 'Se ha producido un error. Pruebe más tarde de nuevo';
             }
         }
         

@@ -58,13 +58,12 @@
                         <strong><a href="<?= URLROOT . '/usuario' ?>">Usuario</a></strong>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong>Alta Usuario</strong>
+                        <strong>Editar Usuario</strong>
                     </li>
                 </ol>
             </nav>
             <hr>
         </div>
-        
         
         <section class="mt-4" role="main">            
             <div class="container bg-light p-3">
@@ -73,18 +72,18 @@
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="email" class="form-label">Email Usuario</label>
-                        <input type="text" name="email" class="form-control" id="email" required>
+                        <input type="text" name="email" class="form-control" id="email" required value="<?=$usuario->email_usuario ?>">
                     </div>
                 </div>
                 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" name="usuario" class="form-control" id="usuario" required>
+                        <input type="text" name="usuario" class="form-control" id="usuario" required value="<?=$usuario->usuario ?>" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="pass" class="form-label">Contraseña</label>
-                        <input type="password" name="pass" class="form-control" id="pass" required>
+                        <input type="password" name="pass" class="form-control" id="pass" required placeholder="Contraseña">
                     </div>
                 </div>   
                 
@@ -92,8 +91,8 @@
                     <div class="col-md-6 mt-3">
                         <label for="activo" class="form-label">Activo</label>
                         <select class="form-select" aria-label="activo" id="activo" name="activo">
-                            <option selected value="SI">SI</option>
-                            <option value="NO">NO</option>
+                            <option <?php setSelected($usuario->activo, true) ?> value="SI">SI</option>
+                            <option <?php setSelected($usuario->activo, false) ?> value="NO">NO</option>
                         </select>
                     </div>
                     <!--Podríamos haber rellenado los tipos usuarios desde la base de datos
@@ -101,15 +100,15 @@
                     <div class="col-md-6 mt-3">
                         <label for="tipo" class="form-label">Tipo Usuario</label>
                         <select class="form-select" aria-label="tipo" id="tipo" name="tipo">
-                            <option selected value="ADMIN">ADMIN</option>
-                            <option value="OPERARIO">OPERARIO</option>
-                            <option value="USUARIO">USUARIO</option>
+                            <option <?php setSelected($usuario->tipo, 'ADMIN') ?> value="ADMIN">ADMIN</option>
+                            <option <?php setSelected($usuario->tipo, 'OPERARIO') ?> value="OPERARIO">OPERARIO</option>
+                            <option <?php setSelected($usuario->tipo, 'USUARIO') ?> value="USUARIO">USUARIO</option>
                         </select>
                     </div>
                 </div>
                 
                 <div>
-                    <button type="submit" class="btn btn-primary">Alta Usuario</button>
+                    <button type="submit" class="btn btn-primary">Editar Usuario</button>
                 </div>
             </form>
             </div>
@@ -120,4 +119,3 @@
         </script>
     </body>
 </html>
-

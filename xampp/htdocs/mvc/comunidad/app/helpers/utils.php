@@ -1,6 +1,7 @@
 <?php
 
 function redirect($pagina) {
+    session_write_close();
     header('location:' . URLROOT . '/' . $pagina);
 }
 

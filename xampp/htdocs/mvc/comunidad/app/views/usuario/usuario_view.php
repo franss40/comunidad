@@ -98,11 +98,11 @@
                                 <?= $usuario->tipo ?>
                             </td>
                             <td>
-                                <a href="<?= URLROOT . '/propietario/editar/' . $usuario->cod ?>" type="button" class="btn btn-success mb-1">              
-                                    <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar Propietario" title="Editar Propietario"/>
+                                <a href="<?= URLROOT . '/usuario/editar/' . $usuario->usuario ?>" type="button" class="btn btn-success mb-1">              
+                                    <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar Usuario" title="Editar Usuario"/>
                                 </a>
-                                <a href="<?= URLROOT . '/propietario/borrar/' . $usuario->cod ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$usuario->nombre?>">
-                                    <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar Propietario" title="Borrar Propietario"/>
+                                <a href="<?= URLROOT . '/usuario/borrar/' . $usuario->usuario ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$usuario->usuario?>">
+                                    <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar Usuario" title="Borrar Usuario"/>
                                 </a>
                             </td>
                         </tr>
@@ -120,6 +120,21 @@
         </div>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">  
+            window.onload = function() {
+                var borrar = document.querySelectorAll('a.borrar');  
+                
+                for (var i = 0; i < borrar.length; i++) {  
+                    borrar[i].addEventListener('click', function(event) {
+                        var info = "¿Estas seguro que deseas borrar el usuario " + this.getAttribute('rel') + "? Los cambios no podrán deshacerse";
+                        if (!window.confirm(info)) {  
+                            event.preventDefault();
+                            return false;
+                        }
+                    }, false);
+                }
+            };
         </script>
     </body>
 </html>

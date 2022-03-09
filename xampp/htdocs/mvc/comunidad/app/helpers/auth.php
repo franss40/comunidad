@@ -29,15 +29,17 @@ function auth(string $control, string $tipoUsuario = '') {
         'Comunidad-borrar' => 0b10000, //10000 = 16
         'Propiedad-comunidad' => 0b100000,  // 100000 = 32
         'Cerrar_sesion-index' => 0b1000000, // 1000000 = 64
-        'Usuario-index' => 0b10000000,
-        'Usuario-nuevo' => 0b100000000
+        'Usuario-index'  => 0b10000000,
+        'Usuario-nuevo'  => 0b100000000,
+        'Usuario-editar' => 0b1000000000,
+        'Usuario-borrar' => 0b10000000000
     );
 
     $permisos = array(
         '' => 0b1,
-        'ADMIN' => 0b111111111, // 15 = 1111 significa que permite la función 1,2,3,4
-        'OPERARIO' => 0b111111111, // 1101 significa que permite la función 1,2,4
-        'USUARIO' => 0b111111111   // 1111
+        'ADMIN' => 0b11111111111, // 15 = 1111 significa que permite la función 1,2,3,4
+        'OPERARIO' => 0b11111111111, // 1101 significa que permite la función 1,2,4
+        'USUARIO' => 0b11111111111   // 1111
     );
 
     if (!array_key_exists($control, $funciones) || !array_key_exists($tipoUsuario, $permisos)) {
