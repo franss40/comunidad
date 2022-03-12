@@ -33,6 +33,18 @@ class Propiedad extends Controller {
         $this->render('propiedad/propiedad_view', $data);
     }
     
+    public function nueva(int $codComunidad, string $nombreComunidad) {
+        $data = ['info' => 'Alta Propiedad',
+            'codComunidad' => $codComunidad,
+            'nombreComunidad' => deleteUrlAmigable($nombreComunidad),
+            'token' => $_SESSION['token']
+        ];
+        
+        
+        $this->render('propiedad/nuevaPropiedad_view', $data);
+    }
+
+
     public function cuota(int $codComunidad, string $numberPropiedad) {
         // Los enlaces de los number de las propiedades los pongo en los html,
         // sustituyendo los espacios en blanco por guiones ( helpers), para que tenga

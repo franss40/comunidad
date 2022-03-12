@@ -43,8 +43,7 @@
         <section class="container-fluid mt-2" role="info">
             <div class="row">
                 <div class="col-md-6 bg-info text-black text-center p-2"><?=$comunidad->nombre;?></div>
-                <div class="col-md-4 col-6 bg-success text-white text-end p-2">Propiedades:</div>
-                <div class="col-md-2 col-6 bg-success text-white text-begin p-2"><?= $total ?></div>
+                <div class="col-md-6 bg-success text-white text-center p-2">Propiedades : <?= $total ?></div>
             </div>
         </section>
         
@@ -65,7 +64,7 @@
         <div class="container">
         <section class="mt-4" role="datos">
             <div class="ps-3 btn-group">                
-                <a href="<?= URLROOT . '/propiedad/nueva' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Propiedad" title="Nueva Propiedad"/>
+                <a href="<?= URLROOT . '/propiedad/nueva/' . $comunidad->cod . '/'. urlAmigable($comunidad->nombre) ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Propiedad" title="Nueva Propiedad"/>
                     Crear Propietario
                 </a>
             </div> 

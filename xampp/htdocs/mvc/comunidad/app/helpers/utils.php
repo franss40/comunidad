@@ -12,3 +12,7 @@ function salvaHtml($variable) {
 function urlAmigable($url) {
     return str_replace(' ', '-', $url);
 }
+
+function deleteUrlAmigable($url) {
+    return str_replace('-', ' ', $url);
+}
