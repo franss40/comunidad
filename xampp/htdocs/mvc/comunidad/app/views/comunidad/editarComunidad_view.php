@@ -70,7 +70,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="cod" class="form-label">Código Comunidad</label>
-                        <input type="text" name="cod" class="form-control" id="cod" value="<?=$comunidad->cod ?>" disabled>
+                        <input type="text" name="cod" class="form-control text-end" id="cod" value="<?=$comunidad->cod ?>" disabled>
                     </div>
                 </div>
                 

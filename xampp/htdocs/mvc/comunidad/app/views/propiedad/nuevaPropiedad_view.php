@@ -69,8 +69,74 @@
             <div class="container bg-light p-3">
                 <form action="" method="POST">
                     <input type="hidden" name="token" class="form-control" value="<?=$token ?>">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="cod" class="form-label">Código Comunidad</label>
+                            <input type="number" name="cod" class="form-control text-end" id="cod" value="<?=$codComunidad ?>" disabled>
+                        </div>
+                        <div class="col">
+                            <label for="numero" class="form-label">Vivienda</label>
+                            <input type="text" name="numero" class="form-control" id="numero" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="nombre" class="form-label">Nombre Propietario</label>
+                            <input type="text" name="nombre" class="form-control" id="nombre" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="email" class="form-label">Email Propietario</label>
+                            <input type="email" name="email" class="form-control" id="email">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tf" class="form-label">Teléfono Propietario</label>
+                            <input type="text" name="tf" class="form-control" id="tf">
+                        </div>
+                    </div>
 
-
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombreInquilino" class="form-label">Nombre Inquilino</label>
+                            <input type="text" name="nombreInquilino" class="form-control" id="nombreInquilino">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tfInquilino" class="form-label">Teléfono Inquilino</label>
+                            <input type="text" name="tfInquilino" class="form-control" id="tfInquilino">
+                        </div>  
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="superficie" class="form-label">Superficie</label>
+                            <input type="text" name="superficie" class="form-control" id="superficie">
+                        </div>
+                        <div class="col">
+                            <label for="participacion" class="form-label">Participación</label>
+                            <input type="text" name="participacion" class="form-control" id="participacion" required>
+                        </div>
+                        <div class="col">
+                            <label for="cuota" class="form-label">Cuota</label>
+                            <input type="text" name="cuota" class="form-control" id="cuota" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="cuenta" class="form-label">Cuenta Bancaria</label>
+                            <input type="text" name="cuenta" class="form-control" id="cuenta">
+                        </div>                        
+                        <div class="col">
+                            <label for="tipo" class="form-label">Tipo Propiedad</label>
+                            <select class="form-select" aria-label="tipo" id="cuota" name="tipo">
+                                <option value="VIVIENDA" selected>VIVIENDA</option>
+                                <option value="OFICINA">OFICINA</option>
+                                <option value="GARAJE">GARAJE</option>
+                                <option value="LOCAL">LOCAL</option>
+                            </select>
+                        </div>                    
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Alta Propiedad</button>
                 </form>
             </div>

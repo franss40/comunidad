@@ -29,7 +29,7 @@
                     </h1>
                 </div>
                 <div class="col-6 text-end pt-2 pe-4">
-                    <a href="<?= URLROOT . '/usuarios' ?>" class="pe-2">
+                    <a href="<?= URLROOT . '/usuario' ?>" class="pe-2">
                         <img src="<?= URLROOT . '/public/img/usuarios_lock.svg' ?>" width="36" height="36" alt="Usuarios" title="Usuarios"/>
                     </a>
 
@@ -60,14 +60,23 @@
                 </ol>
             </nav>
         </div>
-        
+        <hr>  
         <div class="container">
         <section class="mt-4" role="datos">
             <div class="ps-3 btn-group">                
-                <a href="<?= URLROOT . '/propiedad/nueva/' . $comunidad->cod . '/'. urlAmigable($comunidad->nombre) ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Propiedad" title="Nueva Propiedad"/>
+                <a href="<?= URLROOT . '/propiedad/nueva/' . $comunidad->cod . '/'. urlAmigable($comunidad->nombre) ?>" type="button" class="btn btn-success">                           
+                    <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Propiedad" title="Nueva Propiedad"/>
                     Crear Propietario
                 </a>
-            </div> 
+            </div>
+            
+            <div class="ps-3 btn-group">                
+                <a href="" type="button" class="btn btn-info">
+                    <img src="<?= URLROOT . '/public/img/ajustar.svg' ?>" width="25" height="25" alt="Actualizar Cuotas" title="Actualizar cuotas"/>
+                    Actulizar Cuotas
+                </a>
+            </div>
+            
             <?php if ($total!=0):?>
             <div class="table-responsive-md ps-3">
                 <table class="table table-hover">

@@ -47,6 +47,7 @@ class Comunidad extends Controller {
     
     /**
      * Nos indica si la comunidad tiene incidencia o no
+     * 
      * @param array $comunidad
      * @param array $incidencias
      * @return boolean

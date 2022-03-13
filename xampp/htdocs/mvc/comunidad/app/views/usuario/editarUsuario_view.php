@@ -72,7 +72,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-7">
                         <label for="email" class="form-label">Email Usuario</label>
-                        <input type="text" name="email" class="form-control" id="email" required value="<?=$usuario->email_usuario ?>">
+                        <input type="email" name="email" class="form-control" id="email" required value="<?=$usuario->email_usuario ?>">
                     </div>
                 </div>
                 
