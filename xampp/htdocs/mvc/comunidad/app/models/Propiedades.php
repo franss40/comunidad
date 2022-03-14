@@ -98,7 +98,7 @@ class Propiedades {
      * @param int $propiedad
      * @return boolean
      */
-    public function addPropiedad($propiedad) {
+    public function addPropiedad(array $propiedad) {
         $sql = "INSERT INTO propiedad(numero, cod, nombre_propietario  , tf_propietario, email_propietario, nombre_inquilino, tf_inquilino, superficie, participacion, cuota, numero_cuenta, tipo_prop) 
                 VALUES(:numero, :cod, :nombre_propietario, :tf_propietario, :email_propietario, :nombre_inquilino, :tf_inquilino, :superficie, :participacion, :cuota, :numero_cuenta, :tipo)";
 
@@ -117,5 +117,46 @@ class Propiedades {
         $this->db->bind('tipo', $propiedad->tipo_prop, 'string');
         
         return $this->db->noResultPrepared();
+    }
+    
+    /**
+     * Edito una propiedad determinada
+     * 
+     * @param array $propiedad
+     * @return boolean
+     */
+    public function editPropiedad($propiedad) {
+        $sql = "UPDATE propiedad SET nombre_propietario=:nombre_propietario, tf_propietario=:tf_propietario, email_propietario=:email_propietario, nombre_inquilino=:nombre_inquilino, tf_inquilino=:tf_inquilino, superficie=:superficie, participacion=:participacion, cuota=:cuota, numero_cuenta=:numero_cuenta, tipo_prop=:tipo WHERE numero=:numero AND cod=:cod";
+        
+        $this->db->prepared($sql);
+        $this->db->bind('nombre_propietario', $propiedad->nombre_propietario, 'string');
+        $this->db->bind('tf_propietario', $propiedad->tf_propietario, 'string');
+        $this->db->bind('email_propietario', $propiedad->email_propietario, 'string');
+        $this->db->bind('nombre_inquilino', $propiedad->nombre_inquilino, 'string');
+        $this->db->bind('tf_inquilino', $propiedad->tf_inquilino, 'string');
+        $this->db->bind('superficie', $propiedad->superficie, 'string');
+        $this->db->bind('participacion', $propiedad->participacion, 'string');
+        $this->db->bind('cuota', $propiedad->cuota, 'string');
+        $this->db->bind('numero_cuenta', $propiedad->numero_cuenta, 'string');
+        $this->db->bind('tipo', $propiedad->tipo_prop, 'string');
+        $this->db->bind('numero', $propiedad->numero, 'string');
+        $this->db->bind('cod', $propiedad->cod, 'int');
+        
+        return $this->db->noResultPrepared();
+    }
+    
+    /**
+     * Obtengo una propiedad determinada, dado el número de esa propiedad y el cod comunidad
+     * 
+     * @param int $codComunidad
+     * @param string $numeroPropiedad
+     * @return array
+     */
+    public function getPropiedad(int $codComunidad, string $numeroPropiedad) {
+        $sql = "SELECT * FROM propiedad WHERE numero=:numero AND cod =:cod";
+        $this->db->prepared($sql);
+        $this->db->bind('numero', $numeroPropiedad, 'string');
+        $this->db->bind('cod', $codComunidad, 'int');
+        return $this->db->resultPreparedOne();
     }
 }

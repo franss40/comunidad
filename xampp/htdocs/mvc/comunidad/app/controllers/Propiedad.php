@@ -39,14 +39,15 @@ class Propiedad extends Controller {
     }
     
     /**
-     * Muestro y/o envío el formulario de nueva comunidad
+     * Añado nueva comunidad
      * 
      * @param int $codComunidad
      * @param string $nombreComunidad
      * 
      */
     public function nueva(int $codComunidad, string $nombreComunidad) {
-        $data = ['info' => 'Alta Propiedad',
+        $data = [
+            'info' => 'Alta Propiedad',
             'codComunidad' => $codComunidad,
             'nombreComunidad' => deleteUrlAmigable($nombreComunidad),
             'token' => $_SESSION['token']
@@ -98,6 +99,74 @@ class Propiedad extends Controller {
         }
         
         $this->render('propiedad/nuevaPropiedad_view', $data);
+    }
+    
+    /**
+     * Edito nueva comunidad
+     * 
+     * @param int $codComunidad
+     * @param string $nombreComunidad
+     * @param string $numeroPropiedad
+     * 
+     */
+    public function editar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
+        require_once APPROOT . '/views/helpers_view.php';
+        
+        $data = [
+            'info' => 'Editar Propiedad',
+            'token' => $_SESSION['token'],
+            'codComunidad' => $codComunidad,
+            'nombreComunidad' => $nombreComunidad
+        ];
+        
+        // recupero datos enviados mediante post de manera segura
+        $cod = $codComunidad;
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
+        $vivienda = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRIPPED);
+        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRIPPED);
+        $tf = filter_input(INPUT_POST, 'tf', FILTER_SANITIZE_STRIPPED);
+        $nombreInquilino = filter_input(INPUT_POST, 'nombreInquilino', FILTER_SANITIZE_STRIPPED);
+        $tfInquilino = filter_input(INPUT_POST, 'tfInquilino', FILTER_SANITIZE_STRIPPED);
+        $superficie = filter_input(INPUT_POST, 'superficie', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
+        $participacion = filter_input(INPUT_POST, 'participacion', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $cuenta = filter_input(INPUT_POST, 'cuenta', FILTER_SANITIZE_STRIPPED);
+        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRIPPED);
+        
+        // Si los datos son correctos y no están vacios...
+        if (!empty($cod) && !empty($vivienda) && !empty($nombre) && !empty($participacion) && !empty($cuota) && $token == $_SESSION['token']) {
+            $tipoPermitido = array('VIVIENDA', 'OFICINA', 'GARAJE', 'LOCAL');
+            if (!in_array($tipo, $tipoPermitido)) {  
+                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+                $this->render('propiedad/nuevaPropiedad_view', $data);
+                return;
+            }
+            
+            $propiedad = new stdClass();
+            $propiedad->cod = $cod;
+            $propiedad->numero = $vivienda;
+            $propiedad->nombre_propietario = $nombre;
+            $propiedad->tf_propietario = $tf;
+            $propiedad->email_propietario = $email;            
+            $propiedad->nombre_inquilino = $nombreInquilino;
+            $propiedad->tf_inquilino = $tfInquilino;            
+            $propiedad->superficie = $superficie;            
+            $propiedad->participacion = $participacion;
+            $propiedad->cuota = $cuota;
+            $propiedad->numero_cuenta = $cuenta;
+            $propiedad->tipo_prop = $tipo;
+            
+            if ($this->model->editPropiedad($propiedad)) {
+                $data['info'] = 'Registro editado correctamente';
+            } else {
+                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+            }
+        }    
+
+        $propiedades = $this->model->getPropiedad($codComunidad, $numeroPropiedad);
+        $data['propiedad'] = $propiedades;
+        $this->render('propiedad/editarPropiedad_view', $data);
     }
 
     /**
