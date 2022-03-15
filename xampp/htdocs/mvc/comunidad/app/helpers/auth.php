@@ -30,11 +30,12 @@ function auth(string $control, string $tipoUsuario = '') {
         'Propiedad-comunidad' => 0b100000,  // 100000 = 32
         'Propiedad-nueva'     => 0b1000000,// 1000000 = 64
         'Propiedad-editar'    => 0b10000000,
-        'Cerrar_sesion-index' => 0b100000000, 
-        'Usuario-index'       => 0b1000000000,
-        'Usuario-nuevo'       => 0b10000000000,
-        'Usuario-editar'      => 0b100000000000,
-        'Usuario-borrar'      => 0b1000000000000
+        'Propiedad-borrar'    => 0b100000000,
+        'Cerrar_sesion-index' => 0b1000000000, 
+        'Usuario-index'       => 0b10000000000,
+        'Usuario-nuevo'       => 0b100000000000,
+        'Usuario-editar'      => 0b1000000000000,
+        'Usuario-borrar'      => 0b10000000000000
     );
 
     $permisos = array(

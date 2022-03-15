@@ -98,7 +98,7 @@ class Propiedades {
      * @param int $propiedad
      * @return boolean
      */
-    public function addPropiedad(array $propiedad) {
+    public function addPropiedad($propiedad) {
         $sql = "INSERT INTO propiedad(numero, cod, nombre_propietario  , tf_propietario, email_propietario, nombre_inquilino, tf_inquilino, superficie, participacion, cuota, numero_cuenta, tipo_prop) 
                 VALUES(:numero, :cod, :nombre_propietario, :tf_propietario, :email_propietario, :nombre_inquilino, :tf_inquilino, :superficie, :participacion, :cuota, :numero_cuenta, :tipo)";
 
@@ -158,5 +158,9 @@ class Propiedades {
         $this->db->bind('numero', $numeroPropiedad, 'string');
         $this->db->bind('cod', $codComunidad, 'int');
         return $this->db->resultPreparedOne();
+    }
+    
+    public function borrarPropiedad(int $codComunidad, string $codPropiedad) {
+        return false;
     }
 }

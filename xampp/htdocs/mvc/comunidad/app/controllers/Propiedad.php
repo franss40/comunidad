@@ -122,7 +122,7 @@ class Propiedad extends Controller {
         // recupero datos enviados mediante post de manera segura
         $cod = $codComunidad;
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        $vivienda = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRIPPED);
+        $vivienda = $numeroPropiedad;
         $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRIPPED);
         $tf = filter_input(INPUT_POST, 'tf', FILTER_SANITIZE_STRIPPED);
@@ -167,6 +167,20 @@ class Propiedad extends Controller {
         $propiedades = $this->model->getPropiedad($codComunidad, $numeroPropiedad);
         $data['propiedad'] = $propiedades;
         $this->render('propiedad/editarPropiedad_view', $data);
+    }
+    
+    public function borrar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
+        $data = [
+                'info'   => 'Se ha producido un error al intentar borrar la propiedad',
+                'result' => 'Error'
+                ];
+        if ($this->model->borrarPropiedad($codComunidad, $numeroPropiedad)) {
+            $data = [
+                    'result'     => 'Propiedad ' . $numeroPropiedad . ' de la comunidad '. $nombreComunidad . ' borrada',
+                    'info'       => 'Borrado Propiedad'
+                    ];
+        }
+        $this->render('informacion_view', $data);
     }
 
     /**
