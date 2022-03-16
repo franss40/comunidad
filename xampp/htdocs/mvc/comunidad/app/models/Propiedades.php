@@ -160,11 +160,35 @@ class Propiedades {
         return $this->db->resultPreparedOne();
     }
     
+    /**
+     * Borrado de una propiedad
+     * 
+     * @param int $codComunidad
+     * @param string $codPropiedad
+     * @return boolean
+     */
     public function borrarPropiedad(int $codComunidad, string $codPropiedad) {
         $sql = "DELETE FROM propiedad WHERE cod = :cod AND numero = :numero";
         $this->db->prepared($sql);
         $this->db->bind('cod', $codComunidad, 'int');
         $this->db->bind('numero', $codPropiedad, 'string');
+        return $this->db->noResultPrepared();
+    }
+    
+    /**
+     * Actualiza una determinada propiedad al valor de la cuota
+     * 
+     * @param int $codComunidad
+     * @param int $numeroPropiedad
+     * @param double $valor
+     * @return boolean
+     */
+    public function actualizarCuota(int $codComunidad, string $numeroPropiedad, float $valor) {
+        $sql = "UPDATE propiedad SET cuota=:cuota WHERE numero=:numero AND cod=:cod";
+        $this->db->prepared($sql);
+        $this->db->bind('numero', $numeroPropiedad, 'string');
+        $this->db->bind('cod', $codComunidad, 'int');
+        $this->db->bind('cuota', $valor, 'string');        
         return $this->db->noResultPrepared();
     }
 }

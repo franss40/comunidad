@@ -71,7 +71,7 @@
             </div>
             
             <div class="ps-3 btn-group">                
-                <a href="" type="button" class="btn btn-info">
+                <a href="<?= URLROOT.'/comunidad/actualizarCuota/'.$comunidad->cod ?>" type="button" class="btn btn-info" id="actualizarCuotas">
                     <img src="<?= URLROOT . '/public/img/ajustar.svg' ?>" width="25" height="25" alt="Actualizar Cuotas" title="Actualizar cuotas"/>
                     Actulizar Cuotas
                 </a>
@@ -139,7 +139,16 @@
                             return false;
                         }
                     }, false);
-                }
+                };
+                
+                var actualizar = document.querySelector('#actualizarCuotas');
+                actualizar.addEventListener('click', function(event) {
+                    var info2 = "¿Estás seguro de querer actualizar todas las cuotas de esta comunidad?";
+                    if (!window.confirm(info2)) {  
+                        event.preventDefault();
+                        return false;
+                    }
+                }, false);
             };
         </script>
     </body>

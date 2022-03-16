@@ -111,8 +111,11 @@ class Comunidades {
      * @param int $cod
      * @return array
      */
-    public function getComunidad(int $cod) {
-        return $this->db->result("SELECT * FROM comunidad WHERE cod = $cod");
+    public function getComunidad(int $cod) {        
+        $sql = "SELECT * FROM comunidad WHERE cod =:cod";
+        $this->db->prepared($sql);
+        $this->db->bind('cod', $cod, 'int');
+        return $this->db->resultPreparedOne();
     }
 
 }

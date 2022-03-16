@@ -31,7 +31,7 @@ class Propiedad extends Controller {
         $propiedades = $this->model->getPropiedades($cod);
         $total = $this->model->getTotal();
 
-        $data = ['comunidad' => $comunidad[0],
+        $data = ['comunidad' => $comunidad,
             'propiedades' => $propiedades,
             'total' => $total];
 
@@ -169,6 +169,13 @@ class Propiedad extends Controller {
         $this->render('propiedad/editarPropiedad_view', $data);
     }
     
+    /**
+     * Borrado de una propiedad
+     * 
+     * @param int $codComunidad
+     * @param string $nombreComunidad
+     * @param string $numeroPropiedad
+     */
     public function borrar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
         $data = [
                 'info'   => 'Borrado Propiedad',

@@ -194,7 +194,61 @@ class Comunidad extends Controller {
         
         $propiedades = $this->models['Propiedades']->getPropiedades($cod);
         $data['propiedad'] = $propiedades;
-        $data['comunidad'] = $this->model->getComunidad($cod)[0];
+        $data['comunidad'] = $this->model->getComunidad($cod);
         $this->render('comunidad/editarComunidad_view', $data);
+    }
+    
+    /**
+     * Recalculamos las cuotas de todos los propietarios
+     * 
+     * primero conectamos con la comunidad para ver el tipo de cuota y el presupuesto
+     * seguidamente si es cuota fija tenemos que saber el número de propiedades para calcularla
+     * Si no es así necesitamos el presupuesto
+     * Recorremos todas las propiedades calculando la cuota en cada una 
+     * 
+     * @param int $codComunidad
+     */
+    public function actualizarCuota(int $codComunidad) {
+        $data = [
+                'info'   => 'Actualización de cuotas',
+                'result' => "Se ha actualizado correctamente"
+                ];
+        
+        $comunidad = $this->model->getComunidad($codComunidad);
+        if(empty($comunidad)){
+            $data = [
+                'info'   => 'Actualización de cuotas',
+                'result' => "No se ha podido actualizar las cuotas"
+            ];
+        }
+        $propiedades = $this->models['Propiedades']->getPropiedades($codComunidad);
+        $numeroPropiedades = $this->models['Propiedades']->getTotal();
+        
+        if ($comunidad->tipo_cuota == 'FIJA'){
+            foreach ($propiedades as $propiedad) {
+                (float)$valor = $comunidad->presupuesto / $numeroPropiedades;
+                $result = $this->models['Propiedades']->actualizarCuota($comunidad->cod, $propiedad->numero, $valor);
+                if (!$result) {
+                    $data = [
+                        'info'   => 'Actualización de cuotas',
+                        'result' => "No se ha podido actualizar las cuotas"
+                    ];
+                }
+            }
+        } else {
+            foreach ($propiedades as $propiedad) {
+                (float)$valor = $propiedad->participacion * $comunidad->presupuesto / 100;
+
+                $result = $this->models['Propiedades']->actualizarCuota($comunidad->cod, $propiedad->numero, $valor);
+                if (!$result) {
+                    $data = [
+                        'info'   => 'Actualización de cuotas',
+                        'result' => "No se ha podido actualizar las cuotas"
+                    ];
+                }
+            }
+        }
+
+        $this->render('informacion_view', $data);
     }
 }
