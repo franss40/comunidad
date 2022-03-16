@@ -171,12 +171,12 @@ class Propiedad extends Controller {
     
     public function borrar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
         $data = [
-                'info'   => 'Se ha producido un error al intentar borrar la propiedad',
-                'result' => 'Error'
+                'info'   => 'Borrado Propiedad',
+                'result' => "Se ha producido un error al intentar borrar la propiedad $numeroPropiedad de la comunidad $nombreComunidad"
                 ];
         if ($this->model->borrarPropiedad($codComunidad, $numeroPropiedad)) {
             $data = [
-                    'result'     => 'Propiedad ' . $numeroPropiedad . ' de la comunidad '. $nombreComunidad . ' borrada',
+                    'result'     => "Borrado con éxito de la propiedad $numeroPropiedad de la comunidad $nombreComunidad",
                     'info'       => 'Borrado Propiedad'
                     ];
         }

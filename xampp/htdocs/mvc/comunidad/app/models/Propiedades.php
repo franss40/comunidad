@@ -161,6 +161,10 @@ class Propiedades {
     }
     
     public function borrarPropiedad(int $codComunidad, string $codPropiedad) {
-        return false;
+        $sql = "DELETE FROM propiedad WHERE cod = :cod AND numero = :numero";
+        $this->db->prepared($sql);
+        $this->db->bind('cod', $codComunidad, 'int');
+        $this->db->bind('numero', $codPropiedad, 'string');
+        return $this->db->noResultPrepared();
     }
 }

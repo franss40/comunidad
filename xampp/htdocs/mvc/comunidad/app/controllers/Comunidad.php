@@ -66,10 +66,13 @@ class Comunidad extends Controller {
      * 
      * @param int $cod
      */
-    public function borrar(int $cod) {
-        $data = ['info' => 'Se ha producido un error al intentar borrar la comunidad'];
+    public function borrar(int $cod, string $nombreComunidad) {
+        $data = [
+                'info' => "Borrado Comunidad",
+                'result' => "Se ha producido un error al intentar borrar la comunidad $nombreComunidad"
+                ];
         if ($this->model->borrarComunidad($cod)) {
-            $data = ['result' => 'Comunidad borrada',
+            $data = ['result' => "Comunidad $nombreComunidad borrada",
                      'info' => 'Borrado Comunidad'];
         }
         $this->render('informacion_view', $data);

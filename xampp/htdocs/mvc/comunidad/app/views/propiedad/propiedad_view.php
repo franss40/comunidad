@@ -107,7 +107,7 @@
                                 <a href="<?= URLROOT.'/propiedad/editar/'.$comunidad->cod.'/'.urlAmigable($comunidad->nombre).'/'.$propiedad->numero ?>" type="button" class="btn btn-success mb-1">              
                                     <img src="<?= URLROOT . '/public/img/info.svg' ?>" width="20" height="20" alt="Ver o editar propiedad" title="Ver datos o editar propiedad"/>
                                 </a>
-                                <a href="<?= URLROOT . '/propiedad/borrar/' . $comunidad->cod . '/'. urlAmigable($comunidad->nombre).'/'.$propiedad->numero ?>" type="button" class="btn btn-warning mb-1">
+                                <a href="<?= URLROOT . '/propiedad/borrar/' . $comunidad->cod . '/'. urlAmigable($comunidad->nombre).'/'.$propiedad->numero ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$propiedad->numero ?>">
                                     <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar propiedad" title="Borrar propiedad"/>
                                 </a>
                             </td>
@@ -126,6 +126,21 @@
         </div>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">  
+            window.onload = function() {
+                var borrar = document.querySelectorAll('a.borrar');  
+                
+                for (var i = 0; i < borrar.length; i++) {  
+                    borrar[i].addEventListener('click', function(event) {
+                        var info = "¿Estas seguro que deseas borrar la propiedad " + this.getAttribute('rel') + "? Los cambios no podrán deshacerse";
+                        if (!window.confirm(info)) {  
+                            event.preventDefault();
+                            return false;
+                        }
+                    }, false);
+                }
+            };
         </script>
     </body>
 </html>
