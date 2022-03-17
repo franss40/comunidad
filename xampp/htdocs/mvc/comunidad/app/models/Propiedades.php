@@ -184,11 +184,27 @@ class Propiedades {
      * @return boolean
      */
     public function actualizarCuota(int $codComunidad, string $numeroPropiedad, float $valor) {
-        $sql = "UPDATE propiedad SET cuota=:cuota WHERE numero=:numero AND cod=:cod";
-        $this->db->prepared($sql);
-        $this->db->bind('numero', $numeroPropiedad, 'string');
-        $this->db->bind('cod', $codComunidad, 'int');
-        $this->db->bind('cuota', $valor, 'string');        
-        return $this->db->noResultPrepared();
+        try {
+            $sql = "UPDATE propiedad SET cuota=:cuota WHERE numero=:numero AND cod=:cod";
+            $this->db->prepared($sql);
+            $this->db->bind('numero', $numeroPropiedad, 'string');
+            $this->db->bind('cod', $codComunidad, 'int');
+            $this->db->bind('cuota', $valor, 'string');        
+            return $this->db->noResultPrepared();
+        } catch (Exception $exc) {
+            throw new Exception('Se ha producido un error');
+        }
+    }
+    
+    public function beginT() {
+        $this->db->beginT();
+    }
+    
+    public function endT() {
+        $this->db->endT();
+    }
+    
+    public function backT() {
+        $this->db->backT();
     }
 }

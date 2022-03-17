@@ -34,12 +34,12 @@ class DataBase {
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (Exception $exc) {
-            echo 'error: ' . $exc->getMessage();
+            die('Conección fallida');
         }
     }
 
     /**
-     * Obtiene el resultado sin preparar los datos antes
+     * Obtiene el resultado sin preparar los datos antes, algo peligroso
      * 
      * @param string $sql
      * @return array
@@ -130,7 +130,7 @@ class DataBase {
         try {
             return $this->stmt->execute();
         } catch (Exception $exc) {
-            echo $exc->getMessage().'<br>'.$exc->getTraceAsString();
+            throw new Exception('Se ha producido un error');            
         }
     }
 
@@ -152,6 +152,28 @@ class DataBase {
     function lastID() {
         return $this->dbh->lastInsertId();
     }
+    
+    /**
+     * Comienza una transacción
+     */
+    function beginT() {
+        $this->dbh->beginTransaction();
+    }
+    
+    /**
+     * Finalizar una transacción
+     */
+    function endT() {
+        $this->dbh->commit();
+    }
+    
+    /**
+     * Volvemos al estado anterior
+     */
+    function backT() {
+        $this->dbh->rollBack();
+    }
+    
     /**
      * Destruye la conexión
      */

@@ -70,6 +70,10 @@
                 </a>
             </div>
             
+            
+            
+            <?php if ($total!=0):?>
+            
             <div class="ps-3 btn-group">                
                 <a href="<?= URLROOT.'/comunidad/actualizarCuota/'.$comunidad->cod ?>" type="button" class="btn btn-info" id="actualizarCuotas">
                     <img src="<?= URLROOT . '/public/img/ajustar.svg' ?>" width="25" height="25" alt="Actualizar Cuotas" title="Actualizar cuotas"/>
@@ -77,7 +81,6 @@
                 </a>
             </div>
             
-            <?php if ($total!=0):?>
             <div class="table-responsive-md ps-3">
                 <table class="table table-hover">
                     <thead>

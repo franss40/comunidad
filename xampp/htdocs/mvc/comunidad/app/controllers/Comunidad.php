@@ -209,46 +209,68 @@ class Comunidad extends Controller {
      * @param int $codComunidad
      */
     public function actualizarCuota(int $codComunidad) {
-        $data = [
-                'info'   => 'Actualización de cuotas',
-                'result' => "Se ha actualizado correctamente"
-                ];
+        try {
+            $comunidad = $this->model->getComunidad($codComunidad);
+            $this->_existeVista($comunidad);
+
+            $propiedades = $this->models['Propiedades']->getPropiedades($codComunidad);
+            $this->_existeVista($propiedades);
+            
+            $numeroPropiedades = $this->models['Propiedades']->getTotal();
+            // comienzo la transacción
+            $this->models['Propiedades']->beginT();
+
+            foreach ($propiedades as $propiedad) {                
+                $valor = $this->_calculoValorCuota($comunidad, $propiedad, $numeroPropiedades);
+                $result = $this->models['Propiedades']->actualizarCuota($comunidad->cod, $propiedad->numero, $valor);                
+                // Si se produce un error en cualquiera de las actualizaciones, volvemos al principio
+                if (!$result) {throw new Exception;}
+            }
+            $this->models['Propiedades']->endT();
+
+        } catch (Exception $ex) {            
+            $this->models['Propiedades']->backT();
+            echo $ex;
+            $this->_existeVista(null);
+        }
         
-        $comunidad = $this->model->getComunidad($codComunidad);
-        if(empty($comunidad)){
+        $data = [
+            'info'   => 'Actualización de cuotas',
+            'result' => "Se ha actualizado correctamente"
+        ];
+        $this->render('informacion_view', $data);
+    }
+    
+    /**
+     * Método privado que comprueba si el array pasado existe y no contiene nada
+     * Si es nulo o no contiene nada mostramos la información de error
+     * 
+     * @param array $param
+     */
+    private function _existeVista($param) {
+        if(empty($param)){
             $data = [
                 'info'   => 'Actualización de cuotas',
                 'result' => "No se ha podido actualizar las cuotas"
             ];
-        }
-        $propiedades = $this->models['Propiedades']->getPropiedades($codComunidad);
-        $numeroPropiedades = $this->models['Propiedades']->getTotal();
-        
+            $this->render('informacion_view', $data);            
+        }        
+    }
+    
+    /**
+     * Calcula el valor de la cuota mensual de la comunidad
+     * 
+     * @param array $comunidad
+     * @param array $propiedad
+     * @param int $totalPropietario
+     * @return float
+     */
+    private function _calculoValorCuota($comunidad, $propiedad, $totalPropietario) {
         if ($comunidad->tipo_cuota == 'FIJA'){
-            foreach ($propiedades as $propiedad) {
-                (float)$valor = $comunidad->presupuesto / $numeroPropiedades;
-                $result = $this->models['Propiedades']->actualizarCuota($comunidad->cod, $propiedad->numero, $valor);
-                if (!$result) {
-                    $data = [
-                        'info'   => 'Actualización de cuotas',
-                        'result' => "No se ha podido actualizar las cuotas"
-                    ];
-                }
-            }
+            (float)$valor = $comunidad->presupuesto / $totalPropietario;
         } else {
-            foreach ($propiedades as $propiedad) {
-                (float)$valor = $propiedad->participacion * $comunidad->presupuesto / 100;
-
-                $result = $this->models['Propiedades']->actualizarCuota($comunidad->cod, $propiedad->numero, $valor);
-                if (!$result) {
-                    $data = [
-                        'info'   => 'Actualización de cuotas',
-                        'result' => "No se ha podido actualizar las cuotas"
-                    ];
-                }
-            }
+            (float)$valor = $propiedad->participacion * $comunidad->presupuesto / 100;
         }
-
-        $this->render('informacion_view', $data);
+        return $valor/12;
     }
 }
