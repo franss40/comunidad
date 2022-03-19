@@ -95,10 +95,11 @@ class Comunidad extends Controller {
         $codigoPostal = filter_input(INPUT_POST, 'codigoPostal', FILTER_VALIDATE_INT);
         $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);
         $tipoCuota = filter_input(INPUT_POST, 'tipoCuota', FILTER_SANITIZE_STRIPPED);
+        $presupuesto = filter_input(INPUT_POST, 'presupuesto', FILTER_SANITIZE_STRIPPED);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
         
-        // No se comprueba la cuota ni código por comprobarse dentro de forma segura
-        if (!empty($nombre) && !empty($direccion) && !empty($poblacion) && $token == $_SESSION['token']) {
+        // No se comprueba la cuota por comprobarse dentro de forma segura
+        if (!empty($nombre) && !empty($direccion) && !empty($poblacion) && !empty($presupuesto) && $token == $_SESSION['token']) {
 
             if ($tipoCuota!=='FIJA' && $tipoCuota!=='VARIABLE' || !is_int($codigoPostal)) {  
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
@@ -112,6 +113,7 @@ class Comunidad extends Controller {
             $comunidad->codigoPostal = $codigoPostal;
             $comunidad->poblacion = $poblacion;
             $comunidad->tipoCuota = $tipoCuota;
+            $comunidad->presupuesto = $presupuesto;
             
             if ($this->model->addComunidad($comunidad)) {
                 $data['info'] = 'Registro añadido correctamente';
@@ -131,12 +133,66 @@ class Comunidad extends Controller {
     public function editar(int $cod) {
         
         require_once APPROOT . '/views/helpers_view.php';
-        $data = ['info' => 'Editar Comunidad',
+        
+        // Recupero datos post si los hay
+        $filtroPost = $this->filtrarPost();
+        
+        if (!empty($filtroPost)) {
+
+            if (empty($filtroPost->nombre) || empty($filtroPost->direccion) || empty($filtroPost->poblacion) || empty($filtroPost->codigoPostal) || $filtroPost->token !== $_SESSION['token']) {
+                $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde');
+            }
+
+            if ($filtroPost->tipoCuota!=='FIJA' && $filtroPost->tipoCuota!=='VARIABLE') {
+                $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde');
+            }
+
+            if ($filtroPost->presidente!='' && $filtroPost->vicepresidente!='' && $filtroPost->presidente==$filtroPost->vicepresidente) {
+                $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde');
+            }
+
+            if ($filtroPost->presidente == '') {
+                $filtroPost->presidente = null;
+            }
+
+            if ($filtroPost->vicepresidente == '') {
+                $filtroPost->vicepresidente = null;
+            }
+        
+            if ($this->model->editComunidad($filtroPost)) {
+                $this->editMostrarSalida($cod, 'Registro actualizado correctamente');
+            } else {
+                $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde de nuevo');
+            }
+        } else {
+            $this->editMostrarSalida($cod, 'Editar Comunidad');
+        }
+    }
+    
+    /**
+     * Muestro la pantalla de editar Comunidad con la información indicada
+     * 
+     * @param int $cod
+     * @param string $info
+     */
+    private function editMostrarSalida($cod, $info) {
+        $propiedades = $this->models['Propiedades']->getPropiedades($cod);
+        $data = [
+            'propiedad' => $propiedades,
+            'comunidad' => $this->model->getComunidad($cod),
+            'info'      => $info,
             'token' => $_SESSION['token']
         ];
-        
-        // En el caso que haya envío de datos Post, recuperamos los datos de
-        // manera segura
+        $this->render('comunidad/editarComunidad_view', $data);
+    }
+    
+    /**
+     * Filtrar datos de la comunidad. Retorno null si no hay datos post
+     * 
+     * @return array
+     */
+    private function filtrarPost() {
+        $cod = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_STRIPPED);
         $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
         $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRIPPED);
         $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);
@@ -147,55 +203,17 @@ class Comunidad extends Controller {
         $vicepresidente = filter_input(INPUT_POST, 'vicepresidente', FILTER_SANITIZE_STRIPPED);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
         
-        // No se comprueba la cuota por hacerlo dentro de forma segura. 
-        // Tampoco lo hacemos con el presidente, vicepresidente ni presupuesto por no ser campos obligatorios
-        if (!empty($nombre) && !empty($direccion) && !empty($poblacion) && $token == $_SESSION['token']) {
-            if ($tipoCuota!=='FIJA' && $tipoCuota!=='VARIABLE') {  
-                $propiedades = $this->models['Propiedades']->getPropiedades($cod);
-                $data['propiedad'] = $propiedades;
-                $data['comunidad'] = $this->model->getComunidad($cod)[0];
-                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
-                $this->render('comunidad/editarComunidad_view', $data);
-                return;
-            }
-            // no pueden ser la misma persona presidente y vicepresidente
-            if ($presidente!='' && $vicepresidente!='' && $presidente==$vicepresidente) {
-                $propiedades = $this->models['Propiedades']->getPropiedades($cod);
-                $data['propiedad'] = $propiedades;
-                $data['comunidad'] = $this->model->getComunidad($cod)[0];
-                $data['info'] = 'No pueden ser presidente y vicepresidente la misma persona';
-                $this->render('comunidad/editarComunidad_view', $data);
-                return;
-            }
-            if ($presidente == '') {
-                $presidente = null;
-            }
-            if ($vicepresidente == '') {
-                $vicepresidente = null;
-            }
-            // En vez de arrays, utilizamos objetos stdclass
-            $comunidad = new stdClass();
-            $comunidad->cod = $cod;
-            $comunidad->nombre = $nombre; 
-            $comunidad->direccion = $direccion;
-            $comunidad->codigoPostal = $codigoPostal;
-            $comunidad->poblacion = $poblacion;
-            $comunidad->presupuesto = $presupuesto;
-            $comunidad->tipoCuota = $tipoCuota;
-            $comunidad->presidente = $presidente;
-            $comunidad->vicepresidente = $vicepresidente;
-
-            if ($this->model->editComunidad($comunidad)) {
-                $data['info'] = 'Registro actualizado correctamente';
-            } else {
-                $data['info'] = 'Se ha producido un error. Pruebe más tarde de nuevo';
-            }
-        }
+        $comunidad = new stdClass();
+        $comunidad->cod = $cod; $comunidad->nombre = $nombre;
+        $comunidad->direccion = $direccion; $comunidad->codigoPostal = $codigoPostal;
+        $comunidad->poblacion = $poblacion; $comunidad->presupuesto = $presupuesto;
+        $comunidad->tipoCuota = $tipoCuota; $comunidad->presidente = $presidente;
+        $comunidad->vicepresidente = $vicepresidente; $comunidad->token = $token;
         
-        $propiedades = $this->models['Propiedades']->getPropiedades($cod);
-        $data['propiedad'] = $propiedades;
-        $data['comunidad'] = $this->model->getComunidad($cod);
-        $this->render('comunidad/editarComunidad_view', $data);
+        if (empty($direccion) || empty($cod)) {
+            $comunidad = null;
+        }
+        return $comunidad;
     }
     
     /**
@@ -234,10 +252,7 @@ class Comunidad extends Controller {
             $this->_existeVista(null);
         }
         
-        $data = [
-            'info'   => 'Actualización de cuotas',
-            'result' => "Se ha actualizado correctamente"
-        ];
+        $data = ['info'   => 'Actualización de cuotas', 'result' => "Se ha actualizado correctamente"];
         $this->render('informacion_view', $data);
     }
     

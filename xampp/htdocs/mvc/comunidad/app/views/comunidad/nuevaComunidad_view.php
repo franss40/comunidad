@@ -103,7 +103,11 @@
                             <option selected value="FIJA">FIJA</option>
                             <option value="VARIABLE">VARIABLE</option>
                         </select>
-                    </div>                    
+                    </div>
+                    <div class="col">
+                        <label for="presupuesto" class="form-label">Presupuesto</label>
+                        <input type="text" name="presupuesto" class="form-control" id="presupuesto" required>
+                    </div>
                 </div>
                 
                 <div>

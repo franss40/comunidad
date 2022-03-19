@@ -56,14 +56,15 @@ class Comunidades {
      * @return boolean
      */
     public function addComunidad($comunidad) {
-        $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota) 
-                    VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota)";
+        $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota, presupuesto) 
+                    VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota, :presupuesto)";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->direccion, 'string');
         $this->db->bind('codigo', $comunidad->codigoPostal, 'int');
         $this->db->bind('poblacion', $comunidad->poblacion, 'string');
         $this->db->bind('cuota', $comunidad->tipoCuota, 'string');
+        $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
 
         return $this->db->noResultPrepared();
     }
