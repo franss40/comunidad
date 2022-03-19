@@ -12,7 +12,7 @@ class Comunidades {
     public function __construct() {
         $this->db = new DataBase();
     }
-    
+
     /**
      * Retorna las comunidades existentes
      * 
@@ -20,7 +20,7 @@ class Comunidades {
      */
     public function getComunidades() {
 
-        /***************************************************
+        /*         * *************************************************
          * Con datos escapados sería:
          * 
          * $this->db->prepared("select * from codigos where Poblacion=:ciudad");
@@ -49,6 +49,7 @@ class Comunidades {
 
         return $this->db->result($sql);
     }
+
     /**
      * Adiciono una comunidad
      * 
@@ -69,13 +70,13 @@ class Comunidades {
         return $this->db->noResultPrepared();
     }
 
-     public function borrarComunidad(int $cod) {
+    public function borrarComunidad(int $cod) {
         $sql = "DELETE FROM comunidad WHERE cod = :cod";
         $this->db->prepared($sql);
         $this->db->bind('cod', $cod, 'int');
         return $this->db->noResultPrepared();
-     }
-     
+    }
+
     /**
      * Edito una comunidad
      * 
@@ -83,7 +84,7 @@ class Comunidades {
      * @return boolean
      */
     public function editComunidad($comunidad) {
-        $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente WHERE cod=:cod"; 
+        $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente WHERE cod=:cod";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->direccion, 'string');
@@ -94,9 +95,10 @@ class Comunidades {
         $this->db->bind('presidente', $comunidad->presidente, 'string');
         $this->db->bind('vicepresidente', $comunidad->vicepresidente, 'string');
         $this->db->bind('cod', $comunidad->cod, 'int');
-        
+
         return $this->db->noResultPrepared();
     }
+
     /**
      * Retorna ael número total de registros
      * 
@@ -112,7 +114,7 @@ class Comunidades {
      * @param int $cod
      * @return array
      */
-    public function getComunidad(int $cod) {        
+    public function getComunidad(int $cod) {
         $sql = "SELECT * FROM comunidad WHERE cod =:cod";
         $this->db->prepared($sql);
         $this->db->bind('cod', $cod, 'int');

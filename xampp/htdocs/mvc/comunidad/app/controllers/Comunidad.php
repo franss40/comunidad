@@ -90,32 +90,18 @@ class Comunidad extends Controller {
         ];
         // En el caso que haya envío de datos Post, recuperamos los datos de
         // manera segura
-        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
-        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRIPPED);
-        $codigoPostal = filter_input(INPUT_POST, 'codigoPostal', FILTER_VALIDATE_INT);
-        $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);
-        $tipoCuota = filter_input(INPUT_POST, 'tipoCuota', FILTER_SANITIZE_STRIPPED);
-        $presupuesto = filter_input(INPUT_POST, 'presupuesto', FILTER_SANITIZE_STRIPPED);
-        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        
-        // No se comprueba la cuota por comprobarse dentro de forma segura
-        if (!empty($nombre) && !empty($direccion) && !empty($poblacion) && !empty($presupuesto) && $token == $_SESSION['token']) {
+        $filtroPost = $this->filtrarPost();
 
-            if ($tipoCuota!=='FIJA' && $tipoCuota!=='VARIABLE' || !is_int($codigoPostal)) {  
+        // No se comprueba la cuota por comprobarse dentro de forma segura
+        if (!empty($filtroPost->nombre) && !empty($filtroPost->direccion) && !empty($filtroPost->poblacion) && !empty($filtroPost->presupuesto) && $filtroPost->token == $_SESSION['token']) {
+
+            if ($filtroPost->tipoCuota!=='FIJA' && $filtroPost->tipoCuota!=='VARIABLE' || !is_int($filtroPost->codigoPostal)) {  
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
                 $this->render('comunidad/nuevaComunidad_view', $data);
                 return;
             }
-            // En vez de arrays, utilizamos objetos stdclass
-            $comunidad = new stdClass();
-            $comunidad->nombre = $nombre; 
-            $comunidad->direccion = $direccion;
-            $comunidad->codigoPostal = $codigoPostal;
-            $comunidad->poblacion = $poblacion;
-            $comunidad->tipoCuota = $tipoCuota;
-            $comunidad->presupuesto = $presupuesto;
-            
-            if ($this->model->addComunidad($comunidad)) {
+
+            if ($this->model->addComunidad($filtroPost)) {
                 $data['info'] = 'Registro añadido correctamente';
             } else {
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
