@@ -79,7 +79,7 @@ class Comunidad extends Controller {
     }
     
     /**
-     * Alta de la comunidad. Al dar el alta no se añade ni presupuesto ni
+     * Alta de la comunidad. Al dar el alta no se añade
      * presidente ni vicepresidente, ya que no hay aún propiedades
      * 
      */
@@ -178,7 +178,7 @@ class Comunidad extends Controller {
      * @return array
      */
     private function filtrarPost() {
-        $cod = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_STRIPPED);
+        $cod = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_NUMBER_INT);
         $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
         $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRIPPED);
         $poblacion = filter_input(INPUT_POST, 'poblacion', FILTER_SANITIZE_STRIPPED);

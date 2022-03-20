@@ -54,48 +54,20 @@ class Propiedad extends Controller {
         ];
         
         // recupero datos enviados mediante post de manera segura
-        $cod = $codComunidad;
-        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        $vivienda = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRIPPED);
-        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRIPPED);
-        $tf = filter_input(INPUT_POST, 'tf', FILTER_SANITIZE_STRIPPED);
-        $nombreInquilino = filter_input(INPUT_POST, 'nombreInquilino', FILTER_SANITIZE_STRIPPED);
-        $tfInquilino = filter_input(INPUT_POST, 'tfInquilino', FILTER_SANITIZE_STRIPPED);
-        $superficie = filter_input(INPUT_POST, 'superficie', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-        $participacion = filter_input(INPUT_POST, 'participacion', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $cuenta = filter_input(INPUT_POST, 'cuenta', FILTER_SANITIZE_STRIPPED);
-        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRIPPED);
+        $filtroPost = $this->filtrarPost();
         
         // Si los datos son correctos y no están vacios...
-        if (!empty($cod) && !empty($vivienda) && !empty($nombre) && !empty($participacion) && !empty($cuota) && $token == $_SESSION['token']) {
+        if (!empty($filtroPost->cod) && !empty($filtroPost->numero) && !empty($filtroPost->nombre_propietario) && !empty($filtroPost->participacion) && !empty($filtroPost->cuota) && $filtroPost->token == $_SESSION['token']) {
             $tipoPermitido = array('VIVIENDA', 'OFICINA', 'GARAJE', 'LOCAL');
-            if (!in_array($tipo, $tipoPermitido)) {  
+            if (!in_array($filtroPost->tipo_prop, $tipoPermitido)) {  
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
                 $this->render('propiedad/nuevaPropiedad_view', $data);
-                return;
             }
             
-            $propiedad = new stdClass();
-            $propiedad->cod = $cod;
-            $propiedad->numero = $vivienda;
-            $propiedad->nombre_propietario = $nombre;
-            $propiedad->tf_propietario = $tf;
-            $propiedad->email_propietario = $email;            
-            $propiedad->nombre_inquilino = $nombreInquilino;
-            $propiedad->tf_inquilino = $tfInquilino;            
-            $propiedad->superficie = $superficie;            
-            $propiedad->participacion = $participacion;
-            $propiedad->cuota = $cuota;
-            $propiedad->numero_cuenta = $cuenta;
-            $propiedad->tipo_prop = $tipo;
-            
-            if ($this->model->addPropiedad($propiedad)) {
+            $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+            if ($this->model->addPropiedad($filtroPost)) {
                 $data['info'] = 'Registro añadido correctamente';
-            } else {
-                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
-            }
+            }           
         }
         
         $this->render('propiedad/nuevaPropiedad_view', $data);
@@ -113,60 +85,72 @@ class Propiedad extends Controller {
         require_once APPROOT . '/views/helpers_view.php';
         
         $data = [
-            'info' => 'Editar Propiedad',
-            'token' => $_SESSION['token'],
-            'codComunidad' => $codComunidad,
-            'nombreComunidad' => $nombreComunidad
+            'info' => 'Editar Propiedad', 'token' => $_SESSION['token'],
+            'codComunidad' => $codComunidad, 'nombreComunidad' => $nombreComunidad
         ];
         
         // recupero datos enviados mediante post de manera segura
-        $cod = $codComunidad;
-        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        $vivienda = $numeroPropiedad;
-        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRIPPED);
-        $tf = filter_input(INPUT_POST, 'tf', FILTER_SANITIZE_STRIPPED);
-        $nombreInquilino = filter_input(INPUT_POST, 'nombreInquilino', FILTER_SANITIZE_STRIPPED);
-        $tfInquilino = filter_input(INPUT_POST, 'tfInquilino', FILTER_SANITIZE_STRIPPED);
-        $superficie = filter_input(INPUT_POST, 'superficie', FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
-        $participacion = filter_input(INPUT_POST, 'participacion', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $cuenta = filter_input(INPUT_POST, 'cuenta', FILTER_SANITIZE_STRIPPED);
-        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRIPPED);
-        
+        $filtroPost = $this->filtrarPost();
+
         // Si los datos son correctos y no están vacios...
-        if (!empty($cod) && !empty($vivienda) && !empty($nombre) && !empty($participacion) && !empty($cuota) && $token == $_SESSION['token']) {
+        if (!empty($filtroPost->cod) && !empty($filtroPost->numero) && !empty($filtroPost->nombre_propietario) && !empty($filtroPost->participacion) && !empty($filtroPost->cuota) && $filtroPost->token == $_SESSION['token']) {
             $tipoPermitido = array('VIVIENDA', 'OFICINA', 'GARAJE', 'LOCAL');
-            if (!in_array($tipo, $tipoPermitido)) {  
+            if (!in_array($filtroPost->tipo_prop, $tipoPermitido)) {  
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
                 $this->render('propiedad/nuevaPropiedad_view', $data);
-                return;
             }
-            
-            $propiedad = new stdClass();
-            $propiedad->cod = $cod;
-            $propiedad->numero = $vivienda;
-            $propiedad->nombre_propietario = $nombre;
-            $propiedad->tf_propietario = $tf;
-            $propiedad->email_propietario = $email;            
-            $propiedad->nombre_inquilino = $nombreInquilino;
-            $propiedad->tf_inquilino = $tfInquilino;            
-            $propiedad->superficie = $superficie;            
-            $propiedad->participacion = $participacion;
-            $propiedad->cuota = $cuota;
-            $propiedad->numero_cuenta = $cuenta;
-            $propiedad->tipo_prop = $tipo;
-            
-            if ($this->model->editPropiedad($propiedad)) {
+
+            $data['info'] = 'Se ha producido un error. Pruebe más tarde';
+            if ($this->model->editPropiedad($filtroPost)) {
                 $data['info'] = 'Registro editado correctamente';
-            } else {
-                $data['info'] = 'Se ha producido un error. Pruebe más tarde';
             }
         }    
 
         $propiedades = $this->model->getPropiedad($codComunidad, $numeroPropiedad);
         $data['propiedad'] = $propiedades;
         $this->render('propiedad/editarPropiedad_view', $data);
+    }
+    
+    /**
+     * Filtrar datos de la Propiedad. Retorno null si no hay datos post
+     * 
+     * @return array
+     */
+    private function filtrarPost() {
+        
+        $cod = filter_input(INPUT_POST, 'cod', FILTER_SANITIZE_NUMBER_INT);
+        $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRIPPED);
+        $nombre_propietario = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRIPPED);
+        $email_propietario = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRIPPED);
+        $tf_propietario = filter_input(INPUT_POST, 'tf', FILTER_SANITIZE_STRIPPED);
+        $nombre_inquilino = filter_input(INPUT_POST, 'nombreInquilino', FILTER_SANITIZE_STRIPPED);
+        $tf_inquilino = filter_input(INPUT_POST, 'tfInquilino', FILTER_SANITIZE_STRIPPED);
+        $superficie = filter_input(INPUT_POST, 'superficie', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $participacion = filter_input(INPUT_POST, 'participacion', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $cuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $numero_cuenta = filter_input(INPUT_POST, 'cuenta', FILTER_SANITIZE_STRIPPED);
+        $tipo_prop = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRIPPED);
+        $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
+        
+        $propiedad = new stdClass();
+        $propiedad->cod = $cod; 
+        $propiedad->numero = $numero;
+        $propiedad->nombre_propietario = $nombre_propietario;
+        $propiedad->email_propietario = $email_propietario; 
+        $propiedad->tf_propietario = $tf_propietario;
+        $propiedad->nombre_inquilino = $nombre_inquilino; 
+        $propiedad->tf_inquilino = $tf_inquilino;
+        $propiedad->superficie = $superficie; 
+        $propiedad->participacion = $participacion;
+        $propiedad->cuota = $cuota; 
+        $propiedad->numero_cuenta = $numero_cuenta;
+        $propiedad->tipo_prop = $tipo_prop;
+        $propiedad->token = $token;
+        
+        if (empty($nombre_propietario) || empty($numero) || empty($cod)) {
+            $propiedad = null;
+        }
+        return $propiedad;
     }
     
     /**

@@ -72,7 +72,7 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label for="cod" class="form-label">Código Comunidad</label>
-                            <input type="number" name="cod" class="form-control text-end" id="cod" value="<?=$propiedad->cod ?>" disabled>
+                            <input type="number" name="cod" class="form-control text-end" id="cod" value="<?=$propiedad->cod ?>" readonly>
                         </div>
                         <div class="col">
                             <label for="numero" class="form-label">Vivienda</label>
