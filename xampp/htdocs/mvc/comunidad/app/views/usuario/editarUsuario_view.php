@@ -79,7 +79,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" name="usuario" class="form-control" id="usuario" required value="<?=$usuario->usuario ?>" disabled>
+                        <input type="text" name="usuario" class="form-control" id="usuario" required value="<?=$usuario->usuario ?>" readonly>
                     </div>
                     <div class="col-md-6">
                         <label for="pass" class="form-label">Contraseña</label>

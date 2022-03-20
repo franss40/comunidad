@@ -62,11 +62,11 @@ class Usuarios {
         }
         
         $this->db->prepared($sql);
-        $this->db->bind('email', $usuario->email, 'string');
+        $this->db->bind('email', $usuario->email_usuario, 'string');
         $this->db->bind('usuario', $usuario->usuario, 'string');
         $this->db->bind('password', $hash, 'string');
         $this->db->bind('activo', $usuario->activo, 'bool');
-        $this->db->bind('tipoUsuario', $usuario->tipoUsuario, 'string');
+        $this->db->bind('tipoUsuario', $usuario->tipo, 'string');
 
         return $this->db->noResultPrepared();
     }
@@ -88,10 +88,10 @@ class Usuarios {
         }
         
         $this->db->prepared($sql);
-        $this->db->bind('email', $user->email, 'string');
+        $this->db->bind('email', $user->email_usuario, 'string');
         $this->db->bind('password', $hash, 'string');
         $this->db->bind('activo', $user->activo, 'bool');
-        $this->db->bind('tipo', $user->tipoUsuario, 'string');
+        $this->db->bind('tipo', $user->tipo, 'string');
         $this->db->bind('usuario', $user->usuario, 'string');
         return $this->db->noResultPrepared();
     }
