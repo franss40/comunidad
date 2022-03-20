@@ -83,10 +83,9 @@ class Propiedad extends Controller {
      */
     public function editar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
         require_once APPROOT . '/views/helpers_view.php';
-        
         $data = [
             'info' => 'Editar Propiedad', 'token' => $_SESSION['token'],
-            'codComunidad' => $codComunidad, 'nombreComunidad' => $nombreComunidad
+            'codComunidad' => $codComunidad, 'nombreComunidad' => deleteUrlAmigable($nombreComunidad)
         ];
         
         // recupero datos enviados mediante post de manera segura
@@ -106,7 +105,7 @@ class Propiedad extends Controller {
             }
         }    
 
-        $propiedades = $this->model->getPropiedad($codComunidad, $numeroPropiedad);
+        $propiedades = $this->model->getPropiedad($codComunidad, deleteUrlAmigable($numeroPropiedad));
         $data['propiedad'] = $propiedades;
         $this->render('propiedad/editarPropiedad_view', $data);
     }
