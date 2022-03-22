@@ -129,7 +129,7 @@
                                 <a href="<?= URLROOT . '/comunidad/editar/' . $comunidad->cod ?>" type="button" class="btn btn-success mb-1">              
                                     <img src="<?= URLROOT . '/public/img/pencil-square.svg' ?>" width="20" height="20" alt="Editar comunidad" title="Editar comunidad"/>
                                 </a>
-                                <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod . '/' . $comunidad->nombre ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$comunidad->nombre?>">
+                                <a href="<?= URLROOT . '/comunidad/borrar/' . $comunidad->cod . '/' . urlAmigable($comunidad->nombre) ?>" type="button" class="borrar btn btn-warning mb-1" rel="<?=$comunidad->nombre?>">
                                     <img src="<?= URLROOT . '/public/img/borrar.svg' ?>" width="20" height="20" alt="Borrar comunidad" title="Borrar comunidad"/>
                                 </a>
                             </td>

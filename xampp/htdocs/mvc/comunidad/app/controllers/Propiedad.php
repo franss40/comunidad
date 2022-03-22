@@ -160,6 +160,7 @@ class Propiedad extends Controller {
      * @param string $numeroPropiedad
      */
     public function borrar(int $codComunidad, string $nombreComunidad, string $numeroPropiedad) {
+        $numeroPropiedad = deleteUrlAmigable($numeroPropiedad);
         $data = [
                 'info'   => 'Borrado Propiedad',
                 'result' => "Se ha producido un error al intentar borrar la propiedad $numeroPropiedad de la comunidad $nombreComunidad"

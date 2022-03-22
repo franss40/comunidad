@@ -39,11 +39,14 @@
             </div>
         </header>
         
-        <section class="container-fluid mt-2">
+        <section class="container-fluid mt-2" role="informacion">
             <div class="row">
-                <div class="col-md-12 bg-info text-black text-center p-2">
-                    Usuarios: <?=$total?>
-                </div>                               
+                <div class="col-md-6 bg-info text-black text-center p-2">
+                    Comunidad: <?=$codComunidad?>
+                </div>   
+                <div class="col-md-6 bg-success text-white text-center p-2">
+                    Propiedad : <?= $propiedad ?>
+                </div>
             </div>
         </section>
         
@@ -53,24 +56,68 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
                         Usted está en: <strong><a href="<?= URLROOT . '/comunidad' ?>">Origen</a></strong>
-                    </li>              
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong>Usuarios</strong>
+                        <strong><a href="<?= URLROOT . '/propiedad/comunidad/' .$codComunidad ?>">Propietario</a></strong>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <strong>Cuotas</strong>
                     </li>
                 </ol>
             </nav>
             <hr>
         </div>
 
-        <div class="container">
+        <section class="container">
             <section class="mt-4" role="main">
                 <div class="ps-3 btn-group">                
-                    <a href="<?= URLROOT . '/usuario/nuevo' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Usuario" title="Nuevo Usuario"/>
-                        Crear Usuario
+                    <a href="<?= URLROOT . '/cuota/nuevo' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Usuario" title="Nuevo Usuario"/>
+                        Crear Cuota
                     </a>
                 </div> 
             </section>
-        </div>
+        
+            
+            <?php if ($total!=0):?>
+                <br><br>
+                <div class="table-responsive-md ps-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">RECIBO</th>
+                            <th scope="col">CONCEPTO</th>
+                            <th scope="col">IMPORTE</th>
+                            <th scope="col">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        <?php foreach ($cuotas as $cuota): ?>
+                        <tr class="<?= $cuotaPendiente ?>">
+                            <th scope="row">
+                                <?= $cuota->recibo_com ?>                               
+                            </th>
+                            <td>
+                                <?= $cuota->concepto ?> 
+                            </td>
+                            <td>
+                                <?= $cuota->importe ?> €
+                            </td>
+                            <td>
+                                <?= $cuota->estado ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>                        
+                    </tbody>
+                </table>
+            <div>
+            <?php else:?>
+                <br> <br> 
+                <p class="h4 alert alert-danger ps-2 text-center" role="alert">
+                    No tiene actualmente ningun recibo dado de alta
+                </p>
+            <?php endif;?>
+        </section>   
+            
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>

@@ -20,7 +20,15 @@ class Cuota extends Controller{
     }
     
     public function ver(int $codComunidad, string $numeroPropietario) {
-        $data = ['total' => 3];
+        
+        $cuotas = $this->model->getCuotas($codComunidad, deleteUrlAmigable($numeroPropietario));
+        $total = $this->model->getTotal();
+        $data = [
+            'cuotas'    => $cuotas,
+            'total' => $total,
+            'codComunidad' => $codComunidad,
+            'propiedad'  => deleteUrlAmigable($numeroPropietario)
+            ];
         $this->render('cuota/cuota_view', $data);
     }
 }

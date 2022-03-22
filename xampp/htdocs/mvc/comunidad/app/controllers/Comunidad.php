@@ -72,7 +72,8 @@ class Comunidad extends Controller {
                 'result' => "Se ha producido un error al intentar borrar la comunidad $nombreComunidad"
                 ];
         if ($this->model->borrarComunidad($cod)) {
-            $data = ['result' => "Comunidad $nombreComunidad borrada",
+            $comunidad = deleteUrlAmigable($nombreComunidad);
+            $data = ['result' => "Comunidad $comunidad borrada",
                      'info' => 'Borrado Comunidad'];
         }
         $this->render('informacion_view', $data);
@@ -91,7 +92,7 @@ class Comunidad extends Controller {
         // En el caso que haya envío de datos Post, recuperamos los datos de
         // manera segura
         $filtroPost = $this->filtrarPost();
-
+        
         // No se comprueba la cuota por comprobarse dentro de forma segura
         if (!empty($filtroPost->nombre) && !empty($filtroPost->direccion) && !empty($filtroPost->poblacion) && !empty($filtroPost->presupuesto) && $filtroPost->token == $_SESSION['token']) {
 
@@ -195,8 +196,8 @@ class Comunidad extends Controller {
         $comunidad->poblacion = $poblacion; $comunidad->presupuesto = $presupuesto;
         $comunidad->tipoCuota = $tipoCuota; $comunidad->presidente = $presidente;
         $comunidad->vicepresidente = $vicepresidente; $comunidad->token = $token;
-        
-        if (empty($direccion) || empty($cod)) {
+
+        if (empty($direccion) || empty($poblacion) || empty($codigoPostal) || empty($presupuesto)) {
             $comunidad = null;
         }
         return $comunidad;
