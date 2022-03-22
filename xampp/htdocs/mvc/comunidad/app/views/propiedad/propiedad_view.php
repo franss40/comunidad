@@ -104,7 +104,7 @@
                                 <?= $propiedad->cuota ?> €
                             </td>
                             <td>
-                                <a href="<?=URLROOT.'/cuota/ver/'.$comunidad->cod.'/'. urlAmigable($propiedad->numero) ?>" type="button" class="btn btn-info mb-1">  
+                                <a href="<?=URLROOT.'/cuota/ver/'.$comunidad->cod.'/'. urlAmigable($comunidad->nombre) .'/'. urlAmigable($propiedad->numero) ?>" type="button" class="btn btn-info mb-1">  
                                     <img src="<?= URLROOT . '/public/img/euro.svg' ?>" width="20" height="20" alt="Cuotas propietarios" title="Cuotas Propietarios"/>                                        
                                 </a>
                                 <a href="<?= URLROOT.'/propiedad/editar/'.$comunidad->cod.'/'.urlAmigable($comunidad->nombre).'/'. urlAmigable($propiedad->numero) ?>" type="button" class="btn btn-success mb-1">              

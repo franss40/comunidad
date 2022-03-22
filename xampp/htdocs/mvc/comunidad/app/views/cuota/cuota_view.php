@@ -12,6 +12,7 @@
                 font-family: 'Staatliches', cursive;
                 color: green;
             }
+            .red {color: red;}
         </style>
         <!-- Bootstrap css-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -42,10 +43,10 @@
         <section class="container-fluid mt-2" role="informacion">
             <div class="row">
                 <div class="col-md-6 bg-info text-black text-center p-2">
-                    Comunidad: <?=$codComunidad?>
+                    <?=$nombreComunidad?>
                 </div>   
                 <div class="col-md-6 bg-success text-white text-center p-2">
-                    Propiedad : <?= $propiedad ?>
+                    <?= $propiedad ?>
                 </div>
             </div>
         </section>
@@ -67,20 +68,22 @@
             </nav>
             <hr>
         </div>
-
+        
+        <div class="container">
+            <strong>* Sólo se listarán las 12 últimas cuotas</strong>
+        </div>
+        
+        <?php if ($total!=0):?>
         <section class="container">
             <section class="mt-4" role="main">
                 <div class="ps-3 btn-group">                
-                    <a href="<?= URLROOT . '/cuota/nuevo' ?>" type="button" class="btn btn-success">                           <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Adicionar Usuario" title="Nuevo Usuario"/>
-                        Crear Cuota
+                    <a href="<?= URLROOT . '/cuota/pendiente/'.$codComunidad.'/'. urlAmigable($propiedad) ?>" type="button" class="btn btn-success">
+                        Cuotas Pendientes
                     </a>
                 </div> 
-            </section>
-        
-            
-            <?php if ($total!=0):?>
-                <br><br>
-                <div class="table-responsive-md ps-3">
+            </section>            
+            <br>
+            <div class="table-responsive-md ps-3">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -88,11 +91,12 @@
                             <th scope="col">CONCEPTO</th>
                             <th scope="col">IMPORTE</th>
                             <th scope="col">ESTADO</th>
+                            <th>OPERACIÓN</th>
                         </tr>
                     </thead>
                     <tbody>                        
                         <?php foreach ($cuotas as $cuota): ?>
-                        <tr class="<?= $cuotaPendiente ?>">
+                        <tr class="<?php if ($cuota->estado=='IMPAGADO'){echo 'red';} ?>">
                             <th scope="row">
                                 <?= $cuota->recibo_com ?>                               
                             </th>
@@ -105,6 +109,11 @@
                             <td>
                                 <?= $cuota->estado ?>
                             </td>
+                            <th>
+                                <a href="<?=URLROOT.'/cuota/cambiarEstadoCuota/'.$cuota->recibo_com.'/'.$codComunidad.'/'. urlAmigable($nombreComunidad).'/'. urlAmigable($propiedad) ?>" type="button" class="cambiar btn btn-info mb-1" rel="<?=$cuota->recibo_com ?>">  
+                                    <img src="<?= URLROOT . '/public/img/hand.svg' ?>" width="20" height="20" alt="Cambio estado" title="Cambio Estado"/>                                        
+                                </a>
+                            </th>
                         </tr>
                         <?php endforeach; ?>                        
                     </tbody>
@@ -122,12 +131,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
         <script>  
+            // Cambiamos de estado un registro al dar a click
             window.onload = function() {
-                var borrar = document.querySelectorAll('a.borrar');  
+                var cambiar = document.querySelectorAll('a.cambiar');  
                 
-                for (var i = 0; i < borrar.length; i++) {  
-                    borrar[i].addEventListener('click', function(event) {
-                        var info = "¿Estas seguro que deseas borrar el usuario " + this.getAttribute('rel') + "? Los cambios no podrán deshacerse";
+                for (var i = 0; i < cambiar.length; i++) {  
+                    cambiar[i].addEventListener('click', function(event) {
+                        var info = "¿Estas seguro que deseas cambiar el estado del registro número " + this.getAttribute('rel') + "?";
                         if (!window.confirm(info)) {  
                             event.preventDefault();
                             return false;

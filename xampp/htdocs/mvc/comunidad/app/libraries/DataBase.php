@@ -34,7 +34,7 @@ class DataBase {
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (Exception $exc) {
-            die('Conección fallida');
+            die('Conexión fallida');
         }
     }
 

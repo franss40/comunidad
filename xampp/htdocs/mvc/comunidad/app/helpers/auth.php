@@ -37,14 +37,15 @@ function auth(string $control, string $tipoUsuario = '') {
         'Usuario-nuevo'             => 0b1000000000000,
         'Usuario-editar'            => 0b10000000000000,
         'Usuario-borrar'            => 0b100000000000000,
-        'Cuota-ver'                 => 0b1000000000000000
+        'Cuota-ver'                 => 0b1000000000000000,
+        'Cuota-cambiarEstadoCuota'  => 0b10000000000000000
     );
 
     $permisos = array(
         ''          => 0b1,
-        'ADMIN'     => 0b1111111111111111, // 15 = 1111 significa que permite la función 1,2,3,4
-        'OPERARIO'  => 0b1111111111111111, // 1101 significa que permite la función 1,2,4
-        'USUARIO'   => 0b1111111111111111   // 1111
+        'ADMIN'     => 0b11111111111111111, // 15 = 1111 significa que permite la función 1,2,3,4
+        'OPERARIO'  => 0b11111111111111111, // 1101 significa que permite la función 1,2,4
+        'USUARIO'   => 0b11111111111111111   // 1111
     );
 
     if (!array_key_exists($control, $funciones) || !array_key_exists($tipoUsuario, $permisos)) {
