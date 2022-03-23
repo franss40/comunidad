@@ -62,23 +62,30 @@
                         <strong><a href="<?= URLROOT . '/propiedad/comunidad/' .$codComunidad ?>">Propietario</a></strong>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <strong>Cuotas</strong>
+                        <?php if (!$cuotaPendiente):?>
+                            <strong>Cuotas</strong>
+                        <?php else:?>
+                            <strong>Cuotas Pendientes</strong>
+                        <?php endif?>
                     </li>
                 </ol>
             </nav>
             <hr>
         </div>
         
+        <?php if (!$cuotaPendiente): $enlace = 'cuotasPendientes'; $mostrar = 'Cuotas Pendientes';?>
         <div class="container">
             <strong>* Sólo se listarán las 12 últimas cuotas</strong>
         </div>
+        <?php else: $enlace = 'ver'; $mostrar = 'Cuotas';?>        
+        <?php endif?>
         
         <?php if ($total!=0):?>
         <section class="container">
             <section class="mt-4" role="main">
                 <div class="ps-3 btn-group">                
-                    <a href="<?= URLROOT . '/cuota/pendiente/'.$codComunidad.'/'. urlAmigable($propiedad) ?>" type="button" class="btn btn-success">
-                        Cuotas Pendientes
+                    <a href="<?= URLROOT . '/cuota/'.$enlace.'/'.$codComunidad.'/'. urlAmigable($nombreComunidad).'/'.urlAmigable($propiedad) ?>" type="button" class="btn btn-success">
+                        <?=$mostrar?>
                     </a>
                 </div> 
             </section>            

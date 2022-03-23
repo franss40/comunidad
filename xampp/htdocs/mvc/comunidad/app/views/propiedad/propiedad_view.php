@@ -69,12 +69,17 @@
                     Crear Propietario
                 </a>
             </div>
-            
-            
-            
+
             <?php if ($total!=0):?>
             
             <div class="ps-3 btn-group">                
+                <a href="<?= URLROOT.'/cuota/crearCuotas/'.$comunidad->cod.'/'. urlAmigable($comunidad->nombre) ?>" type="button" class="btn btn-warning">                           
+                    <img src="<?= URLROOT . '/public/img/file-plus.svg' ?>" width="25" height="25" alt="Crear Cuota" title="Crear Cuota"/>
+                    Crear Cuotas
+                </a>
+            </div>
+            
+            <div class="ps-3 btn-group m-2">                
                 <a href="<?= URLROOT.'/comunidad/actualizarCuota/'.$comunidad->cod ?>" type="button" class="btn btn-info" id="actualizarCuotas">
                     <img src="<?= URLROOT . '/public/img/ajustar.svg' ?>" width="25" height="25" alt="Actualizar Cuotas" title="Actualizar cuotas"/>
                     Actulizar Cuotas

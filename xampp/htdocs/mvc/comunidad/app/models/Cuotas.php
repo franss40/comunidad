@@ -33,7 +33,25 @@ class Cuotas {
         $this->db->bind('numero', $propiedad, 'string');
         return $this->db->resultPrepared();
     }
-
+    
+    /**
+     * Devuelve las cuotas pendientes de una determinada propiedad
+     * 
+     * @param int $codComunidad
+     * @param string $propiedad
+     * @return array
+     */
+    public function getCuotasPendientes(int $codComunidad, string $propiedad) {
+        $sql = 'SELECT * '
+                . 'FROM recibo_comunidad '
+                . 'WHERE cod =:cod AND numero =:numero AND estado="IMPAGADO"'
+                . 'ORDER BY recibo_com';
+        $this->db->prepared($sql);
+        $this->db->bind('cod', $codComunidad, 'int');
+        $this->db->bind('numero', $propiedad, 'string');
+        return $this->db->resultPrepared();
+    }
+    
     /**
      * Devuelve el total de registros
      * 

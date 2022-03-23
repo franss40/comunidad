@@ -17,7 +17,7 @@ class Propiedad extends Controller {
     }
     
     /**
-     * Muestro la comunidad de código $cod
+     * Muestro las propiedades de la comunidad de código $cod
      * 
      * @param int $cod
      */
