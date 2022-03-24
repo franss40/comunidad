@@ -87,35 +87,78 @@ class Cuota extends Controller{
         $this->render('cuota/cuota_view', $data);
     }
     
+    /**
+     * Creamos las cuotas de la comunidad con transacciones
+     * Según si se ha señalado la propiedad en la vista lo 
+     * grabamos como pagado o impagado
+     *  
+     * @param int $codComunidad
+     * @param string $comunidad
+     */
     public function crearCuotas(int $codComunidad, string $comunidad) {
+        
         $propiedades = $this->models['Propiedades']->getPropiedades($codComunidad);
-        $cuota = $this->filtrarPost();
-        print_r($cuota->propiedad);
         $data = [
-            'info' =>  deleteUrlAmigable($comunidad),
-            'nombreComunidad'   => $comunidad,
+            'nombreComunidad'   => deleteUrlAmigable($comunidad),
             'codComunidad'      => $codComunidad,
-            'propiedades'       => $propiedades,
-            'token' => $_SESSION['token']
-            ];
-        $this->render('cuota/crearCuota_view', $data);
+            'propiedades'       => $propiedades, 'token' => $_SESSION['token']
+                ];
+        
+        $filtroPost = $this->filtrarPost();
+
+        if (!empty($filtroPost)) {
+            if (empty($filtroPost->mes) || empty($filtroPost->ano) || empty($filtroPost->tipoCuota) || $filtroPost->token !== $_SESSION['token']) {
+                $this->mostrarSalida($data, 'Se ha producido un error. Pruebe más tarde');
+            }
+            
+            if ($this->model->crearCuota($propiedades, $filtroPost)) {
+                $this->mostrarSalida($data, 'Registro actualizado correctamente');
+            } else {
+                $this->mostrarSalida($data, 'Se ha producido un error. Pruebe más tarde de nuevo');
+            }
+        }
+        
+        $this->mostrarSalida($data, deleteUrlAmigable($comunidad));
     }
     
+    /**
+     * Muestra una salida
+     * 
+     * @param array $data
+     * @param string $info
+     */
+    private function mostrarSalida($data, $info) {
+        $data['info'] = $info;
+        $this->render('cuota/crearCuota_view', $data);
+    }
+
+    /**
+     * Filtramos los datos tipo post y los devolvemos filtrados
+     * Es importante saber que en caso de cuotas ordinarias, no se obtendrán
+     *      datos ni de concepto ni de importe
+     * 
+     * @return array
+     */
     private function filtrarPost() {
-        $fecha = filter_input(INPUT_POST, 'fecha', FILTER_SANITIZE_STRIPPED);
+        $cod = filter_input(INPUT_POST, 'cod', FILTER_VALIDATE_INT);
+        $mes = filter_input(INPUT_POST, 'mes', FILTER_VALIDATE_INT);
+        $ano = filter_input(INPUT_POST, 'ano', FILTER_VALIDATE_INT);
+        $tipoCuota = filter_input(INPUT_POST, 'cuota', FILTER_SANITIZE_STRIPPED);
         $concepto = filter_input(INPUT_POST, 'concepto', FILTER_SANITIZE_STRIPPED);
         $importe = filter_input(INPUT_POST, 'importe', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $propiedad = filter_input_array(INPUT_POST, 'propiedad', FILTER_SANITIZE_STRIPPED);
+        $propiedad = filter_input(INPUT_POST, 'propiedad', FILTER_SANITIZE_STRIPPED , FILTER_REQUIRE_ARRAY);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
         
         $cuota = new stdClass();
-        $cuota->fecha = $fecha;
+        $cuota->cod = $cod;
+        $cuota->mes = $mes;
+        $cuota->ano = $ano;
+        $cuota->tipoCuota = $tipoCuota;
         $cuota->concepto = $concepto;
         $cuota->importe = $importe;
-        $cuota->propiedad = $propiedad; 
-        $cuota->token = $token;
+        $cuota->propiedad = $propiedad; $cuota->token = $token;
 
-        if (empty($fecha) || empty($concepto) || empty($importe)) {
+        if (empty($cod) || empty($mes) || empty($ano) || empty($tipoCuota)) {
             $cuota = null;
         }
         return $cuota;
