@@ -12,7 +12,7 @@
                 font-family: 'Staatliches', cursive;
                 color: green;
             }
-            .cuotasPendientes{ color: red;}
+            .cuotaPendiente{ color: red;}
             .info {border: 1px solid green;}
             .info strong {color: red;}
         </style>
@@ -94,9 +94,9 @@
                     <tbody>                        
                         <?php foreach ($comunidades as $comunidad): ?>
                             <?php
-                            $rojo = '';
+                            $cuotaPendiente = '';
                             if ($comunidad->cuantos > 0) {
-                                $cuotaPendiente = 'cuotasPendientes';
+                                $cuotaPendiente = 'cuotaPendiente';
                             }
                             ?>
                         <tr class="<?=$cuotaPendiente ?>">

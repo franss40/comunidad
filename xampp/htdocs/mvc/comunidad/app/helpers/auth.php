@@ -1,9 +1,10 @@
 <?php
 /**
  * Función para autorizar la entrada a un usuario registrado a un determinado
- * sitio
+ * sitio mediante la función pasada como control y el tipo de usuario
+ * El máximo permitido son 64 bits - depende del sistema operativo
  * 
- * @param string $control
+ * @param string $control   
  * @param string $tipoUsuario
  * @return boolean
  */
@@ -13,11 +14,7 @@ function auth(string $control, string $tipoUsuario = '') {
      * ---------
      * login-index = 1
      * comunidad-index = 2
-     * comunidad-ver = 3
-     * 
-     * propiedades-comunidad = 4
-     * propiedades-cuota = 5
-     * 
+     * comunidad-nueva = 4
      * 
      * **************************** */
 
@@ -28,8 +25,8 @@ function auth(string $control, string $tipoUsuario = '') {
         'Comunidad-editar'          => 0b1000, // 1000 = 8
         'Comunidad-borrar'          => 0b10000, //10000 = 16
         'Comunidad-actualizarCuota' => 0b100000,
-        'Propiedad-comunidad'       => 0b1000000,  // 100000 = 32
-        'Propiedad-nueva'           => 0b10000000,// 1000000 = 64
+        'Propiedad-comunidad'       => 0b1000000,
+        'Propiedad-nueva'           => 0b10000000,
         'Propiedad-editar'          => 0b100000000,
         'Propiedad-borrar'          => 0b1000000000,
         'Cerrar_sesion-index'       => 0b10000000000, 
@@ -42,18 +39,24 @@ function auth(string $control, string $tipoUsuario = '') {
         'Cuota-cuotasPendientes'    => 0b100000000000000000,
         'Cuota-crearCuotas'         => 0b1000000000000000000
     );
-
+    
+    // En el caso de operario/usuario (no hago de momento distinción)
+    // contando por la derecha, el 1 significa que tiene permiso para el login
+    // el siguiente para la comunidad-index, el siguiente la función que ocupa
+    // la posición 7, que es propiedades-comunidad (visualización)
     $permisos = array(
         ''          => 0b1,
-        'ADMIN'     => 0b1111111111111111111, // 15 = 1111 significa que permite la función 1,2,3,4
-        'OPERARIO'  => 0b1111111111111111111, // 1101 significa que permite la función 1,2,4
-        'USUARIO'   => 0b1111111111111111111   // 1111
+        'ADMIN'     => 0b1111111111111111111, // Todo 1 significa que tiene permisos totales
+        'OPERARIO'  => 0b0001000010001000011, // 1101 significa que permite la función 1,2,4
+        'USUARIO'   => 0b0001000000001000011   // 1111
     );
 
+    // Si no existe la función o el tipo de usuario salimos
     if (!array_key_exists($control, $funciones) || !array_key_exists($tipoUsuario, $permisos)) {
         die('Usted no tiene permisos para acceder a este sitio');
     }
-
+    
+    //Aquí comprobamos con un and lógico si tenemos permisos o no
     if (!($funciones[$control] & $permisos[$tipoUsuario])) {
         die('Usted no tiene permisos para acceder a este sitio');
     }
