@@ -22,6 +22,11 @@ class Comunidad extends Controller {
 
         $comunidades = $this->model->getComunidades();
         $total = $this->model->getTotal();
+        if (!$total) {
+            $data = ['comunidades' => $comunidades, 'total' => $total];
+            $this->render('comunidad/comunidad_view', $data);
+            return;
+        }
 
         $cuotasPendientes = $this->model->getComuConCuotasPtes();
         foreach ($comunidades as $comunidad) {

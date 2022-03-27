@@ -27,7 +27,7 @@ class Propiedad extends Controller {
         if (!$comunidad) {
             die('Código de comunidad no existe - 404 not found');
         }
-
+        
         $propiedades = $this->model->getPropiedades($cod);
         $total = $this->model->getTotal();
 
