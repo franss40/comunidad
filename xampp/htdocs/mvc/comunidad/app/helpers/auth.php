@@ -3,6 +3,10 @@
  * Función para autorizar la entrada a un usuario registrado a un determinado
  * sitio mediante la función pasada como control y el tipo de usuario
  * El máximo permitido son 64 bits - depende del sistema operativo
+ * Tipos usuarios:
+ * admin: Tendrán control total para todas las funciones
+ * operario: Tendrán acceso a todo excepto al módulo de usuarios
+ * usuario: Solo tiene acceso a los listados y a las cuotas pendientes
  * 
  * @param string $control   
  * @param string $tipoUsuario
@@ -42,13 +46,13 @@ function auth(string $control, string $tipoUsuario = '') {
     
     // En el caso de operario/usuario (no hago de momento distinción)
     // contando por la derecha, el 1 significa que tiene permiso para el login
-    // el siguiente para la comunidad-index, el siguiente la función que ocupa
-    // la posición 7, que es propiedades-comunidad (visualización)
+    // el siguiente para la comunidad-index, y así sucesivamente
+    // Los permisos de Login-index y Cerrar_sesion-index lo tendrán todos activos.
     $permisos = array(
         ''          => 0b1,
         'ADMIN'     => 0b1111111111111111111, // Todo 1 significa que tiene permisos totales
-        'OPERARIO'  => 0b0001000010001000011, // 1101 significa que permite la función 1,2,4
-        'USUARIO'   => 0b0001000000001000011   // 1111
+        'OPERARIO'  => 0b1111000011111111111, // 1101 significa que permite la función 1,2,4
+        'USUARIO'   => 0b0101000010001000011   // 1111
     );
 
     // Si no existe la función o el tipo de usuario salimos

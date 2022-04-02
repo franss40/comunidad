@@ -212,8 +212,10 @@ class Comunidad extends Controller {
      * Recalculamos las cuotas de todos los propietarios
      * 
      * primero conectamos con la comunidad para ver el tipo de cuota y el presupuesto
-     * seguidamente si es cuota fija tenemos que saber el número de propiedades para calcularla
-     * Si no es así necesitamos el presupuesto
+     * Si es fijo el importe su cálculo se hace:
+     * presupuesto/total_vecinos/12
+     * Si no es así, necesitamos la participación y su cálculo se hace así:
+     * participación * presupuesto / 100 / 12
      * Recorremos todas las propiedades calculando la cuota en cada una 
      * 
      * @param int $codComunidad
