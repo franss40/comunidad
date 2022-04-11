@@ -20,14 +20,14 @@ class Comunidades {
      */
     public function getComunidades() {
 
-        /*         * *************************************************
+        /**************************************************
          * Con datos escapados sería:
          * 
          * $this->db->prepared("select * from codigos where Poblacion=:ciudad");
          * $this->db->bind('ciudad', 'Madrid', 'string');
          * return $this->db->resultPrepared();        
          *
-         * ************************************************* */
+         * **************************************************/
 
         $sql = "SELECT * FROM comunidad ORDER BY nombre";
         return $this->db->result($sql);
@@ -61,10 +61,10 @@ class Comunidades {
                     VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota, :presupuesto)";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
-        $this->db->bind('direccion', $comunidad->direccion, 'string');
-        $this->db->bind('codigo', $comunidad->codigoPostal, 'int');
+        $this->db->bind('direccion', $comunidad->calle, 'string');
+        $this->db->bind('codigo', $comunidad->cp, 'int');
         $this->db->bind('poblacion', $comunidad->poblacion, 'string');
-        $this->db->bind('cuota', $comunidad->tipoCuota, 'string');
+        $this->db->bind('cuota', $comunidad->tipo_cuota, 'string');
         $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
 
         return $this->db->noResultPrepared();
@@ -87,10 +87,10 @@ class Comunidades {
         $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente WHERE cod=:cod";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
-        $this->db->bind('direccion', $comunidad->direccion, 'string');
-        $this->db->bind('codigoPostal', $comunidad->codigoPostal, 'int');
+        $this->db->bind('direccion', $comunidad->calle, 'string');
+        $this->db->bind('codigoPostal', $comunidad->cp, 'int');
         $this->db->bind('poblacion', $comunidad->poblacion, 'string');
-        $this->db->bind('tipoCuota', $comunidad->tipoCuota, 'string');
+        $this->db->bind('tipoCuota', $comunidad->tipo_cuota, 'string');
         $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
         $this->db->bind('presidente', $comunidad->presidente, 'string');
         $this->db->bind('vicepresidente', $comunidad->vicepresidente, 'string');

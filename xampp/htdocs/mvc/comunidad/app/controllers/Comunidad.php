@@ -99,9 +99,9 @@ class Comunidad extends Controller {
         $filtroPost = $this->filtrarPost();
         
         // No se comprueba la cuota por comprobarse dentro de forma segura
-        if (!empty($filtroPost->nombre) && !empty($filtroPost->direccion) && !empty($filtroPost->poblacion) && !empty($filtroPost->presupuesto) && $filtroPost->token == $_SESSION['token']) {
+        if (!empty($filtroPost->nombre) && !empty($filtroPost->calle) && !empty($filtroPost->poblacion) && !empty($filtroPost->presupuesto) && $filtroPost->token == $_SESSION['token']) {
 
-            if ($filtroPost->tipoCuota!=='FIJA' && $filtroPost->tipoCuota!=='VARIABLE' || !is_int($filtroPost->codigoPostal)) {  
+            if ($filtroPost->tipo_cuota!=='FIJA' && $filtroPost->tipo_cuota!=='VARIABLE' || !is_int($filtroPost->cp)) {  
                 $data['info'] = 'Se ha producido un error. Pruebe más tarde';
                 $this->render('comunidad/nuevaComunidad_view', $data);
                 return;
@@ -131,11 +131,11 @@ class Comunidad extends Controller {
         
         if (!empty($filtroPost)) {
 
-            if (empty($filtroPost->nombre) || empty($filtroPost->direccion) || empty($filtroPost->poblacion) || empty($filtroPost->codigoPostal) || $filtroPost->token !== $_SESSION['token']) {
+            if (empty($filtroPost->nombre) || empty($filtroPost->calle) || empty($filtroPost->poblacion) || empty($filtroPost->cp) || $filtroPost->token !== $_SESSION['token']) {
                 $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde');
             }
 
-            if ($filtroPost->tipoCuota!=='FIJA' && $filtroPost->tipoCuota!=='VARIABLE') {
+            if ($filtroPost->tipo_cuota!=='FIJA' && $filtroPost->tipo_cuota!=='VARIABLE') {
                 $this->editMostrarSalida($cod, 'Se ha producido un error. Pruebe más tarde');
             }
 
@@ -197,9 +197,9 @@ class Comunidad extends Controller {
         
         $comunidad = new stdClass();
         $comunidad->cod = $cod; $comunidad->nombre = $nombre;
-        $comunidad->direccion = $direccion; $comunidad->codigoPostal = $codigoPostal;
+        $comunidad->calle = $direccion; $comunidad->cp = $codigoPostal;
         $comunidad->poblacion = $poblacion; $comunidad->presupuesto = $presupuesto;
-        $comunidad->tipoCuota = $tipoCuota; $comunidad->presidente = $presidente;
+        $comunidad->tipo_cuota = $tipoCuota; $comunidad->presidente = $presidente;
         $comunidad->vicepresidente = $vicepresidente; $comunidad->token = $token;
 
         if (empty($direccion) || empty($poblacion) || empty($codigoPostal) || empty($presupuesto)) {
