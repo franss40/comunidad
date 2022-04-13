@@ -30,7 +30,7 @@ switch (ENVIRONMENT) {
         exit(1);
 }
 
-spl_autoload_register(function ($className) {
+spl_autoload_register(function ($className) {    
     require_once 'libraries/' . $className . '.php';
 });
 

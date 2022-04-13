@@ -34,7 +34,7 @@ function auth(string $control, string $tipoUsuario = '') {
         'Cuota-cambiarEstadoCuota'  => 0b10000000000000000,
         'Cuota-cuotasPendientes'    => 0b100000000000000000,
         'Cuota-crearCuotas'         => 0b1000000000000000000,
-        'Pruebatest-testcomunidad'  => 0b10000000000000000000
+        'Pruebatest-index'  => 0b10000000000000000000
     );
     
     /*************************************

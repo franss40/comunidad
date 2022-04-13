@@ -120,5 +120,12 @@ class Comunidades {
         $this->db->bind('cod', $cod, 'int');
         return $this->db->resultPreparedOne();
     }
-
+    /**
+     * Devuelve el último id introducido en la base de datos
+     * 
+     * @return int
+     */
+    public function lastId() {
+        return $this->db->lastID();
+    }
 }
