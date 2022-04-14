@@ -16,7 +16,7 @@ class PruebatestComunidad extends Controller{
     /**
      * Aquí hacemos los test de todos los casos de uso (CU); uno por uno
      */
-    public function index() {
+    private function index() {
         $this->testListComuni(); // CU Consultar Comunidad / Cuotas Ptes
         $this->testEditComuni(); // CU Editar Comunidad
         $idAlta = $this->testAddComuni(); // CU Alta Comunidad
@@ -96,7 +96,7 @@ class PruebatestComunidad extends Controller{
     /**
      * Añadimos un registro y comprobamos que se ha añadido
      */
-    public function testAddComuni() : int {
+    private function testAddComuni() : int {
         
         // Al añadir no hay presidente ni vicepresidente
         $esperado = new stdClass();        
@@ -121,7 +121,10 @@ class PruebatestComunidad extends Controller{
         return $esperado->cod;
     }
     
-    public function testDeleteComuni(int $id) {
+    /*
+     * Borramos la comunidad
+     */
+    private function testDeleteComuni(int $id) {
         // Borramos
         $this->model->borrarComunidad($id);
         // Comprobamos que está borrada la comunidad

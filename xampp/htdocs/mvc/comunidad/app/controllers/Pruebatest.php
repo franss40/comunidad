@@ -13,5 +13,11 @@ class Pruebatest extends Controller{
         require_once APPROOT.'/controllers/'.'PruebatestComunidad.php';
         //Compruebo los casos de uso del módulo Comunidad
         new PruebatestComunidad();
+        echo '<hr>';
+        require_once APPROOT.'/controllers/'.'PruebatestUsuario.php';
+        //Compruebo los casos de uso del módulo Usuario
+        new PruebatestUsuario();
+        echo '<hr>';
+        
     }
 }
