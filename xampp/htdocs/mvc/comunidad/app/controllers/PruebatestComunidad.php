@@ -43,7 +43,7 @@ class PruebatestComunidad extends Controller{
         $esperado->presidente = 'BAJO B';
         $esperado->vicepresidente = null;
         $esperado->iban = null;
-        
+
         assertArrayEquals($esperado, $comunidades, 'Test - Consultar Comunidad');
         assertEquals(3, $total, 'Test número de Comunidades - Consultar Comunidad');
         

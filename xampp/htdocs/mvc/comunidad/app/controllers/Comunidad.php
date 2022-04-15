@@ -220,7 +220,7 @@ class Comunidad extends Controller {
      * 
      * @param int $codComunidad
      */
-    public function actualizarCuota(int $codComunidad) {
+    public function actualizarCuota(int $codComunidad, bool $test=null) {
         try {
             $comunidad = $this->model->getComunidad($codComunidad);
             $this->_existeVista($comunidad);
@@ -246,8 +246,12 @@ class Comunidad extends Controller {
             $this->_existeVista(null);
         }
         
-        $data = ['info'   => 'Actualización de cuotas', 'result' => "Se ha actualizado correctamente"];
-        $this->render('informacion_view', $data);
+        if (!$test) {
+            $data = ['info'   => 'Actualización de cuotas', 'result' => "Se ha actualizado correctamente"];
+            $this->render('informacion_view', $data);
+        } else {
+            return false;
+        }
     }
     
     /**

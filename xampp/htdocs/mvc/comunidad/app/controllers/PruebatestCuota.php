@@ -23,7 +23,7 @@ class PruebatestCuota extends Controller {
         $this->testAddCuotas();  // CU Alta Cuotas
         $this->testPendientesCuotas(); // CU Cuotas Pendientes
         $this->testCambiarEstadoCuota(); // CU Cambiar Estado Cuota
-        $this->testActualizarCuotas(); // CU Actualizar Cuotas Comunidad
+        $this->testActualizarCuotas(); // CU Actualizar Cuotas
     }
     
     /*
@@ -131,9 +131,41 @@ class PruebatestCuota extends Controller {
     }
     
     /*
-     * Actualizar cuotas comunidad
+     * Test Actualizar Cuota Comunidad
      */
     private function testActualizarCuotas() {
+        // ACTUALIZO
+        require_once APPROOT.'/controllers/'.'Comunidad.php';
+        $comunidad = new Comunidad();
+        $comunidad->actualizarCuota(1, true);
         
+        // recupero las propiedades de la comunidad para la comprobación
+        // Al ser la cuota de tipo fija de 6000 euros, se dividen entre los números propietarios
+        // 6000/12/9 = 55.56 euros
+        $propiedades = $this->models['Propiedades']->getPropiedades(1);
+
+        $error = true;
+        foreach ($propiedades as $propiedad) {
+            if ($propiedad->cuota!=55.56) {
+                $error = false;
+            }            
+        }
+        assertEquals($error, true, 'Test con cuotas fijas - Actualizar Cuotas');
+        //Probamos con la comunidad número 3, que tiene presupuesto 10500 euros variables
+        // Por ejemplo el 1-C  tiene una participación de 10.56, por lo que su cuota es 92.4
+        // Y 2-C con 14.08 de participación tiene una cuota de 123.20 (14.08*10500/100/12)
+        $comunidad->actualizarCuota(3, true);
+        $propiedades2 = $this->models['Propiedades']->getPropiedades(3);
+
+        $error = true;
+        foreach ($propiedades as $propiedad) {
+            if ($propiedad->numero == '1-C' && $propiedad->cuota != 92.40) {
+                $error = false;
+            }       
+            if ($propiedad->numero == '2-C' && $propiedad->cuota != 123.20) {
+                $error = false;
+            }
+        }
+        assertEquals($error, true, 'Test con cuotas variables- Actualizar Cuotas');
     }
 }

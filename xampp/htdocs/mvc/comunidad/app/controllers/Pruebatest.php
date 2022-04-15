@@ -23,5 +23,8 @@ class Pruebatest extends Controller{
         echo '<hr>';
         require_once APPROOT.'/controllers/'.'PruebatestCuota.php';
         new PruebatestCuota();
+        echo '<hr>';
+        require_once APPROOT.'/controllers/'.'PruebatestLogin.php';
+        new PruebatestLogin();
     }
 }
