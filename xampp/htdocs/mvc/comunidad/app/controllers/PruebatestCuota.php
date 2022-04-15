@@ -157,15 +157,15 @@ class PruebatestCuota extends Controller {
         $comunidad->actualizarCuota(3, true);
         $propiedades2 = $this->models['Propiedades']->getPropiedades(3);
 
-        $error = true;
-        foreach ($propiedades as $propiedad) {
+        $error2 = true;
+        foreach ($propiedades2 as $propiedad) {
             if ($propiedad->numero == '1-C' && $propiedad->cuota != 92.40) {
-                $error = false;
+                $error2 = false;
             }       
             if ($propiedad->numero == '2-C' && $propiedad->cuota != 123.20) {
-                $error = false;
+                $error2 = false;
             }
         }
-        assertEquals($error, true, 'Test con cuotas variables- Actualizar Cuotas');
+        assertEquals($error2, true, 'Test con cuotas variables- Actualizar Cuotas');
     }
 }
