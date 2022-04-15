@@ -28,9 +28,9 @@ function deleteUrlAmigable($url) {
  */
 function assertArrayEquals($esperado, $actual, $salida) {
     if (in_array($esperado, $actual)) {
-        echo "<h3>$salida: <strong style='color: green'>OK</strong></h3>";
+        echo "<h4>$salida: <strong style='color: green'>OK</strong></h4>";
     } else {
-        echo "<h3>$salida: <strong style='color: green'>FALSE</strong></h3>";
+        echo "<h4>$salida: <strong style='color: green'>FALSE</strong></h4>";
     }
 }
 /**
@@ -44,8 +44,8 @@ function assertArrayEquals($esperado, $actual, $salida) {
  */
 function assertEquals($esperado, $actual, $salida) {
     if ($esperado==$actual) {
-        echo "<h3>$salida: <strong style='color: green'>OK</strong></h3>";
+        echo "<h4>$salida: <strong style='color: green'>OK</strong></h4>";
     } else {
-        echo "<h3>$salida: <strong style='color: green'>FALSE</strong></h3>";
+        echo "<h4>$salida: <strong style='color: green'>FALSE</strong></h4>";
     }
 }

@@ -49,6 +49,23 @@ class Comunidades {
 
         return $this->db->result($sql);
     }
+    
+    /**
+     * Retorna el importe de las cuotas ptes de cada comunidad dado el cod comunidad
+     * 
+     * @return array
+     */
+    public function getComuConCuotasPte(int $cod) {
+        $sql = "SELECT COUNT(recibo_comunidad.importe) AS cuantos, 
+                SUM(recibo_comunidad.importe) AS suma
+                FROM comunidad
+                LEFT JOIN propiedad ON comunidad.cod = propiedad.cod
+                LEFT JOIN recibo_comunidad ON propiedad.numero = recibo_comunidad.numero
+                WHERE recibo_comunidad.estado='IMPAGADO' AND comunidad.cod = $cod
+                GROUP BY comunidad.cod, comunidad.nombre";
+
+        return $this->db->result($sql);
+    }
 
     /**
      * Adiciono una comunidad

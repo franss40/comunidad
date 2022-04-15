@@ -76,7 +76,7 @@
                         </div>
                         <div class="col">
                             <label for="numero" class="form-label">Vivienda</label>
-                            <input type="text" name="numero" class="form-control" id="numero" value="<?=$propiedad->numero ?>" required>
+                            <input type="text" name="numero" class="form-control" id="numero" value="<?=$propiedad->numero ?>" readonly>
                         </div>
                     </div>
                     

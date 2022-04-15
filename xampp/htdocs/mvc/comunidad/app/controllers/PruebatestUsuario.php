@@ -24,7 +24,7 @@ class PruebatestUsuario extends Controller {
     }
     
     /**
-     * Probamos el listado de usuarios con el cod numero 1
+     * Probamos el listado de usuarios y
      * El número total de usuarios
      */
     private function testListUsuario() {

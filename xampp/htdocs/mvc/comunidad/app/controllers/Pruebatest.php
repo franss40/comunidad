@@ -18,6 +18,10 @@ class Pruebatest extends Controller{
         //Compruebo los casos de uso del módulo Usuario
         new PruebatestUsuario();
         echo '<hr>';
-        
+        require_once APPROOT.'/controllers/'.'PruebatestPropiedad.php';
+        new PruebatestPropiedad();
+        echo '<hr>';
+        require_once APPROOT.'/controllers/'.'PruebatestCuota.php';
+        new PruebatestCuota();
     }
 }
