@@ -79,6 +79,10 @@
                         <label for="nombre" class="form-label">Nombre Comunidad</label>
                         <input type="text" name="nombre" class="form-control" id="nombre" value="<?=$comunidad->nombre ?>" required>
                     </div>
+                    <div class="col-sm-5">
+                        <label for="iban" class="form-label">IBAN Comunidad</label>
+                        <input type="text" name="iban" class="form-control" id="iban" value="<?=$comunidad->iban ?>" maxlength="24">
+                    </div>
                 </div>
                 
                 <div class="row mb-3">
@@ -88,7 +92,7 @@
                     </div>
                     <div class="col">
                         <label for="codigo" class="form-label">Código Postal</label>
-                        <input type="text" name="codigoPostal" class="form-control" id="codigo" value="<?=$comunidad->cp ?>" required>
+                        <input type="text" name="codigoPostal" class="form-control" id="codigo" value="<?=$comunidad->cp ?>" required maxlength="5">
                     </div>
                     <div class="col">
                         <label for="poblacion" class="form-label">Población</label>

@@ -31,8 +31,9 @@ class Login extends Controller {
         
         $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRIPPED);
         $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRIPPED);
+        $apellido = filter_input(INPUT_POST, 'apellido', FILTER_SANITIZE_STRIPPED);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        if (!empty($usuario) && !empty($pass) && $token == $_SESSION['token']) {
+        if (!empty($usuario) && !empty($pass) && $token == $_SESSION['token'] && !$apellido) {
             $usuario_verify = $this->model->verifyPass($usuario, $pass);
             if ($usuario_verify && $usuario_verify[0]->activo) {
                 $_SESSION['user'] = $usuario_verify[0]->usuario;

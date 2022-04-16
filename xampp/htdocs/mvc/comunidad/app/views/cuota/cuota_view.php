@@ -101,8 +101,10 @@
                             <th>OPERACIÓN</th>
                         </tr>
                     </thead>
-                    <tbody>                        
+                    <tbody>            
+                        <?php $suma = 0;?>
                         <?php foreach ($cuotas as $cuota): ?>
+                        <?php $suma = $suma + $cuota->importe;?>
                         <tr class="<?php if ($cuota->estado=='IMPAGADO'){echo 'red';} ?>">
                             <th scope="row">
                                 <?= $cuota->recibo_com ?>                               
@@ -122,7 +124,16 @@
                                 </a>
                             </th>
                         </tr>
-                        <?php endforeach; ?>                        
+                        <?php endforeach; ?>  
+                        <?php if ($cuotaPendiente):?>
+                            <td></td>
+                            <td><strong style="color:red;">Total</strong></td>
+                            <td>
+                                <strong style="color:red;"><?=$suma ?> €</strong> 
+                            </td>
+                            <td></td>
+                            <td></td>
+                        <?php endif?>
                     </tbody>
                 </table>
             <div>

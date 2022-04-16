@@ -74,8 +74,8 @@ class Comunidades {
      * @return boolean
      */
     public function addComunidad($comunidad) {
-        $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota, presupuesto) 
-                    VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota, :presupuesto)";
+        $sql = "INSERT INTO comunidad(nombre, calle, cp, poblacion, tipo_cuota, presupuesto, iban) 
+                    VALUES(:nombre, :direccion, :codigo, :poblacion, :cuota, :presupuesto, :iban)";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->calle, 'string');
@@ -83,6 +83,7 @@ class Comunidades {
         $this->db->bind('poblacion', $comunidad->poblacion, 'string');
         $this->db->bind('cuota', $comunidad->tipo_cuota, 'string');
         $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
+        $this->db->bind('iban', $comunidad->iban, 'string');
 
         return $this->db->noResultPrepared();
     }
@@ -101,7 +102,7 @@ class Comunidades {
      * @return boolean
      */
     public function editComunidad($comunidad) {
-        $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente WHERE cod=:cod";
+        $sql = "UPDATE comunidad SET nombre=:nombre, calle=:direccion, cp=:codigoPostal, poblacion=:poblacion, tipo_cuota=:tipoCuota, presupuesto=:presupuesto, presidente=:presidente, vicepresidente=:vicepresidente, iban=:iban WHERE cod=:cod";
         $this->db->prepared($sql);
         $this->db->bind('nombre', $comunidad->nombre, 'string');
         $this->db->bind('direccion', $comunidad->calle, 'string');
@@ -111,6 +112,7 @@ class Comunidades {
         $this->db->bind('presupuesto', $comunidad->presupuesto, 'int');
         $this->db->bind('presidente', $comunidad->presidente, 'string');
         $this->db->bind('vicepresidente', $comunidad->vicepresidente, 'string');
+        $this->db->bind('iban', $comunidad->iban, 'string');
         $this->db->bind('cod', $comunidad->cod, 'int');
 
         return $this->db->noResultPrepared();

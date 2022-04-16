@@ -193,11 +193,12 @@ class Comunidad extends Controller {
         $presupuesto = filter_input(INPUT_POST, 'presupuesto', FILTER_VALIDATE_FLOAT);
         $presidente = filter_input(INPUT_POST, 'presidente', FILTER_SANITIZE_STRIPPED);
         $vicepresidente = filter_input(INPUT_POST, 'vicepresidente', FILTER_SANITIZE_STRIPPED);
+        $iban = filter_input(INPUT_POST, 'iban', FILTER_SANITIZE_STRIPPED);
         $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRIPPED);
-        
+                
         $comunidad = new stdClass();
         $comunidad->cod = $cod; $comunidad->nombre = $nombre;
-        $comunidad->calle = $direccion; $comunidad->cp = $codigoPostal;
+        $comunidad->calle = $direccion; $comunidad->iban = $iban; $comunidad->cp = $codigoPostal;
         $comunidad->poblacion = $poblacion; $comunidad->presupuesto = $presupuesto;
         $comunidad->tipo_cuota = $tipoCuota; $comunidad->presidente = $presidente;
         $comunidad->vicepresidente = $vicepresidente; $comunidad->token = $token;
